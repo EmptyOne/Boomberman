@@ -8,7 +8,6 @@
 // to enable random
 #include <ctime>
 #include <cstdlib>
-//herhsehsehs
 // note(tommi): this below will automatically initialize srand
 struct Random
 {
@@ -35,8 +34,11 @@ Ball::Ball(Sprite* sprite, int width, int height, float startX, float startY)
 
 	m_speed = 300.0f;
 	m_offset = 1.0f;
-	m_position_x = m_start_x = startX + m_offset;
-	m_position_y = m_start_y = startY + m_offset;
+	//m_position_x = m_start_x = startX + m_offset;
+	//m_position_y = m_start_y = startY + m_offset;
+
+	m_position_x = 0;
+	m_position_y = 0;
 
 	m_collider = new Collider(startX, startY);
 	m_collider->SetParent(this);
@@ -113,7 +115,7 @@ void Ball::Reset()
 
 bool Ball::IsVisible()
 {
-	return true;
+	return false;
 }
 
 EEntityType Ball::GetType()
