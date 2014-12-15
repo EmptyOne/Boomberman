@@ -24,13 +24,13 @@ GameState::GameState(System& system)
 	Sprite* sprite = m_systems.sprite_manager->CreateSprite(
 		filename, 0, 0, 80, 16);
 
-	Paddle* paddle = new Paddle(
+	/*Paddle* paddle = new Paddle(
 		m_systems.input_manager->GetMouse(),
 		sprite,
 		m_systems.width,
 		m_systems.height);
 	m_entities.push_back(paddle);
-
+	
 	sprite = m_systems.sprite_manager->CreateSprite(
 		filename, 82, 0, 16, 16);
 	Ball* ball = new Ball(sprite,
@@ -38,40 +38,54 @@ GameState::GameState(System& system)
 		m_systems.height,
 		m_systems.width / 2 - 8, 
 		m_systems.height - 68 - 16);
-	m_entities.push_back(ball);
+	m_entities.push_back(ball);*/
 
 	// hard coded block coordinates
 	SDL_Rect blockCoords[] =
 	{
-		{ 100,  0, 40, 16 }, // green
-		{ 143,  0, 40, 16 }, // red
-		{ 185,  0, 40, 16 }, // 
-		{ 100, 18, 40, 16 }, // purple
-		{ 143, 18, 40, 16 }, // blue
-		{ 185, 18, 40, 16 }, // yellow
-		{ 100, 36, 40, 16 }, // orange
+		{ 0,  0, 64, 64 }, // Solid
+		{ 66,  0, 64, 64 }, // Breakable
+		{ 0, 0, 0, 0}, // Non-visible
+		{ 132, 0, 64, 64} // Background
+
 	};
 
 	// create all blocks for level
-	int padding = 4;
-	int xNumBlocks = m_systems.width / (40 + padding);
-	int yNumBlocks = 16;
-	int xOffset = (m_systems.width % (40 + padding)) / 2;
-	int yOffset = xOffset;
+	int padding = 0;
+	//int xNumBlocks = m_systems.width / (64 + padding);
+	const int xNumBlocks = 15;
+	const int yNumBlocks = 13;
+	int NumBlocks[xNumBlocks][yNumBlocks];
+
+	
+	//int xOffset = (m_systems.width % (64 + padding) / 2);
+	int xOffset = 120;
+	int yOffset = 0;
 
 	for (int y = 0; y < yNumBlocks; y++)
 	{
 		for (int x = 0; x < xNumBlocks; x++)
 		{
-			SDL_Rect& rect = blockCoords[rand() % 7];
-			sprite = m_systems.sprite_manager->CreateSprite(
-				filename, rect.x, rect.y, rect.w, rect.h);
-			Block* block = new Block(sprite, 
-				(padding / 2) + xOffset + x * 40 + x * padding,
-				yOffset + y * 16 + y * padding);
+			SDL_Rect& rect = blockCoords[4];
+			sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
+			Block* block = new Block(sprite, (padding / 2) + xOffset + x * 64 + x * padding, yOffset + y * 64 + y * padding);
 			m_entities.push_back(block);
+			
 		}
 	}
+
+	for (int y = 0; y < yNumBlocks; y++)
+	{
+		for (int x = 0; x < xNumBlocks; x++)
+		{
+		
+				SDL_Rect& rect = blockCoords[3];
+				sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
+				Block* block = new Block(sprite,(padding / 2) + xOffset + x * 64 + x * padding, yOffset + y * 64 + y * padding);
+				m_entities.push_back(block);
+		}
+	}
+
 
 	m_active = false;
 }

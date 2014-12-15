@@ -26,8 +26,8 @@ bool Engine::Initialize()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
-	int width = 360;
-	int height = 640;
+	int width = 1080;
+	int height = 832;
 	m_draw_manager = new DrawManager;
 	if (!m_draw_manager->Initialize(width, height))
 		return false;

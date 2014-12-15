@@ -8,6 +8,7 @@
 
 Paddle::Paddle(Mouse* mouse, Sprite* sprite, int screen_width, int screen_height)
 {
+	
 	m_mouse = mouse;
 	m_sprite = sprite;
 
@@ -21,8 +22,8 @@ Paddle::Paddle(Mouse* mouse, Sprite* sprite, int screen_width, int screen_height
 	m_screen_height = screen_height;
 
 	m_speed = 2.0f;
-	
 	Reset();
+	
 }
 
 Paddle::~Paddle()
@@ -72,12 +73,12 @@ void Paddle::Reset()
 {
 	m_x = m_screen_width / 2 - 40;
 	m_y = m_screen_height - 60 - 8;
-	m_collider->SetPosition(m_x, m_y);
+
 }
 
 bool Paddle::IsVisible() 
 {
-	return true;
+	return false;
 }
 
 EEntityType Paddle::GetType()
