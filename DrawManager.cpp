@@ -8,6 +8,7 @@ DrawManager::DrawManager()
 {
 	m_window = nullptr;
 	m_renderer = nullptr;
+
 }
 
 DrawManager::~DrawManager()

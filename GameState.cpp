@@ -15,14 +15,14 @@
 #include "Collider.h"
 #include "CollisionManager.h"
 
+
 GameState::GameState(System& system)
 {
 	m_systems = system;
 
 	std::string filename = "../assets/main.bmp";
 
-	Sprite* sprite = m_systems.sprite_manager->CreateSprite(
-		filename, 0, 0, 80, 16);
+	Sprite* sprite;
 
 	/*Paddle* paddle = new Paddle(
 		m_systems.input_manager->GetMouse(),
@@ -46,12 +46,12 @@ GameState::GameState(System& system)
 		{ 0,  0, 64, 64 }, // Solid
 		{ 66,  0, 64, 64 }, // Breakable
 		{ 0, 0, 0, 0}, // Non-visible
-		{ 132, 0, 64, 64} // Background
+		{ 132, 0, 64, 64}, // Background
 
 	};
 
 	// create all blocks for level
-	int padding = 0;
+	
 	//int xNumBlocks = m_systems.width / (64 + padding);
 	const int xNumBlocks = 15;
 	const int yNumBlocks = 13;
@@ -62,26 +62,27 @@ GameState::GameState(System& system)
 	int xOffset = 120;
 	int yOffset = 0;
 
+	
 	for (int y = 0; y < yNumBlocks; y++)
 	{
 		for (int x = 0; x < xNumBlocks; x++)
 		{
-			SDL_Rect& rect = blockCoords[4];
+			SDL_Rect& rect = blockCoords[0];
 			sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
-			Block* block = new Block(sprite, (padding / 2) + xOffset + x * 64 + x * padding, yOffset + y * 64 + y * padding);
+			Block* block = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
 			m_entities.push_back(block);
 			
 		}
 	}
-
+	
 	for (int y = 0; y < yNumBlocks; y++)
 	{
 		for (int x = 0; x < xNumBlocks; x++)
 		{
 		
-				SDL_Rect& rect = blockCoords[3];
+				SDL_Rect& rect = blockCoords[1];
 				sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
-				Block* block = new Block(sprite,(padding / 2) + xOffset + x * 64 + x * padding, yOffset + y * 64 + y * padding);
+				Block* block = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
 				m_entities.push_back(block);
 		}
 	}
@@ -194,7 +195,7 @@ State* GameState::NextState()
 // private
 void GameState::CollisionChecking()
 {
-	Paddle* paddle = static_cast<Paddle*>(m_entities[0]);
+	/*Paddle* paddle = static_cast<Paddle*>(m_entities[0]);
 	Ball* ball = static_cast<Ball*>(m_entities[1]);
 
 	int overlapX = 0, overlapY = 0;
@@ -228,4 +229,5 @@ void GameState::CollisionChecking()
 			}
 		}
 	}
+	*/
 }
