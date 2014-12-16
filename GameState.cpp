@@ -15,12 +15,15 @@
 #include "Collider.h"
 #include "CollisionManager.h"
 
+#include <fstream>
+
 
 GameState::GameState(System& system)
 {
 	m_systems = system;
 
 	std::string filename = "../assets/main.bmp";
+	std::string txtname = "../assets/Map.txt";
 
 	//Sprite* sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 0, 64, 64);
 	Sprite* sprite;
@@ -63,6 +66,29 @@ GameState::GameState(System& system)
 	int xOffset = 120;
 	int yOffset = 0;
 
+
+	std::ifstream stream;
+	stream.open(txtname);
+	if (stream.is_open()){
+
+		std::string line;
+		int y = 0;
+		while (!stream.eof())
+		{
+			int count;
+			for (int x = 0; x < xNumBlocks; x++)
+			{
+				stream >> count;
+				SDL_Rect& rect = blockCoords[count];
+				sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
+				Block* block = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
+				m_entities.push_back(block);
+			}
+			y++;
+		}
+	}
+
+	/*
 	
 	//Background
 	for (int y = 0; y < yNumBlocks; y++)
@@ -106,7 +132,7 @@ GameState::GameState(System& system)
 			}
 		}
 	}
-
+	*/
 
 	m_active = false;
 }
