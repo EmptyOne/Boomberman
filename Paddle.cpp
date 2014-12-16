@@ -34,6 +34,7 @@ Paddle::~Paddle()
 
 void Paddle::Update(float deltatime)
 {
+
 	float deltaX = m_mouse->GetX() - (m_x + static_cast<float>(m_sprite->GetRegion()->w * 0.5f));
 	if (static_cast<int>(deltaX) != 0)
 	{
@@ -71,8 +72,8 @@ float Paddle::GetY()
 
 void Paddle::Reset()
 {
-	m_x = m_screen_width / 2 - 40;
-	m_y = m_screen_height - 60 - 8;
+	m_x = 1;
+	m_y = 1;
 
 }
 

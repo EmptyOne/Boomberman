@@ -22,9 +22,10 @@ GameState::GameState(System& system)
 
 	std::string filename = "../assets/main.bmp";
 
+	//Sprite* sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 0, 64, 64);
 	Sprite* sprite;
-
-	/*Paddle* paddle = new Paddle(
+	/*
+	Paddle* paddle = new Paddle(
 		m_systems.input_manager->GetMouse(),
 		sprite,
 		m_systems.width,
@@ -32,7 +33,7 @@ GameState::GameState(System& system)
 	m_entities.push_back(paddle);
 	
 	sprite = m_systems.sprite_manager->CreateSprite(
-		filename, 82, 0, 16, 16);
+		filename, 66, 0, 64, 64);
 	Ball* ball = new Ball(sprite,
 		m_systems.width,
 		m_systems.height,
@@ -76,7 +77,7 @@ GameState::GameState(System& system)
 		}
 	}
 	
-	//Breakable
+	//Solid
 	for (int y = 0; y < yNumBlocks; y++)
 	{
 		for (int x = 0; x < xNumBlocks; x++)
@@ -247,6 +248,6 @@ void GameState::CollisionChecking()
 				ball->SetPosition(ball->GetX() + overlapX, ball->GetY() + overlapY);
 			}
 		}
-	}
-	*/
+	}*/
+	
 }

@@ -106,8 +106,8 @@ float Ball::GetY()
 
 void Ball::Reset()
 {
-	m_position_x = m_start_x;
-	m_position_y = m_start_y;
+	m_position_x = 0;
+	m_position_y = 0;
 	m_active = false;
 
 	m_collider->SetPosition(m_position_x, m_position_y);
@@ -115,7 +115,7 @@ void Ball::Reset()
 
 bool Ball::IsVisible()
 {
-	return false;
+	return true;
 }
 
 EEntityType Ball::GetType()

@@ -95,32 +95,22 @@ void Engine::HandleEvents()
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
-		switch (event.key.keysym.sym)
+		//Keyboard handle
+		switch (event.type)
 		{
-		case SDLK_w:
-			
+		case SDL_KEYDOWN:
+			m_input_manager->SetKeyboard(event.key.keysym.sym, true);
 			break;
 
-		case SDLK_s:
+		case SDL_KEYUP:
+			m_input_manager->SetKeyboard(event.key.keysym.sym, false);
+			break;
 			
-			break;
-
-		case SDLK_d:
-			
-			break;
-
-		case SDLK_a:
-			
-			break;
-		
-		case SDLK_SPACE:
-
-			break;
 		}
 
 
 
-		 //Mouse handle
+		 //Mouse/window handle
 		switch (event.type)
 		{
 		case SDL_QUIT:
