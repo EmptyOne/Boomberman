@@ -5,6 +5,7 @@
 
 #include "Entity.h"
 
+class Keyboard;
 class Mouse;
 
 class Paddle : public Entity

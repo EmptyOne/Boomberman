@@ -43,8 +43,8 @@ GameState::GameState(System& system)
 	// hard coded block coordinates
 	SDL_Rect blockCoords[] =
 	{
-		{ 0,  0, 64, 64 }, // Solid
-		{ 66,  0, 64, 64 }, // Breakable
+		{ 0,  0, 64, 64 }, // Breakable
+		{ 66,  0, 64, 64 }, // Solid
 		{ 0, 0, 0, 0}, // Non-visible
 		{ 132, 0, 64, 64}, // Background
 
@@ -63,11 +63,12 @@ GameState::GameState(System& system)
 	int yOffset = 0;
 
 	
+	//Background
 	for (int y = 0; y < yNumBlocks; y++)
 	{
 		for (int x = 0; x < xNumBlocks; x++)
 		{
-			SDL_Rect& rect = blockCoords[0];
+			SDL_Rect& rect = blockCoords[3];
 			sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
 			Block* block = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
 			m_entities.push_back(block);
@@ -75,15 +76,33 @@ GameState::GameState(System& system)
 		}
 	}
 	
+	//Breakable
 	for (int y = 0; y < yNumBlocks; y++)
 	{
 		for (int x = 0; x < xNumBlocks; x++)
 		{
-		
+			if (x % 2 == 1 && y % 2 == 1)
+			{
 				SDL_Rect& rect = blockCoords[1];
 				sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
 				Block* block = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
 				m_entities.push_back(block);
+			}
+		}
+	}
+
+	//Breakable
+	for (int y = 0; y < yNumBlocks; y++)
+	{
+		for (int x = 0; x < xNumBlocks; x++)
+		{
+			if (x % 2 != 1 || y % 2 != 1)
+			{
+				SDL_Rect& rect = blockCoords[0];
+				sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
+				Block* block = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
+				m_entities.push_back(block);
+			}
 		}
 	}
 

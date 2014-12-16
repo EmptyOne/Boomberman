@@ -10,6 +10,8 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <iostream>
+
 
 #include "SDL.h"
 #include "SDL_image.h"

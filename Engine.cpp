@@ -95,12 +95,39 @@ void Engine::HandleEvents()
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
+		switch (event.key.keysym.sym)
+		{
+		case SDLK_w:
+			
+			break;
+
+		case SDLK_s:
+			
+			break;
+
+		case SDLK_d:
+			
+			break;
+
+		case SDLK_a:
+			
+			break;
+		
+		case SDLK_SPACE:
+
+			break;
+		}
+
+
+
+		 //Mouse handle
 		switch (event.type)
 		{
 		case SDL_QUIT:
 			m_running = false;
 			break;
-
+		}
+			/*
 		case SDL_MOUSEMOTION:
 			m_input_manager->SetMousePosition(event.motion.x, event.motion.y);
 			break;
@@ -124,6 +151,6 @@ void Engine::HandleEvents()
 			m_input_manager->SetMouseButton(index, false);
 		}
 			break;
-		}
+		}*/
 	}
 }
