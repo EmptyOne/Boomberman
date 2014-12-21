@@ -34,8 +34,9 @@ Paddle::~Paddle()
 
 void Paddle::Update(float deltatime)
 {
+	
 
-	float deltaX = m_mouse->GetX() - (m_x + static_cast<float>(m_sprite->GetRegion()->w * 0.5f));
+	/*float deltaX = m_mouse->GetX() - (m_x + static_cast<float>(m_sprite->GetRegion()->w * 0.5f));
 	if (static_cast<int>(deltaX) != 0)
 	{
 		float dirX = deltaX / abs(deltaX);
@@ -47,7 +48,7 @@ void Paddle::Update(float deltatime)
 			m_x = m_screen_width - 80.0f;
 
 		m_collider->SetPosition(m_x, m_y);
-	}
+	}*/
 }
 
 Sprite* Paddle::GetSprite()
