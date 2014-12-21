@@ -23,7 +23,7 @@ GameState::GameState(System& system)
 {
 	m_systems = system;
 
-	std::string filename = "../assets/main.bmp";
+	std::string filename = "../assets/main.png";
 	std::string txtname = "../assets/Map.txt";
 
 	//Sprite* sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 0, 64, 64);
