@@ -221,12 +221,15 @@ State* GameState::NextState()
 // private
 void GameState::CollisionChecking()
 {
+<<<<<<< HEAD
+=======
 	/*
+>>>>>>> origin/master
 	Paddle* paddle = static_cast<Paddle*>(m_entities[0]);
 	Ball* ball = static_cast<Ball*>(m_entities[1]);
 
 	int overlapX = 0, overlapY = 0;
-	if (CollisionManager::Check(ball->GetCollider(), paddle->GetCollider(), overlapX, overlapY))
+	if (CollisionManager::Check(paddle->GetCollider(), paddle->GetCollider(), overlapX, overlapY))
 	{
 		if (overlapX != 0)
 			ball->InvertDirectionX();
@@ -243,7 +246,7 @@ void GameState::CollisionChecking()
 			if (!block->IsVisible())
 				continue;
 
-			if (CollisionManager::Check(ball->GetCollider(), block->GetCollider(), overlapX, overlapY))
+			if (CollisionManager::Check(block->GetCollider(), paddle->GetCollider(), overlapX, overlapY))
 			{
 				block->SetInvisible();
 
@@ -256,6 +259,9 @@ void GameState::CollisionChecking()
 			}
 		}
 	}
+<<<<<<< HEAD
+=======
 	*/
+>>>>>>> origin/master
 	
 }
