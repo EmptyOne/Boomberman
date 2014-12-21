@@ -10,6 +10,8 @@ enum EEntityType
 	ENTITY_BLOCK,
 	ENTITY_BREAKABLEBLOCK,
 	ENTITY_BALL,
+	ENTITY_SOLIDBLOCK,
+
 };
 
 class Sprite;

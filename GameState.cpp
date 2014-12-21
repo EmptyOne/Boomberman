@@ -11,9 +11,12 @@
 #include "Paddle.h"
 #include "Block.h"
 #include "Ball.h"
+#include "SolidBlock.h"
 
 #include "Collider.h"
 #include "CollisionManager.h"
+
+#include <fstream>
 
 
 GameState::GameState(System& system)
@@ -21,6 +24,7 @@ GameState::GameState(System& system)
 	m_systems = system;
 
 	std::string filename = "../assets/main.bmp";
+	std::string txtname = "../assets/Map.txt";
 
 	//Sprite* sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 0, 64, 64);
 	Sprite* sprite;
@@ -42,7 +46,7 @@ GameState::GameState(System& system)
 	m_entities.push_back(ball);*/
 
 	// hard coded block coordinates
-	SDL_Rect blockCoords[] =
+	SDL_Rect blockCoords[] 
 	{
 		{ 0,  0, 64, 64 }, // Breakable
 		{ 66,  0, 64, 64 }, // Solid
@@ -53,60 +57,62 @@ GameState::GameState(System& system)
 
 	// create all blocks for level
 	
+	//variabler som är hur många blocks vi ska ha i x och y led.
 	//int xNumBlocks = m_systems.width / (64 + padding);
 	const int xNumBlocks = 15;
 	const int yNumBlocks = 13;
 	int NumBlocks[xNumBlocks][yNumBlocks];
 
 	
+	//padding är onödig för oss. de den gör är mellan rum mellan blocks.
 	//int xOffset = (m_systems.width % (64 + padding) / 2);
+	//dom här variablerna är var någonstans på skärmen de ska börja skriva ut.
 	int xOffset = 120;
 	int yOffset = 0;
+	
 
+	std::ifstream stream;
+	stream.open(txtname);
+	if (stream.is_open()){
+
+		std::string line;
+
+		while (!stream.eof()){
+
+			int count;
+			for (int y = 0; y < yNumBlocks; y++){
+
+				for (int x = 0; x < xNumBlocks; x++){
+				
+					stream >> count;
+					//den här raden skriver ut allt atm 
+					SDL_Rect& rect = blockCoords[count];
+
+					//block
+					sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
+					Block* block = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
+					m_entities.push_back(block);
+
+					// jag kommer lägga till en klass för background
+					// då kommer de bli nice tror jag 
 	
-	//Background
-	for (int y = 0; y < yNumBlocks; y++)
-	{
-		for (int x = 0; x < xNumBlocks; x++)
-		{
-			SDL_Rect& rect = blockCoords[3];
-			sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
-			Block* block = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
-			m_entities.push_back(block);
-			
-		}
-	}
-	
-	//Solid
-	for (int y = 0; y < yNumBlocks; y++)
-	{
-		for (int x = 0; x < xNumBlocks; x++)
-		{
-			if (x % 2 == 1 && y % 2 == 1)
-			{
-				SDL_Rect& rect = blockCoords[1];
-				sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
-				Block* block = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
-				m_entities.push_back(block);
+					//bakground
+					sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
+					SolidBlock* solidblock = new SolidBlock(sprite, xOffset + x * 64, yOffset + y * 64);
+					m_entities.push_back(solidblock);
+					/*
+					if (x % 2 == 1 && y % 2 == 1){
+
+						// solidblock					
+						sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
+						SolidBlock* solidblock = new SolidBlock(sprite, xOffset + x * 64, yOffset + y * 64);
+						m_entities.push_back(solidblock);
+					}*/
+				}
 			}
 		}
 	}
-
-	//Breakable
-	for (int y = 0; y < yNumBlocks; y++)
-	{
-		for (int x = 0; x < xNumBlocks; x++)
-		{
-			if (x % 2 != 1 || y % 2 != 1)
-			{
-				SDL_Rect& rect = blockCoords[0];
-				sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
-				Block* block = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
-				m_entities.push_back(block);
-			}
-		}
-	}
-
+	
 
 	m_active = false;
 }
@@ -215,6 +221,10 @@ State* GameState::NextState()
 // private
 void GameState::CollisionChecking()
 {
+<<<<<<< HEAD
+=======
+	/*
+>>>>>>> origin/master
 	Paddle* paddle = static_cast<Paddle*>(m_entities[0]);
 	Ball* ball = static_cast<Ball*>(m_entities[1]);
 
@@ -249,5 +259,9 @@ void GameState::CollisionChecking()
 			}
 		}
 	}
+<<<<<<< HEAD
+=======
+	*/
+>>>>>>> origin/master
 	
 }
