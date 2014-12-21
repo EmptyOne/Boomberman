@@ -221,8 +221,12 @@ State* GameState::NextState()
 // private
 void GameState::CollisionChecking()
 {
+
+	/*
 <<<<<<< HEAD
 =======
+*/
+
 	/*
 >>>>>>> origin/master
 	Paddle* paddle = static_cast<Paddle*>(m_entities[0]);
@@ -262,6 +266,8 @@ void GameState::CollisionChecking()
 <<<<<<< HEAD
 =======
 	*/
+
+	/*
 >>>>>>> origin/master
-	
+	*/
 }
