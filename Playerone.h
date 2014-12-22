@@ -1,18 +1,16 @@
-// Paddle.h
+// Playerone.h
 
-#ifndef PADDLE_H_INCLUDED
-#define PADDLE_H_INCLUDED
+#pragma once
 
 #include "Entity.h"
 
 class Keyboard;
-class Mouse;
 
-class Paddle : public Entity
+class Playerone : public Entity
 {
 public:
-	Paddle(Mouse* mouse, Sprite* sprite, int width, int height);
-	~Paddle();
+	Playerone(Sprite* sprite, float x, float y);
+	~Playerone();
 	
 	void Update(float deltatime);
 	Sprite* GetSprite();
@@ -25,8 +23,9 @@ public:
 	EEntityType GetType();
 	Collider* GetCollider();
 
+
 private:
-	Mouse* m_mouse;
+	
 	Sprite* m_sprite;
 	Collider* m_collider;
 
@@ -35,6 +34,7 @@ private:
 	float m_speed;
 	int m_screen_width;
 	int m_screen_height;
+;
 };
 
-#endif // PADDLE_H_INCLUDED
+

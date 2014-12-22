@@ -1,38 +1,38 @@
-// Paddle.cpp
+// Playerone.cpp
 
 #include "stdafx.h"
-#include "Mouse.h"
 #include "Sprite.h"
 #include "Collider.h"
-#include "Paddle.h"
+#include "Playerone.h"
 
-Paddle::Paddle(Mouse* mouse, Sprite* sprite, int screen_width, int screen_height)
+Playerone::Playerone(Sprite* sprite,float x, float y)
 {
 	
-	m_mouse = mouse;
+	
 	m_sprite = sprite;
 
 	m_collider = new Collider(0, 0);
 	m_collider->SetWidthHeight(m_sprite->GetRegion()->w, 
 		m_sprite->GetRegion()->h);
 
-	m_x = 0.0f;
-	m_y = 0.0f;
+	m_x = x;
+	m_y = y;
+	/*
 	m_screen_width = screen_width;
 	m_screen_height = screen_height;
-
+	*/
 	m_speed = 2.0f;
 	Reset();
 	
 }
 
-Paddle::~Paddle()
+Playerone::~Playerone()
 {
 	if (m_collider)
 		delete m_collider;
 }
 
-void Paddle::Update(float deltatime)
+void Playerone::Update(float deltatime)
 {
 	
 
@@ -51,39 +51,39 @@ void Paddle::Update(float deltatime)
 	}*/
 }
 
-Sprite* Paddle::GetSprite()
+Sprite* Playerone::GetSprite()
 {
 	return m_sprite;
 }
 
-Collider* Paddle::GetCollider()
+Collider* Playerone::GetCollider()
 {
 	return m_collider;
 }
 
-float Paddle::GetX()
+float Playerone::GetX()
 {
 	return m_x;
 }
 
-float Paddle::GetY()
+float Playerone::GetY()
 {
 	return m_y;
 }
 
-void Paddle::Reset()
+void Playerone::Reset()
 {
-	m_x = 1;
-	m_y = 1;
+	//m_x = 1;
+	//m_y = 1;
 
 }
 
-bool Paddle::IsVisible() 
+bool Playerone::IsVisible() 
 {
-	return false;
+	return true;
 }
 
-EEntityType Paddle::GetType()
+EEntityType Playerone::GetType()
 {
-	return ENTITY_PADDLE;
+	return ENTITY_PLAYERONE;
 }
