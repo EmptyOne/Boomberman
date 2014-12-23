@@ -51,7 +51,7 @@ void Playerone::Update(float deltatime)
 	{
 	
 		m_y -= 2;
-		snappY = (int)m_y % 64;
+		//snappY = (int)m_y % 64;
 	
 	}
 
