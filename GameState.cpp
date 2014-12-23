@@ -96,10 +96,11 @@ GameState::GameState(System& system)
 					// då kommer de bli nice tror jag 
 	
 					//bakground
+					/*
 					sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
 					SolidBlock* solidblock = new SolidBlock(sprite, xOffset + x * 64, yOffset + y * 64);
 					m_entities.push_back(solidblock);
-
+					*/
 					
 					
 					if (x % 2 == 1 && y % 2 == 1){
@@ -151,50 +152,20 @@ GameState::~GameState()
 
 bool GameState::Update(float deltatime)
 {
+	
 
-	// här har jag försökt göra movment
-	// jag kollade på tommis movment under och försökte få den att bli lika dan typ
-
-	// de andra nya sakerna är paddle är nu playerone 
-	// och lite små grejer bara
+	// tog bort de som vi inte behöver i update längre (typ de mesta jag skrev igår)
 
 	for (unsigned int i = 0; i < m_entities.size(); i++){
 
+		
 		if (!m_entities[i]->IsVisible())
 			continue;
-
+			
 		// update
 		m_entities[i]->Update(deltatime);
 
-		if (m_entities[i]->GetType() == ENTITY_PLAYERONE)
-		{
-
-			Playerone* playerone = static_cast<Playerone*>(m_entities[0]);
-
-			
-
-				Keyboard* keyboard = m_systems.input_manager->GetKeyboard();
-				if (keyboard->IsKeyDown(SDLK_s)){
-
-					float PlayeronePosY = playerone->GetY();
-					playerone->GetY() + 64;
-				}
-				else if (keyboard->IsKeyDown(SDLK_w)){
-
-					float PlayeronePosY = playerone->GetY();
-					PlayeronePosY - 64;
-				}
-				else if (keyboard->IsKeyDown(SDLK_a)){
-
-					float PlayeronePosX = playerone->GetX();
-					PlayeronePosX - 64;
-				}
-				else if (keyboard->IsKeyDown(SDLK_d)){
-
-					float PlayeronePosX = playerone->GetX();
-					PlayeronePosX + 64;
-				}
-			}
+	
 		}
 	
 	// tommis update jag antar att de här här saker rör sig så jag sparar den så kan vi kolla om de behövs
@@ -292,51 +263,45 @@ void GameState::CollisionChecking()
 {
 
 	/*
-<<<<<<< HEAD
-=======
-*/
+	Playerone* playerone = static_cast<Playerone*>(m_entities[0]);
+	SolidBlock* solidblock = static_cast<SolidBlock*>(m_entities[1]);
 
-	/*
->>>>>>> origin/master
-	Playerone* Playerone = static_cast<Playerone*>(m_entities[0]);
-	Ball* ball = static_cast<Ball*>(m_entities[1]);
+
 
 	int overlapX = 0, overlapY = 0;
-	if (CollisionManager::Check(Playerone->GetCollider(), Playerone->GetCollider(), overlapX, overlapY))
+
+	if (CollisionManager::Check(playerone->GetCollider(), playerone->GetCollider(), overlapX, overlapY))
 	{
-		if (overlapX != 0)
+			if (overlapX != 0)
 			ball->InvertDirectionX();
 		if (overlapY != 0)
 			ball->InvertDirectionY();
+			
 
 		ball->SetPosition(ball->GetX() + overlapX, ball->GetY() + overlapY);
 	}
+
+
 	else
 	{
 		for (unsigned int i = 2; i < m_entities.size(); i++)
 		{
-			Block* block = static_cast<Block*>(m_entities[i]);
-			if (!block->IsVisible())
+			SolidBlock* solidblock = static_cast<SolidBlock*>(m_entities[i]);
+			if (!solidblock->IsVisible())
 				continue;
 
-			if (CollisionManager::Check(block->GetCollider(), Playerone->GetCollider(), overlapX, overlapY))
+			if (CollisionManager::Check(solidblock->GetCollider(), playerone->GetCollider(), overlapX, overlapY))
 			{
-				block->SetInvisible();
+				solidblock->SetInvisible();
 
-				if (overlapX != 0)
-					ball->InvertDirectionX();
-				if (overlapY != 0)
-					ball->InvertDirectionY();
+			//	if (overlapX != 0)
+				//	solidblock->InvertDirectionX();
+				//if (overlapY != 0)
+					//solidblock->InvertDirectionY();
 
-				ball->SetPosition(ball->GetX() + overlapX, ball->GetY() + overlapY);
+				//solidblock->SetPosition(ball->GetX() + overlapX, ball->GetY() + overlapY);
 			}
 		}
 	}
-<<<<<<< HEAD
-=======
-	*/
-
-	/*
->>>>>>> origin/master
 	*/
 }

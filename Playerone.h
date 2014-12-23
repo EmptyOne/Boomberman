@@ -35,7 +35,14 @@ private:
 	float m_speed;
 	int m_screen_width;
 	int m_screen_height;
-;
+
+	// tror inte vi kommer behöva använda dom här
+	// semih sa typ att man kan göra fake tiles med modulus sjukt lätt
+	int m_keypress;
+	int m_numMax;
+	int m_numMin;
+
+	
 };
 
 

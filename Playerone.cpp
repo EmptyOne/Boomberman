@@ -18,8 +18,11 @@ Playerone::Playerone(Keyboard* keyboard,Sprite* sprite,float x, float y)
 	m_collider->SetWidthHeight(m_sprite->GetRegion()->w, 
 		m_sprite->GetRegion()->h);
 
+
 	m_x = x;
 	m_y = y;
+	
+
 	/*
 	m_screen_width = screen_width;
 	m_screen_height = screen_height;
@@ -37,24 +40,57 @@ Playerone::~Playerone()
 
 void Playerone::Update(float deltatime)
 {
+	// semihs snapp variabler
+		int snappX;
+		int snappY;
+	
+	
+
+	// axls movement
 	if (m_keyboard->IsKeyDown(SDLK_w) == true)
 	{
-		m_y -= 10;
+		
+		m_y -= 2;
+	
 	}
 
-	if (m_keyboard->IsKeyDown(SDLK_s) == true)
+	else if (m_keyboard->IsKeyDown(SDLK_s) == true)
 	{
-		m_y += 10;
+		
+		m_y += 2;
+	
 	}
 
-	if (m_keyboard->IsKeyDown(SDLK_d) == true)
+	else if (m_keyboard->IsKeyDown(SDLK_d) == true)
 	{
-		m_x += 10;
+		
+		m_x += 2;
+		
 	}
-	if (m_keyboard->IsKeyDown(SDLK_a) == true)
+	else if (m_keyboard->IsKeyDown(SDLK_a) == true)
 	{
-		m_x -= 10;
+	
+		m_x -= 2;
 	}
+
+
+
+//här trodde jag att de var bättre med SDL_KEYUP men den suger jag får den aldrig att funka.
+	if (SDLK_w == false){
+
+		
+		snappX = (int)m_x % 64;
+		snappY = (int)m_y % 64;
+
+		
+		m_y = (float)(snappY * 64);
+		if (snappX > 32){
+			m_x = (float)(snappX * 64);
+		}
+
+	}
+
+
 
 }
 
