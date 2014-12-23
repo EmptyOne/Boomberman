@@ -42,23 +42,23 @@ void Playerone::Update(float deltatime)
 {
 	// semihs snapp variabler
 		int snappX;
-		int snappY;
-	
+		int snappY = 0;
+		int timer = 0;
 	
 
 	// axls movement
 	if (m_keyboard->IsKeyDown(SDLK_w) == true)
 	{
-		
+	
 		m_y -= 2;
+		snappY = (int)m_y % 64;
 	
 	}
 
-	else if (m_keyboard->IsKeyDown(SDLK_s) == true)
+
+	if (m_keyboard->IsKeyDown(SDLK_s) == true)
 	{
-		
 		m_y += 2;
-	
 	}
 
 	else if (m_keyboard->IsKeyDown(SDLK_d) == true)
@@ -76,21 +76,32 @@ void Playerone::Update(float deltatime)
 
 
 //här trodde jag att de var bättre med SDL_KEYUP men den suger jag får den aldrig att funka.
-	if (SDLK_w == false){
 
-		
-		snappX = (int)m_x % 64;
-		snappY = (int)m_y % 64;
+	/*if (m_keyboard->IsKeyDown(SDLK_w) == false)
+	{
+	snappX = (int)m_x % 64;
+	snappY = (int)m_y % 64;
+	std::cout << snappY;
 
-		
-		m_y = (float)(snappY * 64);
-		if (snappX > 32){
-			m_x = (float)(snappX * 64);
-		}
+	m_y = (float)(snappY * 64);
 
+	if (snappX > 32)
+	{
+	m_x = (float)(snappX * 64);
 	}
+	}*/
+	if (m_keyboard->IsKeyDown(SDL_KEYUP) == false)
+	{
+		
 
+		std::cout << snappY << std::endl;
 
+		if (snappY != 64)
+		{
+		m_y += snappY;
+		}
+	
+		}
 
 }
 
