@@ -118,10 +118,10 @@ GameState::GameState(System& system)
 	
 	int playerx = 120;
 	int playery = 0;
-
+	
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 66, 64, 64);
 
-	Playerone* playerone = new Playerone(sprite, playerx , playery);
+	Playerone* playerone = new Playerone(m_systems.input_manager->GetKeyboard(), sprite, playerx , playery);
 	playerx = playerone->GetX();
 	playery = playerone->GetY();
 

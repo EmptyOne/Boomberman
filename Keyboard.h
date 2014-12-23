@@ -17,6 +17,7 @@ private:
 
 private:
 	bool m_keys[256];
+
 };
 
 #endif // KEYBOARD_H_INCLUDED

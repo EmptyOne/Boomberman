@@ -18,30 +18,6 @@ bool Keyboard::IsKeyDown(int index)
 
 void Keyboard::SetKeyboard(int index, bool state)
 {
-	//m_keys[index] = state;
-	if (index == SDLK_w)
-	{
-		std::cout << "w";
-	}
-
-	if (index == SDLK_a)
-	{
-		std::cout << "a";
-	}
-
-	if (index == SDLK_s)
-	{
-		std::cout << "s";
-	}
-
-	if (index == SDLK_d)
-	{
-		std::cout << "d";
-	}
-
-	if (index == SDLK_SPACE)
-	{
-		std::cout << " ";
-	}
-
+	m_keys[index] = state;
+	
 }

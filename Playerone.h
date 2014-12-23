@@ -9,7 +9,7 @@ class Keyboard;
 class Playerone : public Entity
 {
 public:
-	Playerone(Sprite* sprite, float x, float y);
+	Playerone(Keyboard* keyboard, Sprite* sprite, float x, float y);
 	~Playerone();
 	
 	void Update(float deltatime);
@@ -26,6 +26,7 @@ public:
 
 private:
 	
+	Keyboard* m_keyboard;
 	Sprite* m_sprite;
 	Collider* m_collider;
 

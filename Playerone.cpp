@@ -1,14 +1,17 @@
 // Playerone.cpp
 
 #include "stdafx.h"
+#include "Keyboard.h"
 #include "Sprite.h"
 #include "Collider.h"
 #include "Playerone.h"
 
-Playerone::Playerone(Sprite* sprite,float x, float y)
+
+
+Playerone::Playerone(Keyboard* keyboard,Sprite* sprite,float x, float y)
 {
 	
-	
+	m_keyboard = keyboard;
 	m_sprite = sprite;
 
 	m_collider = new Collider(0, 0);
@@ -34,21 +37,25 @@ Playerone::~Playerone()
 
 void Playerone::Update(float deltatime)
 {
-	
-
-	/*float deltaX = m_mouse->GetX() - (m_x + static_cast<float>(m_sprite->GetRegion()->w * 0.5f));
-	if (static_cast<int>(deltaX) != 0)
+	if (m_keyboard->IsKeyDown(SDLK_w) == true)
 	{
-		float dirX = deltaX / abs(deltaX);
-		m_x += m_speed * abs(deltaX) * deltatime * dirX;
+		m_y -= 10;
+	}
 
-		if (m_x < 0.0f)
-			m_x = 0.0f;
-		else if (m_x > m_screen_width - 80.0f)
-			m_x = m_screen_width - 80.0f;
+	if (m_keyboard->IsKeyDown(SDLK_s) == true)
+	{
+		m_y += 10;
+	}
 
-		m_collider->SetPosition(m_x, m_y);
-	}*/
+	if (m_keyboard->IsKeyDown(SDLK_d) == true)
+	{
+		m_x += 10;
+	}
+	if (m_keyboard->IsKeyDown(SDLK_a) == true)
+	{
+		m_x -= 10;
+	}
+
 }
 
 Sprite* Playerone::GetSprite()
