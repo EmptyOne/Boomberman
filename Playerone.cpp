@@ -78,15 +78,23 @@ void Playerone::Update(float deltatime)
 			
 			if (snappY != 0 || snappY != 62)
 			{
-				if (snappY > 64)
+				if (snappY > 32)
 				{
-
+					std::cout << "m_y " << m_y << std::endl;
+					snappY -= 64;
+					std::cout << "snappY, less than 32: " << snappY << std::endl;
+					m_y -= snappY;
+					std::cout << "m_y efter -: " << m_y << std::endl;
 				}
-				std::cout << "m_y " << m_y << std::endl;
-				snappY -= 64;
-				std::cout << "snappY efter -64: " << snappY << std::endl;
-				m_y -= snappY;
-				std::cout << "m_y efter -: " << m_y << std::endl;
+				else if (snappY < 32)
+				{
+					std::cout << "m_y " << m_y << std::endl;
+					snappY -= 64;
+					std::cout << "more than 32: " << snappY << std::endl;
+					m_y += snappY;
+					std::cout << "m_y efter -: " << m_y << std::endl;
+				}
+
 				snappY = 0;
 				
 			}
