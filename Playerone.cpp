@@ -14,10 +14,9 @@ Playerone::Playerone(Keyboard* keyboard,Sprite* sprite,float x, float y)
 	m_keyboard = keyboard;
 	m_sprite = sprite;
 
-	m_collider = new Collider(0, 0);
+	m_collider = new Collider(x, y);
 	m_collider->SetWidthHeight(m_sprite->GetRegion()->w, 
 		m_sprite->GetRegion()->h);
-
 
 	m_x = x;
 	m_y = y;
@@ -40,6 +39,24 @@ Playerone::~Playerone()
 
 void Playerone::Update(float deltatime)
 {
+	//Skärm limit
+	if (m_x < 120)
+	{
+		m_x = 120;
+	}
+	else if (m_x > 1080.0f - 64.0f)
+	{
+		m_x = 1080.0f - 64.0f;
+	}
+	if (m_y < 0)
+	{
+		m_y = 0;
+	}
+	else if (m_y > 832.0f - 64.0f)
+	{
+		m_y = 832.0f - 64.0f;
+	}
+
 	// semihs snapp variabler
 		int snappX;
 		int snappY = 0;

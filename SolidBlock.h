@@ -17,6 +17,8 @@ public:
 	float GetY();
 
 	bool IsVisible();
+	void SetInvisible();
+
 
 	EEntityType GetType();
 	Collider* GetCollider();

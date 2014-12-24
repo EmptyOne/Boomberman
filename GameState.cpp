@@ -262,7 +262,7 @@ State* GameState::NextState()
 void GameState::CollisionChecking()
 {
 
-	/*
+	
 	Playerone* playerone = static_cast<Playerone*>(m_entities[0]);
 	SolidBlock* solidblock = static_cast<SolidBlock*>(m_entities[1]);
 
@@ -270,20 +270,10 @@ void GameState::CollisionChecking()
 
 	int overlapX = 0, overlapY = 0;
 
-	if (CollisionManager::Check(playerone->GetCollider(), playerone->GetCollider(), overlapX, overlapY))
-	{
-			if (overlapX != 0)
-			ball->InvertDirectionX();
-		if (overlapY != 0)
-			ball->InvertDirectionY();
-			
-
-		ball->SetPosition(ball->GetX() + overlapX, ball->GetY() + overlapY);
-	}
 
 
-	else
-	{
+
+	
 		for (unsigned int i = 2; i < m_entities.size(); i++)
 		{
 			SolidBlock* solidblock = static_cast<SolidBlock*>(m_entities[i]);
@@ -292,6 +282,7 @@ void GameState::CollisionChecking()
 
 			if (CollisionManager::Check(solidblock->GetCollider(), playerone->GetCollider(), overlapX, overlapY))
 			{
+				std::cout << "test";
 				solidblock->SetInvisible();
 
 			//	if (overlapX != 0)
@@ -302,6 +293,6 @@ void GameState::CollisionChecking()
 				//solidblock->SetPosition(ball->GetX() + overlapX, ball->GetY() + overlapY);
 			}
 		}
-	}
-	*/
+	
+	
 }

@@ -41,6 +41,10 @@ float SolidBlock::GetY()
 {
 	return m_y;
 }
+void SolidBlock::SetInvisible()
+{
+	m_visible = false;
+}
 bool SolidBlock::IsVisible()
 {
 	m_visible = true;
