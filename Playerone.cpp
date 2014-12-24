@@ -64,16 +64,37 @@ void Playerone::Update(float deltatime)
 	
 
 	// axls movement
-	if (m_keyboard->IsKeyDown(SDLK_w) == true)
+		if (m_keyboard->IsKeyDown(SDLK_w) == true || snappY != 0)
 	{
-	
-		m_y -= 2;
-		//snappY = (int)m_y % 64;
-	
+			if (m_keyboard->IsKeyDown(SDLK_w) == true)
+			{
+				m_y -= 2;
+				snappY = (unsigned int)m_y % 64;
+				
+				std::cout <<"snappY first: " << snappY << std::endl;
+				m_keyboard->IsKeyDown(300);
+			}
+			
+			
+			if (snappY != 0 || snappY != 62)
+			{
+				if (snappY > 64)
+				{
+
+				}
+				std::cout << "m_y " << m_y << std::endl;
+				snappY -= 64;
+				std::cout << "snappY efter -64: " << snappY << std::endl;
+				m_y -= snappY;
+				std::cout << "m_y efter -: " << m_y << std::endl;
+				snappY = 0;
+				
+			}
+			std::cout << "!!!!!!!!!!!" << std::endl;
 	}
 
 
-	if (m_keyboard->IsKeyDown(SDLK_s) == true)
+	if (m_keyboard->IsKeyDown(SDLK_s) == true || snappY )
 	{
 		m_y += 2;
 	}
@@ -107,7 +128,7 @@ void Playerone::Update(float deltatime)
 	m_x = (float)(snappX * 64);
 	}
 	}*/
-	if (m_keyboard->IsKeyDown(SDL_KEYUP) == false)
+	/*if (m_keyboard->IsKeyDown(SDL_KEYUP) == false)
 	{
 		
 
@@ -119,7 +140,7 @@ void Playerone::Update(float deltatime)
 		}
 	
 		}
-
+		*/
 }
 
 Sprite* Playerone::GetSprite()
