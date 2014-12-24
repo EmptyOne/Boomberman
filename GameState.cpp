@@ -282,7 +282,6 @@ void GameState::CollisionChecking()
 
 			if (CollisionManager::Check(solidblock->GetCollider(), playerone->GetCollider(), overlapX, overlapY))
 			{
-				std::cout << "test";
 				solidblock->SetInvisible();
 
 			//	if (overlapX != 0)
