@@ -39,7 +39,7 @@ Playerone::~Playerone()
 
 void Playerone::Update(float deltatime)
 {
-	//Skärm limit
+	//Skärm limit, kanske inte behövs om man gör limit där nere
 	if (m_x < 120)
 	{
 		m_x = 120;
@@ -56,67 +56,59 @@ void Playerone::Update(float deltatime)
 	{
 		m_y = 832.0f - 64.0f;
 	}
-
-	// semihs snapp variabler
-		int snappX;
-		int snappY = 0;
-		int timer = 0;
-	
-
 	// axls movement
-		if (m_keyboard->IsKeyDown(SDLK_w) == true || snappY != 0)
+	m_timer += deltatime;
+	m_playerSpeed = 0.35;
+	
+	if (m_keyboard->IsKeyDown(SDLK_w) == true)
 	{
-			if (m_keyboard->IsKeyDown(SDLK_w) == true)
+		if (m_y != 0)
+		{
+			if (m_timer > m_playerSpeed)
 			{
-				m_y -= 2;
-				snappY = (unsigned int)m_y % 64;
-				
-				std::cout <<"snappY first: " << snappY << std::endl;
-				m_keyboard->IsKeyDown(300);
+				m_y -= 64;
+				m_timer = 0;
 			}
-			
-			
-			if (snappY != 0 || snappY != 62)
-			{
-				if (snappY > 32)
-				{
-					std::cout << "m_y " << m_y << std::endl;
-					snappY -= 64;
-					std::cout << "snappY, less than 32: " << snappY << std::endl;
-					m_y -= snappY;
-					std::cout << "m_y efter -: " << m_y << std::endl;
-				}
-				else if (snappY < 32)
-				{
-					std::cout << "m_y " << m_y << std::endl;
-					snappY -= 64;
-					std::cout << "more than 32: " << snappY << std::endl;
-					m_y += snappY;
-					std::cout << "m_y efter -: " << m_y << std::endl;
-				}
-
-				snappY = 0;
-				
-			}
-			std::cout << "!!!!!!!!!!!" << std::endl;
+		}
 	}
 
 
-	if (m_keyboard->IsKeyDown(SDLK_s) == true || snappY )
+	if (m_keyboard->IsKeyDown(SDLK_s) == true)
 	{
-		m_y += 2;
+		if (m_y != 832.0f - 64.0f)
+		{
+			if (m_timer > m_playerSpeed)
+			{
+				m_y += 64;
+				m_timer = 0;
+			}
+		}
 	}
 
 	else if (m_keyboard->IsKeyDown(SDLK_d) == true)
 	{
+		if (m_x != 1080.0f - 64.0f)
+		{
+			if (m_timer > m_playerSpeed)
+			{
+				m_x += 64;
+				m_timer = 0;
+			}
+		}
 		
-		m_x += 2;
 		
 	}
 	else if (m_keyboard->IsKeyDown(SDLK_a) == true)
 	{
-	
-		m_x -= 2;
+		//För att man inte ska kunna glitcha utanför spelplanen
+		if (m_x != 120)
+		{
+			if (m_timer > m_playerSpeed)
+			{
+				m_x -= 64;
+				m_timer = 0;
+			}
+		}
 	}
 
 
@@ -129,7 +121,7 @@ void Playerone::Update(float deltatime)
 	snappY = (int)m_y % 64;
 	std::cout << snappY;
 
-	m_y = (float)(snappY * 64);
+	m_y = (float)(snappY * 64) ;
 
 	if (snappX > 32)
 	{
