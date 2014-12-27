@@ -17,7 +17,7 @@ SolidBlock::SolidBlock(Sprite* sprite, float x, float y){
 	m_x = x;
 	m_y = y;
 
-	
+	m_visible = true;
 }
 SolidBlock::~SolidBlock()
 {

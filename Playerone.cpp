@@ -13,13 +13,14 @@ Playerone::Playerone(Keyboard* keyboard,Sprite* sprite,float x, float y)
 	
 	m_keyboard = keyboard;
 	m_sprite = sprite;
-
+	
 	m_collider = new Collider(x, y);
+	m_collider->SetParent(this);
 	m_collider->SetWidthHeight(m_sprite->GetRegion()->w, 
 		m_sprite->GetRegion()->h);
-
 	m_x = x;
 	m_y = y;
+
 	
 
 	/*

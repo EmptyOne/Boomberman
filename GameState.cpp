@@ -280,8 +280,9 @@ void GameState::CollisionChecking()
 			if (!solidblock->IsVisible())
 				continue;
 
-			if (CollisionManager::Check(solidblock->GetCollider(), playerone->GetCollider(), overlapX, overlapY))
+			if (CollisionManager::Check(playerone->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
 			{
+				std::cout << "Collision" << std::endl;
 				solidblock->SetInvisible();
 
 			//	if (overlapX != 0)
