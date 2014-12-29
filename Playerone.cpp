@@ -60,7 +60,7 @@ void Playerone::Update(float deltatime)
 	}
 	// axls movement
 	m_timer += deltatime;
-	m_playerSpeed = 0.35; //Borde vara samma som animations tiden
+	m_playerSpeed = 0.25; //Borde vara samma som animations tiden
 	
 	if (m_keyboard->IsKeyDown(SDLK_w) == true)
 	{
