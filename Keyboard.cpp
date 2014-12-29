@@ -18,8 +18,6 @@ bool Keyboard::IsKeyDown(int index)
 
 void Keyboard::SetKeyboard(int index, bool state)
 {
-	//m_keys[index] = state;
-
-
-
+	m_keys[index] = state;
+	
 }

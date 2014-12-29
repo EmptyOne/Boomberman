@@ -93,7 +93,6 @@
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Block.h" />
-    <ClInclude Include="BreakableBlock.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="DrawManager.h" />
@@ -103,7 +102,8 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />
-    <ClInclude Include="Paddle.h" />
+    <ClInclude Include="Playerone.h" />
+    <ClInclude Include="SolidBlock.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="SpriteText.h" />
@@ -115,7 +115,6 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Block.cpp" />
-    <ClCompile Include="BreakableBlock.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="DrawManager.cpp" />
@@ -125,7 +124,8 @@
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mouse.cpp" />
-    <ClCompile Include="Paddle.cpp" />
+    <ClCompile Include="Playerone.cpp" />
+    <ClCompile Include="SolidBlock.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="SpriteText.cpp" />

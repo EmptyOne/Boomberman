@@ -1,3 +1,5 @@
+//kommer vi använda denna?
+
 
 #include "Entity.h"
 

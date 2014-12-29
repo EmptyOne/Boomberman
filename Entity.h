@@ -1,15 +1,16 @@
 // Entity.h
 
-#ifndef ENTITY_H_INCLUDED
-#define ENTITY_H_INCLUDED
+#pragma once
 
 enum EEntityType
 {
 	ENTITY_UNKNOWN,
-	ENTITY_PADDLE,
+	ENTITY_PLAYERONE,
 	ENTITY_BLOCK,
 	ENTITY_BREAKABLEBLOCK,
 	ENTITY_BALL,
+	ENTITY_SOLIDBLOCK,
+
 };
 
 class Sprite;
@@ -28,4 +29,3 @@ public:
 	virtual EEntityType GetType() = 0;
 };
 
-#endif // ENTITY_H_INCLUDED

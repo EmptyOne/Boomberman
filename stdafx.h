@@ -11,6 +11,8 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <time.h>
+#include <Windows.h>
 
 
 #include "SDL.h"
