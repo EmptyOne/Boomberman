@@ -31,15 +31,15 @@ GameState::GameState(System& system)
 
 	Sprite* sprite;
 	
-	/*
+	
 	sprite = m_systems.sprite_manager->CreateSprite(
-		filename, 66, 0, 64, 64);
+		filename, 0, 130, 64, 64);
 	Ball* ball = new Ball(sprite,
 		m_systems.width,
 		m_systems.height,
-		m_systems.width / 2 - 8, 
-		m_systems.height - 68 - 16);
-	m_entities.push_back(ball);*/
+		0, 
+		0);
+	m_entities.push_back(ball);
 
 	// hard coded block coordinates
 	SDL_Rect blockCoords[] 

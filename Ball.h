@@ -26,8 +26,9 @@ public:
 	bool IsActive();
 	void SetPosition(float x, float y);
 
-	void InvertDirectionX();
-	void InvertDirectionY();
+	//Behövs inte längre
+	//void InvertDirectionX();
+	//void InvertDirectionY();
 
 private:
 	Sprite* m_sprite;
@@ -40,13 +41,17 @@ private:
 	float m_offset;
 	float m_position_x;
 	float m_position_y;
-	float m_direction_x;
-	float m_direction_y;
 
 	float m_start_x;
 	float m_start_y;
-	
+
 	bool m_active;
+
+	//Behövs inte längre
+	//float m_direction_x;
+	//float m_direction_y;
+
+	
 };
 
 #endif // BALL_H_INCLUDED
