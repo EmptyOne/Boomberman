@@ -5,6 +5,7 @@
 #include "Sprite.h"
 #include "Collider.h"
 #include "Playerone.h"
+#include "Ball.h"
 
 
 
@@ -59,7 +60,7 @@ void Playerone::Update(float deltatime)
 	}
 	// axls movement
 	m_timer += deltatime;
-	m_playerSpeed = 0.35;
+	m_playerSpeed = 0.25; //Borde vara samma som animations tiden
 	
 	if (m_keyboard->IsKeyDown(SDLK_w) == true)
 	{
@@ -109,6 +110,14 @@ void Playerone::Update(float deltatime)
 				m_x -= 64;
 				m_timer = 0;
 			}
+		}
+	}
+	if (m_keyboard->IsKeyDown(SDLK_SPACE) == true)
+	{
+		if (m_timer > m_playerSpeed)
+		{
+			//Ball* ball = new Ball(m_x, m_y);
+			m_timer = 0;
 		}
 	}
 
