@@ -86,7 +86,7 @@ GameState::GameState(System& system)
 					stream >> count;
 					//den här raden skriver ut allt atm 
 					SDL_Rect& rect = blockCoords[count];
-
+					
 					//block
 					sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
 					Block* block = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
@@ -96,12 +96,11 @@ GameState::GameState(System& system)
 					// då kommer de bli nice tror jag 
 	
 					//bakground
-					
+					/*
 					sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
 					SolidBlock* solidblock = new SolidBlock(sprite, xOffset + x * 64, yOffset + y * 64);
 					m_entities.push_back(solidblock);
-					
-					
+					*/
 					
 					if (x % 2 == 1 && y % 2 == 1){
 
