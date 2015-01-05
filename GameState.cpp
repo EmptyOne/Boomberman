@@ -17,6 +17,9 @@
 #include "Collider.h"
 #include "CollisionManager.h"
 
+#include "SoundManager.h"
+#include "SoundClip.h"
+
 #include <fstream>
 
 
@@ -26,6 +29,7 @@ GameState::GameState(System& system)
 
 	std::string filename = "../assets/main.png";
 	std::string txtname = "../assets/Map.txt";
+	std::string soundname = "../assets/BOOM_MUSIC.wav";
 
 
 
@@ -102,11 +106,7 @@ GameState::GameState(System& system)
 					SolidBlock* solidblock = new SolidBlock(sprite, xOffset + x * 64, yOffset + y * 64);
 					m_entities.push_back(solidblock);
 					*/
-<<<<<<< HEAD
-					
-=======
->>>>>>> origin/master
-					
+
 					if (x % 2 == 1 && y % 2 == 1){
 
 						// solidblock					
@@ -133,6 +133,10 @@ GameState::GameState(System& system)
 
 	m_entities.push_back(playerone);
 
+	Keyboard* keyboard = m_systems.input_manager->GetKeyboard();
+		SoundClip* s = m_systems.sound_manager->CreateSoundClip("../assets/BOOM_MUSIC.wav");
+		s->Play();
+	
 
 
 	m_active = false;
@@ -156,7 +160,6 @@ GameState::~GameState()
 
 bool GameState::Update(float deltatime)
 {
-	
 
 	// tog bort de som vi inte behöver i update längre (typ de mesta jag skrev igår)
 	

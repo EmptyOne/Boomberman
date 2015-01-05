@@ -58,13 +58,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../external/sdl2/include;../external/sdl2_image/include;../external/sdl2_ttf/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../external/sdl2/include;../external/sdl2_image/include;../external/sdl2_ttf/include;../external/sdl2_mixer/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4244</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../external/sdl2/lib/x86/;../external/sdl2_image/lib/x86/;../external/sdl2_ttf/lib/x86/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../external/sdl2/lib/x86/;../external/sdl2_image/lib/x86/;../external/sdl2_ttf/lib/x86/;../external/sdl2_mixer/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -104,6 +104,8 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Playerone.h" />
     <ClInclude Include="SolidBlock.h" />
+    <ClInclude Include="SoundClip.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="SpriteText.h" />
@@ -126,6 +128,8 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Playerone.cpp" />
     <ClCompile Include="SolidBlock.cpp" />
+    <ClCompile Include="SoundClip.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="SpriteText.cpp" />
