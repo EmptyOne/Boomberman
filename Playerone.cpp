@@ -121,6 +121,8 @@ void Playerone::Update(float deltatime)
 		}
 	}
 
+	m_collider->SetPosition(m_x, m_y);
+
 
 
 //här trodde jag att de var bättre med SDL_KEYUP men den suger jag får den aldrig att funka.
