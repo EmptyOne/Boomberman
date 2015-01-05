@@ -86,7 +86,7 @@ GameState::GameState(System& system)
 					stream >> count;
 					//den här raden skriver ut allt atm 
 					SDL_Rect& rect = blockCoords[count];
-
+					
 					//block
 					
 					sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
@@ -102,7 +102,10 @@ GameState::GameState(System& system)
 					SolidBlock* solidblock = new SolidBlock(sprite, xOffset + x * 64, yOffset + y * 64);
 					m_entities.push_back(solidblock);
 					*/
+<<<<<<< HEAD
 					
+=======
+>>>>>>> origin/master
 					
 					if (x % 2 == 1 && y % 2 == 1){
 
