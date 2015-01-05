@@ -88,19 +88,20 @@ GameState::GameState(System& system)
 					SDL_Rect& rect = blockCoords[count];
 
 					//block
+					
 					sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
 					Block* block = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
 					m_entities.push_back(block);
-
+					
 					// jag kommer lägga till en klass för background
 					// då kommer de bli nice tror jag 
 	
 					//bakground
-					
+					/*
 					sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
 					SolidBlock* solidblock = new SolidBlock(sprite, xOffset + x * 64, yOffset + y * 64);
 					m_entities.push_back(solidblock);
-					
+					*/
 					
 					
 					if (x % 2 == 1 && y % 2 == 1){
@@ -155,7 +156,7 @@ bool GameState::Update(float deltatime)
 	
 
 	// tog bort de som vi inte behöver i update längre (typ de mesta jag skrev igår)
-
+	
 	for (unsigned int i = 0; i < m_entities.size(); i++){
 
 		
@@ -167,6 +168,7 @@ bool GameState::Update(float deltatime)
 
 	
 		}
+		
 	
 	// tommis update jag antar att de här här saker rör sig så jag sparar den så kan vi kolla om de behövs
 	/*
@@ -224,8 +226,8 @@ bool GameState::Update(float deltatime)
 				
 			}
 		}
-	}
-	*/
+	}*/
+	
 
 
 	// we always do collision checking after updating 
@@ -262,7 +264,7 @@ State* GameState::NextState()
 void GameState::CollisionChecking()
 {
 
-	
+
 	Playerone* playerone = static_cast<Playerone*>(m_entities[0]);
 	SolidBlock* solidblock = static_cast<SolidBlock*>(m_entities[1]);
 
@@ -271,28 +273,25 @@ void GameState::CollisionChecking()
 	int overlapX = 0, overlapY = 0;
 
 
+	for (unsigned int i = 1; i < m_entities.size(); i++)
+	{
+		SolidBlock* solidblock = static_cast<SolidBlock*>(m_entities[i]);
+		if (!solidblock->IsVisible())
+			continue;
 
-
-	
-		for (unsigned int i = 2; i < m_entities.size(); i++)
+		if (CollisionManager::Check(playerone->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
 		{
-			SolidBlock* solidblock = static_cast<SolidBlock*>(m_entities[i]);
-			if (!solidblock->IsVisible())
-				continue;
-
-			if (CollisionManager::Check(playerone->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
-			{
-				std::cout << "Collision" << std::endl;
-				solidblock->SetInvisible();
+			std::cout << "Collision" << std::endl;
+			//solidblock->SetInvisible();
 
 			//	if (overlapX != 0)
-				//	solidblock->InvertDirectionX();
-				//if (overlapY != 0)
-					//solidblock->InvertDirectionY();
+			//	solidblock->InvertDirectionX();
+			//if (overlapY != 0)
+			//solidblock->InvertDirectionY();
 
-				//solidblock->SetPosition(ball->GetX() + overlapX, ball->GetY() + overlapY);
-			}
+			//solidblock->SetInvisible(solidblock->GetX() + overlapX, solidblock->GetY() + overlapY);
 		}
-	
-	
+	}
+
+
 }
