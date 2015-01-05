@@ -7,7 +7,6 @@
 class SolidBlock : public Entity {
 
 public:
-
 	SolidBlock(Sprite* sprite, float x, float y);
 	~SolidBlock();
 

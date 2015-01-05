@@ -1,7 +1,6 @@
 // Engine.h
 
-#ifndef ENGINE_H_INCLUDED
-#define ENGINE_H_INCLUDED
+#pragma once
 
 // forward declares
 class DrawManager;
@@ -31,5 +30,3 @@ private:
 	StateManager* m_state_manager;
 	SoundManager* m_sound_manager;
 };
-
-#endif // ENGINE_H_INCLUDED

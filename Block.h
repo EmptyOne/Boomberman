@@ -1,7 +1,6 @@
 // Block.h
 
-#ifndef BLOCK_H_INCLUDED
-#define BLOCK_H_INCLUDED
+#pragma once
 
 #include "Entity.h"
 
@@ -21,6 +20,7 @@ public:
 	void SetInvisible();
 	bool IsVisible();
 
+	void SetType(int i);
 	EEntityType GetType();
 	Collider* GetCollider();
 
@@ -30,6 +30,5 @@ private:
 	float m_x;
 	float m_y;
 	bool m_visible;
+	EEntityType e;
 };
-
-#endif // BLOCK_H_INCLUDED

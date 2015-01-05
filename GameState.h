@@ -1,8 +1,6 @@
 // GameState.h
 
-#ifndef GAMESTATE_H_INCLUDED
-#define GAMESTATE_H_INCLUDED
-
+#pragma once
 #include "State.h"
 
 class Entity;
@@ -27,4 +25,3 @@ private:
 	bool m_active;
 };
 
-#endif // GAMESTATE_H_INCLUDED

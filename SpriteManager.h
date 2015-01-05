@@ -1,7 +1,6 @@
 // SpriteManager.h
 
-#ifndef SPRITEMANAGER_H_INCLUDED
-#define SPRITEMANAGER_H_INCLUDED
+#pragma once
 
 class Sprite;
 class SpriteText;
@@ -25,4 +24,3 @@ private:
 	std::map<std::string, TTF_Font*> m_fonts;
 };
 
-#endif // SPRITEMANAGER_H_INCLUDED

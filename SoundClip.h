@@ -2,6 +2,7 @@
 
 
 class SoundClip{
+
 public:
 
 	~SoundClip();
@@ -13,6 +14,7 @@ public:
 	void Volume(int p_iVolume);
 
 private:
+
 	SoundClip();
 	Mix_Chunk* m_pxClip;
 	int m_iChannel;

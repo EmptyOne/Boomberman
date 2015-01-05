@@ -1,7 +1,6 @@
 // StateManager.h
 
-#ifndef STATEMANAGER_H_INCLUDED
-#define STATEMANAGER_H_INCLUDED
+#pragma once
 
 // forward declare
 class State;
@@ -24,5 +23,3 @@ private:
 	State* m_active_state;
 	unsigned int m_tick;
 };
-
-#endif // STATEMANAGER_H_INCLUDED

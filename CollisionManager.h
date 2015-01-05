@@ -1,7 +1,6 @@
 // CollisionManager.h
 
-#ifndef COLLISIONMANAGER_H_INCLUDED
-#define COLLISIONMANAGER_H_INCLUDED
+#pragma once
 
 class Collider;
 
@@ -23,5 +22,3 @@ public:
 
 	static bool Check(Collider* lhs, Collider* rhs, int& overlapX, int& overlapY);
 };
-
-#endif // COLLISIONMANAGER_H_INCLUDED

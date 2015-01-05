@@ -21,7 +21,7 @@ bool CollisionManager::Check(Collider* lhs, Collider* rhs, int& overlapX, int& o
 	//                  |           |         |   | halfHeightB       |  deltaCenterY
 	//                  `-----------|    B    |  <´                  <´
 	//                              |         |
-  //                              `---------´
+    //                              `---------´
 	//                  ^------^         ^----^
 	//                  halfWidthA       halfWidthB
 	//

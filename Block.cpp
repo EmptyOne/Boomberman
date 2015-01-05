@@ -17,6 +17,8 @@ Block::Block(Sprite* sprite, float x, float y)
 	m_x = x;
 	m_y = y;
 
+	e = ENTITY_BLOCK;
+
 	m_visible = true;
 }
 
@@ -63,7 +65,24 @@ bool Block::IsVisible()
 
 EEntityType Block::GetType()
 {
-	return ENTITY_BLOCK;
+	return e;
+}
+
+void Block::SetType(int i)
+{
+	if (i == 1)
+	{
+		e = ENTITY_BACKGROUNDBLOCK;
+	}
+	else if (i == 2)
+	{
+		e = ENTITY_SOLIDBLOCK;
+	}
+	else
+	{
+		e = ENTITY_BLOCK;
+	}
+
 }
 
 Collider* Block::GetCollider()

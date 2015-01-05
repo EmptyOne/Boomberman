@@ -1,7 +1,6 @@
 // InputManager.h
 
-#ifndef INPUTMANAGER_H_INCLUDED
-#define INPUTMANAGER_H_INCLUDED
+#pragma once
 
 // forward declares
 class Mouse;
@@ -28,4 +27,3 @@ private:
 	Keyboard* m_keyboard;
 };
 
-#endif // INPUTMANAGER_H_INCLUDED

@@ -34,45 +34,38 @@ GameState::GameState(System& system)
 
 
 	Sprite* sprite;
-	
-	
+
+
 	sprite = m_systems.sprite_manager->CreateSprite(
 		filename, 0, 130, 64, 64);
 	Ball* ball = new Ball(sprite,
 		m_systems.width,
 		m_systems.height,
-		0, 
+		0,
 		0);
 	m_entities.push_back(ball);
 
 	// hard coded block coordinates
-	SDL_Rect blockCoords[] 
+	SDL_Rect blockCoords[]
 	{
-		{ 0,  0, 64, 64 }, // Breakable
-		{ 66,  0, 64, 64 }, // Solid
-		{ 0, 0, 0, 0}, // Non-visible
-		{ 132, 0, 64, 64}, // Background
+		{ 0, 0, 64, 64 }, // Breakable
+		{ 66, 0, 64, 64 }, // Solid
+		{ 0, 0, 0, 0 }, // Non-visible
+		{ 132, 0, 64, 64 }, // Background
 
 	};
 
-	// create all blocks for level
-	
+	// mapen 
+
 	//variabler som är hur många blocks vi ska ha i x och y led.
-	//int xNumBlocks = m_systems.width / (64 + padding);
+
 	const int xNumBlocks = 15;
 	const int yNumBlocks = 13;
 
-	//märkte att denna rad används typ inte 
-	//int NumBlocks[xNumBlocks][yNumBlocks];
-
-	
-	//padding är onödig för oss. de den gör är mellan rum mellan blocks.
-	//int xOffset = (m_systems.width % (64 + padding) / 2);
-	//dom här variablerna är var någonstans på skärmen de ska börja skriva ut.
+	// varnågonstans spelplanen börjar ritas ut
 	int xOffset = 120;
 	int yOffset = 0;
-	
-	
+
 
 	std::ifstream stream;
 	stream.open(txtname);
@@ -86,69 +79,65 @@ GameState::GameState(System& system)
 			for (int y = 0; y < yNumBlocks; y++){
 
 				for (int x = 0; x < xNumBlocks; x++){
-				
+
 					stream >> count;
 					//den här raden skriver ut allt atm 
 					SDL_Rect& rect = blockCoords[count];
 
 
-					if (x % 2 == 1 && y % 2 == 1){
+					//bakground
+					sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
+					Block* backgroundBlock = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
+					backgroundBlock->SetType(1);
+				
+					m_entities.push_back(backgroundBlock);
 
+
+					if (x % 2 == 1 && y % 2 == 1){
 						// solidblock					
 						sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
-						SolidBlock* solidblock = new SolidBlock(sprite, xOffset + x * 64, yOffset + y * 64);
+						Block* solidblock = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
+						solidblock->SetType(2);
 						m_entities.push_back(solidblock);
+					
 						continue;
 					}
 					else
 					{
-						sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
-						Block* backgroundBlock = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
-
+		
 						if (count == 0)
 						{
+							//breakableblock
 							rect = blockCoords[0];
 							sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
 							Block* breakableBlock = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
+
 							m_entities.push_back(breakableBlock);
 						}
-						m_entities.push_back(backgroundBlock);
+			
+						
 					}
-					
-					//block
-					
-					
-					// jag kommer lägga till en klass för background
-					// då kommer de bli nice tror jag 
-	
-					//bakground
-					
-					/*sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
-					SolidBlock* solidblock = new SolidBlock(sprite, xOffset + x * 64, yOffset + y * 64);
-					m_entities.push_back(solidblock);*/
-				
 				}
 			}
 		}
 	}
 
-	
+	//player
 	int playerx = 120;
 	int playery = 0;
-	
+
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 66, 64, 64);
 
-	Playerone* playerone = new Playerone(m_systems.input_manager->GetKeyboard(), sprite, playerx , playery);
+	Playerone* playerone = new Playerone(m_systems.input_manager->GetKeyboard(), sprite, playerx, playery);
 	playerx = playerone->GetX();
 	playery = playerone->GetY();
 
-
 	m_entities.push_back(playerone);
 
-	Keyboard* keyboard = m_systems.input_manager->GetKeyboard();
-		SoundClip* s = m_systems.sound_manager->CreateSoundClip("../assets/BOOM_MUSIC.wav");
-		s->Play();
-	
+
+	//musik
+	SoundClip* s = m_systems.sound_manager->CreateSoundClip(soundname);
+	s->Play();
 
 
 	m_active = false;
@@ -173,79 +162,78 @@ GameState::~GameState()
 bool GameState::Update(float deltatime)
 {
 
-	// tog bort de som vi inte behöver i update längre (typ de mesta jag skrev igår)
-	
 	for (unsigned int i = 0; i < m_entities.size(); i++){
 
-		
+
 		if (!m_entities[i]->IsVisible())
 			continue;
-			
+
 		// update
 		m_entities[i]->Update(deltatime);
 
-	
-		}
-		
-	
+
+	}
+
+
 	// tommis update jag antar att de här här saker rör sig så jag sparar den så kan vi kolla om de behövs
+
 	/*
 	// update all entities
 	for (unsigned int i = 0; i < m_entities.size(); i++)
 	{
-		if (!m_entities[i]->IsVisible())
-			continue;
+	if (!m_entities[i]->IsVisible())
+	continue;
 
-		// update
-		m_entities[i]->Update(deltatime);
+	// update
+	m_entities[i]->Update(deltatime);
 
-		// note(tommi): special treatment for the ball
-		if (m_entities[i]->GetType() == ENTITY_BALL)
-		{
-			// note(tommi): we static_cast the ball from entity 
-			//   to ball we know that it is a ball since 
-			//   we check for entity type
-			Ball* ball = static_cast<Ball*>(m_entities[i]);
+	// note(tommi): special treatment for the ball
+	if (m_entities[i]->GetType() == ENTITY_BALL)
+	{
+	// note(tommi): we static_cast the ball from entity
+	//   to ball we know that it is a ball since
+	//   we check for entity type
+	Ball* ball = static_cast<Ball*>(m_entities[i]);
 
-			if (!ball->IsActive() && m_active)
-			{
-				// reset the game
-				m_active = false;
-			}
-			else if (!ball->IsActive())
-			{
-				// here the ball follows the Playerone
-				// note(tommi): we can do this because we always 
-				//   add the Playerone first in the vector of entities
+	if (!ball->IsActive() && m_active)
+	{
+	// reset the game
+	m_active = false;
+	}
+	else if (!ball->IsActive())
+	{
+	// here the ball follows the Playerone
+	// note(tommi): we can do this because we always
+	//   add the Playerone first in the vector of entities
 
-				
-				Playerone* playerone = static_cast<Playerone*>(m_entities[0]);
 
-				float PlayeroneHalfWidth = playerone->GetSprite()->GetRegion()->w * 0.5f;
-				float PlayeroneHalfHeight = playerone->GetSprite()->GetRegion()->h * 0.5f;
+	Playerone* playerone = static_cast<Playerone*>(m_entities[0]);
 
-				float PlayeronePosX = playerone->GetX();
-				float PlayeronePosY = playerone->GetY();
+	float PlayeroneHalfWidth = playerone->GetSprite()->GetRegion()->w * 0.5f;
+	float PlayeroneHalfHeight = playerone->GetSprite()->GetRegion()->h * 0.5f;
 
-				float ballHalfWidth = ball->GetSprite()->GetRegion()->w	* 0.5f;
-				float ballHalfHeight = ball->GetSprite()->GetRegion()->h	* 0.5f;
+	float PlayeronePosX = playerone->GetX();
+	float PlayeronePosY = playerone->GetY();
 
-				float ballNewX = PlayeronePosX + PlayeroneHalfWidth - ballHalfWidth;
-				float ballNewY = PlayeronePosY - PlayeroneHalfHeight - ballHalfHeight;
+	float ballHalfWidth = ball->GetSprite()->GetRegion()->w	* 0.5f;
+	float ballHalfHeight = ball->GetSprite()->GetRegion()->h	* 0.5f;
 
-				ball->SetPosition(ballNewX, ballNewY);
+	float ballNewX = PlayeronePosX + PlayeroneHalfWidth - ballHalfWidth;
+	float ballNewY = PlayeronePosY - PlayeroneHalfHeight - ballHalfHeight;
 
-				Mouse* mouse = m_systems.input_manager->GetMouse();
-				if (mouse->IsButtonDown(0) && !m_active)
-				{
-					ball->Activate();
-					m_active = true;
-				}
-				
-			}
-		}
+	ball->SetPosition(ballNewX, ballNewY);
+
+	Mouse* mouse = m_systems.input_manager->GetMouse();
+	if (mouse->IsButtonDown(0) && !m_active)
+	{
+	ball->Activate();
+	m_active = true;
+	}
+
+	}
+	}
 	}*/
-	
+
 
 
 	// we always do collision checking after updating 
@@ -282,8 +270,8 @@ State* GameState::NextState()
 // private
 void GameState::CollisionChecking()
 {
-	int overlapX = 0, overlapY = 0;
 
+	int overlapX = 0, overlapY = 0;
 
 	for (unsigned int i = 0; i < m_entities.size(); i++)
 	{
@@ -299,26 +287,41 @@ void GameState::CollisionChecking()
 			EEntityType aType = a->GetType();
 			EEntityType bType = b->GetType();
 
-			if (aType == ENTITY_PLAYERONE && bType == ENTITY_SOLIDBLOCK)
+			if (aType == ENTITY_PLAYERONE)
 			{
 				Playerone* playerone = static_cast<Playerone*>(a);
-				SolidBlock* solidblock = static_cast<SolidBlock*>(b);
 
-				if (CollisionManager::Check(playerone->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
+				if (bType == ENTITY_SOLIDBLOCK)
 				{
-					std::cout << "Collision" << std::endl;
-					//solidblock->SetInvisible();
 
-					//	if (overlapX != 0)
-					//	solidblock->InvertDirectionX();
-					//if (overlapY != 0)
-					//solidblock->InvertDirectionY();
+					Block* solidblock = static_cast<Block*>(b);
 
-					//solidblock->SetInvisible(solidblock->GetX() + overlapX, solidblock->GetY() + overlapY);
+					if (CollisionManager::Check(playerone->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
+					{
+						std::cout << "Collision" << std::endl;
+
+						//collison funkar meeeeeeeeeen
+						//jag vet inte hur vi ska göra för att
+						//player "inte" ska kunna gå till blocksen
+
+					}
+				}
+				else if (bType == ENTITY_BLOCK){
+
+
+					Block* block = static_cast<Block*>(b);
+
+					if (CollisionManager::Check(playerone->GetCollider(), block->GetCollider(), overlapX, overlapY))
+					{
+						std::cout << "Collision" << std::endl;
+
+						//collison funkar meeeeeeeeeen
+						//jag vet inte hur vi ska göra för att
+						//player "inte" ska kunna gå till blocksen
+
+					}
 				}
 			}
 		}
 	}
-
-
 }

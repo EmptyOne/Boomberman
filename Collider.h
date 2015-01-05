@@ -1,7 +1,6 @@
 // Collider.h
 
-#ifndef COLLIDER_H_INCLUDED
-#define COLLIDER_H_INCLUDED
+#pragma once
 
 class Entity;
 
@@ -29,4 +28,3 @@ private:
 	SDL_Rect m_area;
 };
 
-#endif // COLLIDER_H_INCLUDED

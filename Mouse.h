@@ -1,7 +1,6 @@
 // Mouse.h
 
-#ifndef MOUSE_H_INCLUDED
-#define MOUSE_H_INCLUDED
+#pragma once
 
 class Mouse
 {
@@ -23,5 +22,3 @@ private:
 	int m_x;
 	int m_y;
 };
-
-#endif // MOUSE_H_INCLUDED

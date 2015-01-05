@@ -38,11 +38,6 @@ private:
 
 	float m_timer;
 	float m_playerSpeed;
-	// tror inte vi kommer behöva använda dom här
-	// semih sa typ att man kan göra fake tiles med modulus sjukt lätt
-	int m_keypress;
-	int m_numMax;
-	int m_numMin;
 
 	
 };

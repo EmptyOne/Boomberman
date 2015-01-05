@@ -1,7 +1,6 @@
 // State.h
 
-#ifndef STATE_H_INCLUDED
-#define STATE_H_INCLUDED
+#pragma once
 
 class DrawManager;
 class InputManager;
@@ -26,5 +25,3 @@ public:
 	virtual void Draw() = 0;
 	virtual State* NextState() = 0;
 };
-
-#endif // STATE_H_INCLUDED

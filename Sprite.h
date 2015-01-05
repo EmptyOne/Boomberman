@@ -1,8 +1,6 @@
 // Sprite.h
 
-#ifndef SPRITE_H_INCLUDED
-#define SPRITE_H_INCLUDED
-
+#pragma once
 class Sprite
 {
 public:
@@ -16,5 +14,3 @@ protected:
 	SDL_Rect m_region;
 	SDL_Texture* m_texture;
 };
-
-#endif // SPRITE_H_INCLUDED

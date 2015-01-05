@@ -1,7 +1,6 @@
 // Keyboard.h
 
-#ifndef KEYBOARD_H_INCLUDED
-#define KEYBOARD_H_INCLUDED
+#pragma once
 
 class Keyboard
 {
@@ -20,4 +19,3 @@ private:
 
 };
 
-#endif // KEYBOARD_H_INCLUDED
