@@ -172,7 +172,7 @@ bool GameState::Update(float deltatime)
 
 	}
 
-
+	
 	// tommis update jag antar att de här här saker rör sig så jag sparar den så kan vi kolla om de behövs
 
 	/*
@@ -185,22 +185,22 @@ bool GameState::Update(float deltatime)
 	// update
 	m_entities[i]->Update(deltatime);
 
-	// note(tommi): special treatment for the ball
-	if (m_entities[i]->GetType() == ENTITY_BALL)
+	// note(tommi): special treatment for the Bomb
+	if (m_entities[i]->GetType() == ENTITY_BOMB)
 	{
-	// note(tommi): we static_cast the ball from entity
-	//   to ball we know that it is a ball since
+	// note(tommi): we static_cast the Bomb from entity
+	//   to Bomb we know that it is a Bomb since
 	//   we check for entity type
-	Ball* ball = static_cast<Ball*>(m_entities[i]);
+	Bomb* bomb = static_cast<Bomb*>(m_entities[i]);
 
-	if (!ball->IsActive() && m_active)
+	if (!bomb->IsActive() && m_active)
 	{
 	// reset the game
 	m_active = false;
 	}
-	else if (!ball->IsActive())
+	else if (!bomb->IsActive())
 	{
-	// here the ball follows the Playerone
+	// here the Bomb follows the Playerone
 	// note(tommi): we can do this because we always
 	//   add the Playerone first in the vector of entities
 
@@ -213,25 +213,26 @@ bool GameState::Update(float deltatime)
 	float PlayeronePosX = playerone->GetX();
 	float PlayeronePosY = playerone->GetY();
 
-	float ballHalfWidth = ball->GetSprite()->GetRegion()->w	* 0.5f;
-	float ballHalfHeight = ball->GetSprite()->GetRegion()->h	* 0.5f;
+	float BombHalfWidth = bomb->GetSprite()->GetRegion()->w	* 0.5f;
+	float BombHalfHeight = bomb->GetSprite()->GetRegion()->h	* 0.5f;
 
-	float ballNewX = PlayeronePosX + PlayeroneHalfWidth - ballHalfWidth;
-	float ballNewY = PlayeronePosY - PlayeroneHalfHeight - ballHalfHeight;
+	float BombNewX = PlayeronePosX + PlayeroneHalfWidth - BombHalfWidth;
+	float BombNewY = PlayeronePosY - PlayeroneHalfHeight - BombHalfHeight;
 
-	ball->SetPosition(ballNewX, ballNewY);
-
+	bomb->SetPosition(BombNewX, BombNewY);
+	
 	Mouse* mouse = m_systems.input_manager->GetMouse();
 	if (mouse->IsButtonDown(0) && !m_active)
 	{
-	ball->Activate();
+		std::cout << "hello" << std::endl;
+	bomb->Activate();
 	m_active = true;
 	}
 
 	}
 	}
-	}*/
-
+	}
+	*/
 
 
 	// we always do collision checking after updating 
