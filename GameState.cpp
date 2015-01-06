@@ -14,6 +14,7 @@
 #include "Playerone.h"
 #include "Block.h"
 #include "Bomb.h"
+#include "Playertwo.h"
 
 #include "Collider.h"
 #include "CollisionManager.h"
@@ -113,18 +114,31 @@ GameState::GameState(System& system)
 
 
 
-	//player
-	int playerx = 120;
-	int playery = 0;
+	//playerone
+	int playeronex = 120;
+	int playeroney = 0;
 
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 66, 64, 64);
 
-	Playerone* playerone = new Playerone(m_systems.input_manager->GetKeyboard(), sprite, playerx, playery);
-	playerx = playerone->GetX();
-	playery = playerone->GetY();
+	Playerone* playerone = new Playerone(m_systems.input_manager->GetKeyboard(), sprite, playeronex, playeroney);
+	playeronex = playerone->GetX();
+	playeroney = playerone->GetY();
 
 	m_entities.push_back(playerone);
 	
+
+	//playertwo
+	// 3 pixlar fel i bilden x led.
+	int playertwox = 1013;
+	int playertwoy = 768;
+
+	sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 66, 64, 64);
+
+	Playertwo* playertwo = new Playertwo(m_systems.input_manager->GetKeyboard(), sprite, playertwox, playertwoy);
+	playertwox = playertwo->GetX();
+	playertwoy = playertwo->GetY();
+
+	m_entities.push_back(playertwo);
 
 	//musik
 	SoundClip* music = m_systems.sound_manager->CreateSoundClip(soundname);
@@ -296,9 +310,9 @@ void GameState::CollisionChecking()
 
 			if (aType == ENTITY_PLAYERONE)
 			{
-				
+
 				Playerone* playerone = static_cast<Playerone*>(a);
-				
+
 				Keyboard* keyboard = new Keyboard;
 				float px;
 				float py;
@@ -306,54 +320,56 @@ void GameState::CollisionChecking()
 				px = playerone->GetX();
 				py = playerone->GetY();
 				pd = playerone->GetDir();
-				if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK  || bType == ENTITY_BOMB)
+			
+
+			if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK || bType == ENTITY_BOMB)
+			{
+
+				Block* solidblock = static_cast<Block*>(b);
+
+				if (CollisionManager::Check(playerone->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
 				{
-
-					Block* solidblock = static_cast<Block*>(b);
-
-					if (CollisionManager::Check(playerone->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
+					if (pd == 0)
 					{
-						if (pd == 0)
-						{
-							playerone->SetY(py + 64);
-						}
-						else if(pd == 1)
-						{
-							playerone->SetY(py - 64);
-						}
-						else if (pd == 2)
-						{
-							playerone->SetX(px - 64);
-							
-						}
-						else if (pd == 3)
-						{
-							playerone->SetX(px + 64);
-						}
-																			
-						std::cout << "px: " << px << std::endl << "py: " << py << std::endl;
-						//std::cout << "Collision" << std::endl;
-						
-						//collison funkar meeeeeeeeeen
-						//jag vet inte hur vi ska göra för att
-						//player "inte" ska kunna gå till blocksen
+						playerone->SetY(py + 64);
+					}
+					else if (pd == 1)
+					{
+						playerone->SetY(py - 64);
+					}
+					else if (pd == 2)
+					{
+						playerone->SetX(px - 64);
 
 					}
+					else if (pd == 3)
+					{
+						playerone->SetX(px + 64);
+					}
+
+					std::cout << "px: " << px << std::endl << "py: " << py << std::endl;
+					//std::cout << "Collision" << std::endl;
+
+					//collison funkar meeeeeeeeeen
+					//jag vet inte hur vi ska göra för att
+					//player "inte" ska kunna gå till blocksen
+
 				}
-				else if (bType == ENTITY_BLOCK){
+			}
+			else if (bType == ENTITY_BLOCK){
 
 
-					Block* block = static_cast<Block*>(b);
+				Block* block = static_cast<Block*>(b);
 
-					if (CollisionManager::Check(playerone->GetCollider(), block->GetCollider(), overlapX, overlapY))
-					{
-						std::cout << "Collision" << std::endl;
+				if (CollisionManager::Check(playerone->GetCollider(), block->GetCollider(), overlapX, overlapY))
+				{
+					std::cout << "Collision" << std::endl;
 
-						//collison funkar meeeeeeeeeen
-						//jag vet inte hur vi ska göra för att
-						//player "inte" ska kunna gå till blocksen
+					//collison funkar meeeeeeeeeen
+					//jag vet inte hur vi ska göra för att
+					//player "inte" ska kunna gå till blocksen
+				}
 
-					}
 				}
 			}
 		}

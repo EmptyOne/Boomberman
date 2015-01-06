@@ -117,6 +117,9 @@
     <ClInclude Include="GameState.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
+    <ClInclude Include="Playertwo.h">
+      <Filter>Header Files\Objekt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -177,6 +180,9 @@
       <Filter>Source Files\Objekt</Filter>
     </ClCompile>
     <ClCompile Include="Playerone.cpp">
+      <Filter>Source Files\Objekt</Filter>
+    </ClCompile>
+    <ClCompile Include="Playertwo.cpp">
       <Filter>Source Files\Objekt</Filter>
     </ClCompile>
   </ItemGroup>
