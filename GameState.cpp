@@ -129,7 +129,7 @@ GameState::GameState(System& system)
 
 	//playertwo
 	// 3 pixlar fel i bilden x led.
-	int playertwox = 1013;
+	int playertwox = 1016;
 	int playertwoy = 768;
 
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 66, 64, 64);
@@ -310,10 +310,11 @@ void GameState::CollisionChecking()
 
 			if (aType == ENTITY_PLAYERONE)
 			{
+				Keyboard* keyboard = new Keyboard;
+
 
 				Playerone* playerone = static_cast<Playerone*>(a);
 
-				Keyboard* keyboard = new Keyboard;
 				float px;
 				float py;
 				float pd;
@@ -322,7 +323,9 @@ void GameState::CollisionChecking()
 				pd = playerone->GetDir();
 			
 
-			if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK || bType == ENTITY_BOMB)
+
+
+			if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK || bType == ENTITY_BOMB )
 			{
 
 				Block* solidblock = static_cast<Block*>(b);
@@ -348,28 +351,50 @@ void GameState::CollisionChecking()
 					}
 
 					std::cout << "px: " << px << std::endl << "py: " << py << std::endl;
-					//std::cout << "Collision" << std::endl;
 
-					//collison funkar meeeeeeeeeen
-					//jag vet inte hur vi ska göra för att
-					//player "inte" ska kunna gå till blocksen
 
 				}
 			}
-			else if (bType == ENTITY_BLOCK){
+			}
+			else if (aType == ENTITY_PLAYERTWO){
+				Playertwo* playertwo = static_cast<Playertwo*>(a);
 
+				float ptwox;
+				float ptwoy;
+				float ptwod;
+				ptwox = playertwo->GetX();
+				ptwoy = playertwo->GetY();
+				ptwod = playertwo->GetDir();
 
-				Block* block = static_cast<Block*>(b);
-
-				if (CollisionManager::Check(playerone->GetCollider(), block->GetCollider(), overlapX, overlapY))
+				if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK || bType == ENTITY_BOMB)
 				{
-					std::cout << "Collision" << std::endl;
 
-					//collison funkar meeeeeeeeeen
-					//jag vet inte hur vi ska göra för att
-					//player "inte" ska kunna gå till blocksen
-				}
+					Block* solidblock = static_cast<Block*>(b);
 
+					if (CollisionManager::Check(playertwo->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
+					{
+						if (ptwod == 0)
+						{
+							playertwo->SetY(ptwoy + 64);
+						}
+						else if (ptwod == 1)
+						{
+							playertwo->SetY(ptwoy - 64);
+						}
+						else if (ptwod == 2)
+						{
+							playertwo->SetX(ptwox - 64);
+
+						}
+						else if (ptwod == 3)
+						{
+							playertwo->SetX(ptwox + 64);
+						}
+
+						std::cout << "ptwox: " << ptwox << std::endl << "ptwoy: " << ptwoy << std::endl;
+
+
+					}
 				}
 			}
 		}
