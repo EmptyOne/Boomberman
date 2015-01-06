@@ -21,6 +21,8 @@ public:
 	void Reset();
 
 	bool IsVisible();
+	void SetInvisible();
+
 	EEntityType GetType();
 	Collider* GetCollider();
 
@@ -45,7 +47,7 @@ private:
 	float m_start_y;
 
 
-
+	bool m_visible;
 	bool m_active;
 
 	bool m_space;

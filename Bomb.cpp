@@ -5,11 +5,12 @@
 #include "Sprite.h"
 #include "Collider.h"
 #include "Bomb.h"
+#include "Playerone.h"
 
 
 Bomb::Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY)
 {
-
+	
 	m_keyboard = keyboard;
 	m_sprite = sprite;
 	
@@ -60,11 +61,10 @@ float Bomb::GetY()
 
 void Bomb::Reset()
 {
-	m_position_x = 0;
-	m_position_y = 0;
+	
 	m_active = false;
 
-	m_collider->SetPosition(m_position_x, m_position_y);
+
 }
 
 bool Bomb::IsVisible()
@@ -72,6 +72,10 @@ bool Bomb::IsVisible()
 	return true;
 }
 
+void Bomb::SetInvisible()
+{
+	m_visible = false;
+}
 EEntityType Bomb::GetType()
 {
 	return ENTITY_BOMB;

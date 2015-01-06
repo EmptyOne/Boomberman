@@ -130,17 +130,17 @@ GameState::GameState(System& system)
 	SoundClip* music = m_systems.sound_manager->CreateSoundClip(soundname);
 	music->Play();
 
-	
+	//bomb
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
-	Bomb* bomb = new Bomb(m_systems.input_manager->GetKeyboard(), sprite, playerx, playery);
+	Bomb* bomb = new Bomb(m_systems.input_manager->GetKeyboard(), sprite, 248, 0);
 
-	//Keyboard* keyboard = new Keyboard();
-	std::cout << bomb->IsSpace() << std::endl;
-	if (playerone->GetDir() == 5){
-		std::cout << "eåothug" << std::endl;
+	if (playerone->GetDir() == 5)
+	{
+		std::cout << "Bomb" << std::endl;
 		m_entities.push_back(bomb);
 
 	}
+
 
 
 	m_active = false;
@@ -166,7 +166,8 @@ bool GameState::Update(float deltatime)
 {
 
 	for (unsigned int i = 0; i < m_entities.size(); i++){
-
+		
+	
 
 		if (!m_entities[i]->IsVisible())
 			continue;
@@ -297,51 +298,39 @@ void GameState::CollisionChecking()
 			{
 				
 				Playerone* playerone = static_cast<Playerone*>(a);
-
-				if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK)
+				
+				Keyboard* keyboard = new Keyboard;
+				float px;
+				float py;
+				float pd;
+				px = playerone->GetX();
+				py = playerone->GetY();
+				pd = playerone->GetDir();
+				if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK  || bType == ENTITY_BOMB)
 				{
 
 					Block* solidblock = static_cast<Block*>(b);
 
 					if (CollisionManager::Check(playerone->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
 					{
-						Keyboard* keyboard = new Keyboard;
-						float px;
-						float py;
-						px = playerone->GetX();
-						py = playerone->GetY();
-						playerone->GetDir();
-						if (playerone->GetDir() == 0)
+						if (pd == 0)
 						{
 							playerone->SetY(py + 64);
 						}
-						else if(playerone->GetDir() == 1)
+						else if(pd == 1)
 						{
 							playerone->SetY(py - 64);
 						}
-						else if (playerone->GetDir() == 2)
+						else if (pd == 2)
 						{
 							playerone->SetX(px - 64);
 							
 						}
-						else if (playerone->GetDir() == 3)
+						else if (pd == 3)
 						{
 							playerone->SetX(px + 64);
 						}
-					
-						
-						
-						
-						if (keyboard->IsKeyDown(SDLK_w) == true)
-						{
-							
-							std::cout << "test";
-						}
-						
-						
-					
-					
-						
+																			
 						std::cout << "px: " << px << std::endl << "py: " << py << std::endl;
 						//std::cout << "Collision" << std::endl;
 						
