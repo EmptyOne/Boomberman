@@ -78,7 +78,7 @@ void Block::SetType(int i)
 	{
 		e = ENTITY_SOLIDBLOCK;
 	}
-	else
+	else if (i == 3)
 	{
 		e = ENTITY_BLOCK;
 	}

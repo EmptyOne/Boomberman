@@ -1,18 +1,19 @@
 // GameState.cpp
 
 #include "stdafx.h"
+#include "GameState.h"
+
 #include "Mouse.h"
 #include "Keyboard.h"
 #include "InputManager.h"
+
 #include "DrawManager.h"
 #include "SpriteManager.h"
 #include "Sprite.h"
-#include "GameState.h"
 
 #include "Playerone.h"
 #include "Block.h"
-#include "Ball.h"
-#include "SolidBlock.h"
+#include "Bomb.h"
 
 #include "Collider.h"
 #include "CollisionManager.h"
@@ -28,34 +29,13 @@ GameState::GameState(System& system)
 	m_systems = system;
 
 	std::string filename = "../assets/main.png";
+	std::string kartan = "../assets/MAP.png";
 	std::string txtname = "../assets/Map.txt";
 	std::string soundname = "../assets/BOOM_MUSIC.wav";
 
-
-
 	Sprite* sprite;
 
-
-	sprite = m_systems.sprite_manager->CreateSprite(
-		filename, 0, 130, 64, 64);
-	Ball* ball = new Ball(sprite,
-		m_systems.width,
-		m_systems.height,
-		0,
-		0);
-	m_entities.push_back(ball);
-
-	// hard coded block coordinates
-	SDL_Rect blockCoords[]
-	{
-		{ 0, 0, 64, 64 }, // Breakable
-		{ 66, 0, 64, 64 }, // Solid
-		{ 0, 0, 0, 0 }, // Non-visible
-		{ 132, 0, 64, 64 }, // Background
-
-	};
-
-	// mapen 
+	//map
 
 	//variabler som är hur många blocks vi ska ha i x och y led.
 
@@ -65,6 +45,23 @@ GameState::GameState(System& system)
 	// varnågonstans spelplanen börjar ritas ut
 	int xOffset = 120;
 	int yOffset = 0;
+
+	// hard coded block coordinates
+	SDL_Rect blockCoords[]
+	{
+		{ 0, 0, 64, 64 }, // Breakable 0
+		{ 66, 0, 64, 64 }, // Solid 1 
+		{ 0, 0, 0, 0 }, // Non-visible 2
+		{ 132, 0, 64, 64 }, // Background 3
+
+	};
+
+	//background 
+	sprite = m_systems.sprite_manager->CreateSprite(kartan, 0, 0, 1080 - xOffset, 832);
+	Block* backgroundBlock = new Block(sprite, xOffset, yOffset);
+	backgroundBlock->SetType(1);
+
+	m_entities.push_back(backgroundBlock);
 
 
 	std::ifstream stream;
@@ -84,20 +81,13 @@ GameState::GameState(System& system)
 					//den här raden skriver ut allt atm 
 					SDL_Rect& rect = blockCoords[count];
 
-
-					//bakground
-					sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
-					Block* backgroundBlock = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
-					backgroundBlock->SetType(1);
-				
-					m_entities.push_back(backgroundBlock);
-
-
 					if (x % 2 == 1 && y % 2 == 1){
+
 						// solidblock					
 						sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
 						Block* solidblock = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
 						solidblock->SetType(2);
+				
 						m_entities.push_back(solidblock);
 					
 						continue;
@@ -111,16 +101,17 @@ GameState::GameState(System& system)
 							rect = blockCoords[0];
 							sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
 							Block* breakableBlock = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
-
+					
+					
 							m_entities.push_back(breakableBlock);
 						}
-			
-						
 					}
 				}
 			}
 		}
 	}
+
+
 
 	//player
 	int playerx = 120;
@@ -136,8 +127,15 @@ GameState::GameState(System& system)
 
 
 	//musik
-	SoundClip* s = m_systems.sound_manager->CreateSoundClip(soundname);
-	s->Play();
+	SoundClip* music = m_systems.sound_manager->CreateSoundClip(soundname);
+	music->Play();
+
+
+	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
+	Bomb* bomb = new Bomb(sprite, 64, 64, playerx, playery);
+
+
+	m_entities.push_back(bomb);
 
 
 	m_active = false;
@@ -289,6 +287,7 @@ void GameState::CollisionChecking()
 
 			if (aType == ENTITY_PLAYERONE)
 			{
+				
 				Playerone* playerone = static_cast<Playerone*>(a);
 
 				if (bType == ENTITY_SOLIDBLOCK)

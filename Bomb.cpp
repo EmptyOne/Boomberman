@@ -1,11 +1,11 @@
-// Ball.cpp
+// Bomb.cpp
 
 #include "stdafx.h"
 #include "Sprite.h"
 #include "Collider.h"
-#include "Ball.h"
+#include "Bomb.h"
 
-Ball::Ball(Sprite* sprite, int width, int height, float startX, float startY)
+Bomb::Bomb(Sprite* sprite, int width, int height, float startX, float startY)
 {
 	m_screen_width = width;
 	m_screen_height = height;
@@ -28,13 +28,13 @@ Ball::Ball(Sprite* sprite, int width, int height, float startX, float startY)
 	m_active = false;
 }
 
-Ball::~Ball()
+Bomb::~Bomb()
 {
 	if (m_collider)
 		delete m_collider;
 }
 
-void Ball::Update(float deltatime)
+void Bomb::Update(float deltatime)
 {
 	if (!m_active)
 		return;
@@ -64,21 +64,21 @@ void Ball::Update(float deltatime)
 	m_collider->SetPosition(m_position_x, m_position_y);
 }
 
-Sprite* Ball::GetSprite()
+Sprite* Bomb::GetSprite()
 {
 	return m_sprite;
 }
-float Ball::GetX()
+float Bomb::GetX()
 {
 	return m_position_x;
 }
 
-float Ball::GetY()
+float Bomb::GetY()
 {
 	return m_position_y;
 }
 
-void Ball::Reset()
+void Bomb::Reset()
 {
 	m_position_x = 0;
 	m_position_y = 0;
@@ -87,35 +87,35 @@ void Ball::Reset()
 	m_collider->SetPosition(m_position_x, m_position_y);
 }
 
-bool Ball::IsVisible()
+bool Bomb::IsVisible()
 {
 	return true;
 }
 
-EEntityType Ball::GetType()
+EEntityType Bomb::GetType()
 {
-	return ENTITY_BALL;
+	return ENTITY_BOMB;
 }
 
-void Ball::SetPosition(float x, float y)
+void Bomb::SetPosition(float x, float y)
 {
 	m_position_x = x;
 	m_position_y = y;
 	m_collider->Refresh();
 }
 
-Collider* Ball::GetCollider()
+Collider* Bomb::GetCollider()
 {
 	return m_collider;
 }
 
-void Ball::Activate()
+void Bomb::Activate()
 {
-	// activate the ball
+	// activate the Bomb
 	m_active = true;
 }
 
-bool Ball::IsActive()
+bool Bomb::IsActive()
 {
 	return m_active;
 }

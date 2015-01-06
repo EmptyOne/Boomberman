@@ -32,14 +32,10 @@ private:
 
 	float m_x;
 	float m_y;
-	float m_speed;
-	int m_screen_width;
-	int m_screen_height;
 
 	float m_timer;
 	float m_playerSpeed;
 
-	
 };
 
 

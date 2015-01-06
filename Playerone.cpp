@@ -5,7 +5,7 @@
 #include "Sprite.h"
 #include "Collider.h"
 #include "Playerone.h"
-#include "Ball.h"
+#include "Bomb.h"
 
 
 
@@ -22,15 +22,6 @@ Playerone::Playerone(Keyboard* keyboard, Sprite* sprite, float x, float y)
 
 	m_x = x;
 	m_y = y;
-
-
-	// axl vad gör de här?
-	/*
-	m_screen_width = screen_width;
-	m_screen_height = screen_height;
-	*/
-
-	m_speed = 2.0f;
 
 
 	Reset();
@@ -108,7 +99,7 @@ void Playerone::Update(float deltatime)
 	{
 		if (m_timer > m_playerSpeed)
 		{
-			//Ball* ball = new Ball(m_x, m_y);
+	
 			m_timer = 0;
 		}
 	}

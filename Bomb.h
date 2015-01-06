@@ -1,14 +1,14 @@
-// Ball.h
+// Bomb.h
 
 #pragma once
 
 #include "Entity.h"
 
-class Ball : public Entity
+class Bomb : public Entity
 {
 public:
-	Ball(Sprite* sprite, int width, int height, float startX, float startY);
-	~Ball();
+	Bomb(Sprite* sprite, int width, int height, float startX, float startY);
+	~Bomb();
 
 	void Update(float deltatime);
 	Sprite* GetSprite();
