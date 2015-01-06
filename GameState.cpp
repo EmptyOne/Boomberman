@@ -134,11 +134,13 @@ GameState::GameState(System& system)
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
 	Bomb* bomb = new Bomb(m_systems.input_manager->GetKeyboard(), sprite, playerx, playery);
 
-	Keyboard* keyboard = new Keyboard();
+	//Keyboard* keyboard = new Keyboard();
+	std::cout << bomb->IsSpace() << std::endl;
+	if (playerone->GetDir() == 5){
+		std::cout << "eåothug" << std::endl;
+		m_entities.push_back(bomb);
 
-
-	m_entities.push_back(bomb);
-	
+	}
 
 
 	m_active = false;
@@ -296,15 +298,53 @@ void GameState::CollisionChecking()
 				
 				Playerone* playerone = static_cast<Playerone*>(a);
 
-				if (bType == ENTITY_SOLIDBLOCK)
+				if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK)
 				{
 
 					Block* solidblock = static_cast<Block*>(b);
 
 					if (CollisionManager::Check(playerone->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
 					{
-						std::cout << "Collision" << std::endl;
-
+						Keyboard* keyboard = new Keyboard;
+						float px;
+						float py;
+						px = playerone->GetX();
+						py = playerone->GetY();
+						playerone->GetDir();
+						if (playerone->GetDir() == 0)
+						{
+							playerone->SetY(py + 64);
+						}
+						else if(playerone->GetDir() == 1)
+						{
+							playerone->SetY(py - 64);
+						}
+						else if (playerone->GetDir() == 2)
+						{
+							playerone->SetX(px - 64);
+							
+						}
+						else if (playerone->GetDir() == 3)
+						{
+							playerone->SetX(px + 64);
+						}
+					
+						
+						
+						
+						if (keyboard->IsKeyDown(SDLK_w) == true)
+						{
+							
+							std::cout << "test";
+						}
+						
+						
+					
+					
+						
+						std::cout << "px: " << px << std::endl << "py: " << py << std::endl;
+						//std::cout << "Collision" << std::endl;
+						
 						//collison funkar meeeeeeeeeen
 						//jag vet inte hur vi ska göra för att
 						//player "inte" ska kunna gå till blocksen

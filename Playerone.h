@@ -16,6 +16,11 @@ public:
 	Sprite* GetSprite();
 	float GetX();
 	float GetY();
+	void SetY(float y);
+	void SetX(float x);
+
+	float GetDir();
+
 
 	void Reset();
 
@@ -32,6 +37,7 @@ private:
 
 	float m_x;
 	float m_y;
+	float m_dir;
 
 	bool m_space;
 

@@ -26,6 +26,7 @@ public:
 
 	void Activate();
 	bool IsActive();
+	bool IsSpace();
 	void SetPosition(float x, float y);
 
 
@@ -33,10 +34,7 @@ private:
 	Keyboard* m_keyboard;
 	Sprite* m_sprite;
 	Collider* m_collider;
-	
 
-	int m_screen_width;
-	int m_screen_height;
 
 	float m_speed;
 	float m_offset;
@@ -46,8 +44,11 @@ private:
 	float m_start_x;
 	float m_start_y;
 
+
+
 	bool m_active;
 
+	bool m_space;
 	
 };
 

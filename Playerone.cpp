@@ -49,6 +49,7 @@ void Playerone::Update(float deltatime)
 			{
 				m_y -= 64;
 				m_timer = 0;
+				m_dir = 0;
 			}
 		}
 	}
@@ -62,6 +63,7 @@ void Playerone::Update(float deltatime)
 			{
 				m_y += 64;
 				m_timer = 0;
+				m_dir = 1;
 			}
 		}
 	}
@@ -74,6 +76,7 @@ void Playerone::Update(float deltatime)
 			{
 				m_x += 64;
 				m_timer = 0;
+				m_dir = 2;
 			}
 		}
 
@@ -88,11 +91,18 @@ void Playerone::Update(float deltatime)
 			{
 				m_x -= 64;
 				m_timer = 0;
+				m_dir = 3;
 			}
 		}
 	}
 
+	if (m_keyboard->IsKeyDown(SDLK_SPACE) == true)
+	{
+		m_dir = 5;
+		
+		
 
+	}
 
 	//bomber?
 	//if (m_keyboard->IsKeyDown(SDLK_SPACE) == true)
@@ -112,7 +122,10 @@ void Playerone::Update(float deltatime)
 	m_collider->SetPosition(m_x, m_y);
 
 }
-
+float Playerone::GetDir()
+{
+	return m_dir;
+}
 Sprite* Playerone::GetSprite()
 {
 	return m_sprite;
@@ -132,6 +145,17 @@ float Playerone::GetY()
 {
 	return m_y;
 }
+
+void Playerone::SetX(float x)
+{
+	m_x = x;
+}
+
+void Playerone::SetY(float y)
+{
+	m_y = y;
+}
+
 
 void Playerone::Reset()
 {

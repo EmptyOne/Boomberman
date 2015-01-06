@@ -6,18 +6,13 @@
 #include "Collider.h"
 #include "Bomb.h"
 
-//Bomb::Bomb()
-//{
-//
-//}
 
 Bomb::Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY)
 {
-	//m_screen_width = width;
-	//m_screen_height = height;
+
 	m_keyboard = keyboard;
 	m_sprite = sprite;
-
+	
 	m_speed = 300.0f;
 	m_offset = 1.0f;
 	m_position_x = m_start_x = startX + m_offset;
@@ -40,38 +35,11 @@ Bomb::~Bomb()
 
 void Bomb::Update(float deltatime)
 {
-	if (m_keyboard->IsKeyDown(SDLK_SPACE) == true)
-	{
-		if (1 == 1) // Bomb amount
-		{
-			std::cout << "Space" << std::endl;		
-			
-		}
-	}
+	
+
 	if (!m_active)
 		return;
 
-	m_position_x += m_start_x;
-	m_position_y += m_start_y;
-
-	if (m_position_x < 0.0f)
-	{
-		m_position_x = 0.0f;
-	}
-	else if (m_position_x > (m_screen_width - m_sprite->GetRegion()->w))
-	{
-		m_position_x = (m_screen_width - m_sprite->GetRegion()->w);
-	}
-
-	if (m_position_y < 0.0f)
-	{
-		m_position_y = 0.0f;
-	}
-	else if (m_position_y > m_screen_height)
-	{
-
-		m_position_y = (m_screen_height - m_sprite->GetRegion()->h);
-	}
 
 	m_collider->SetPosition(m_position_x, m_position_y);
 }
@@ -124,11 +92,17 @@ Collider* Bomb::GetCollider()
 void Bomb::Activate()
 {
 	// activate the Bomb
-	m_active = true;
+	m_space = true;
 }
 
 bool Bomb::IsActive()
 {
 	return m_active;
 }
+
+bool Bomb::IsSpace()
+{
+	return m_space;
+}
+
 
