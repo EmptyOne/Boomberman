@@ -95,14 +95,17 @@ void Playerone::Update(float deltatime)
 
 
 	//bomber?
-	if (m_keyboard->IsKeyDown(SDLK_SPACE) == true)
-	{
-		if (m_timer > m_playerSpeed)
-		{
-	
-			m_timer = 0;
-		}
-	}
+	//if (m_keyboard->IsKeyDown(SDLK_SPACE) == true)
+	//{
+	//	if (m_timer > m_playerSpeed)
+	//	{
+	//		std::cout << "Space" << std::endl;
+	//		
+	//	
+	//		m_timer = 0;
+	//	}
+	//}
+
 
 
 
@@ -144,5 +147,6 @@ EEntityType Playerone::GetType()
 {
 	return ENTITY_PLAYERONE;
 }
+
 
 

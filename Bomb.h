@@ -4,10 +4,13 @@
 
 #include "Entity.h"
 
+class Keyboard;
 class Bomb : public Entity
 {
+
 public:
-	Bomb(Sprite* sprite, int width, int height, float startX, float startY);
+	//Bomb();
+	Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY);
 	~Bomb();
 
 	void Update(float deltatime);
@@ -27,8 +30,10 @@ public:
 
 
 private:
+	Keyboard* m_keyboard;
 	Sprite* m_sprite;
 	Collider* m_collider;
+	
 
 	int m_screen_width;
 	int m_screen_height;

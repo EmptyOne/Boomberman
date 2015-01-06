@@ -124,18 +124,21 @@ GameState::GameState(System& system)
 	playery = playerone->GetY();
 
 	m_entities.push_back(playerone);
-
+	
 
 	//musik
 	SoundClip* music = m_systems.sound_manager->CreateSoundClip(soundname);
 	music->Play();
 
-
+	
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
-	Bomb* bomb = new Bomb(sprite, 64, 64, 120, 0);
+	Bomb* bomb = new Bomb(m_systems.input_manager->GetKeyboard(), sprite, playerx, playery);
+
+	Keyboard* keyboard = new Keyboard();
 
 
 	m_entities.push_back(bomb);
+	
 
 
 	m_active = false;
@@ -234,9 +237,11 @@ bool GameState::Update(float deltatime)
 	}
 	*/
 
-
 	// we always do collision checking after updating 
 	// positions et al in entities
+
+
+
 
 	CollisionChecking();
 

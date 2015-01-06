@@ -1,24 +1,28 @@
 // Bomb.cpp
 
 #include "stdafx.h"
+#include "Keyboard.h"
 #include "Sprite.h"
 #include "Collider.h"
 #include "Bomb.h"
 
-Bomb::Bomb(Sprite* sprite, int width, int height, float startX, float startY)
-{
-	m_screen_width = width;
-	m_screen_height = height;
+//Bomb::Bomb()
+//{
+//
+//}
 
+Bomb::Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY)
+{
+	//m_screen_width = width;
+	//m_screen_height = height;
+	m_keyboard = keyboard;
 	m_sprite = sprite;
 
 	m_speed = 300.0f;
 	m_offset = 1.0f;
-	//m_position_x = m_start_x = startX + m_offset;
-	//m_position_y = m_start_y = startY + m_offset;
+	m_position_x = m_start_x = startX + m_offset;
+	m_position_y = m_start_y = startY + m_offset;
 
-	m_position_x = 0;
-	m_position_y = 0;
 
 	m_collider = new Collider(startX, startY);
 	m_collider->SetParent(this);
@@ -36,6 +40,14 @@ Bomb::~Bomb()
 
 void Bomb::Update(float deltatime)
 {
+	if (m_keyboard->IsKeyDown(SDLK_SPACE) == true)
+	{
+		if (1 == 1) // Bomb amount
+		{
+			std::cout << "Space" << std::endl;		
+			
+		}
+	}
 	if (!m_active)
 		return;
 

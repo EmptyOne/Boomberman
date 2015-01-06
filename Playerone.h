@@ -33,6 +33,9 @@ private:
 	float m_x;
 	float m_y;
 
+	bool m_space;
+
+
 	float m_timer;
 	float m_playerSpeed;
 
