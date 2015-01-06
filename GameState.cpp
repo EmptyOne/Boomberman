@@ -132,7 +132,7 @@ GameState::GameState(System& system)
 
 
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
-	Bomb* bomb = new Bomb(sprite, 64, 64, playerx, playery);
+	Bomb* bomb = new Bomb(sprite, 64, 64, 120, 0);
 
 
 	m_entities.push_back(bomb);
