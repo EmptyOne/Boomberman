@@ -113,26 +113,27 @@ GameState::GameState(System& system)
 	}
 
 
-
 	//playerone
+
 	int playeronex = 120;
 	int playeroney = 0;
 
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 66, 64, 64);
+	Sprite* bombSprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
 
-	Playerone* playerone = new Playerone(m_systems.input_manager->GetKeyboard(), sprite, playeronex, playeroney);
+	Playerone* playerone = new Playerone(m_systems.input_manager->GetKeyboard(), sprite, bombSprite, &m_entities, playeronex, playeroney);
 	playeronex = playerone->GetX();
 	playeroney = playerone->GetY();
 
 	m_entities.push_back(playerone);
-	
+
 
 	//playertwo
 	// 3 pixlar fel i bilden x led.
 	int playertwox = 1016;
 	int playertwoy = 768;
-
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 66, 64, 64);
+
 
 	Playertwo* playertwo = new Playertwo(m_systems.input_manager->GetKeyboard(), sprite, playertwox, playertwoy);
 	playertwox = playertwo->GetX();
@@ -145,16 +146,10 @@ GameState::GameState(System& system)
 	music->Play();
 
 	//bomb
-	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
-	Bomb* bomb = new Bomb(m_systems.input_manager->GetKeyboard(), sprite, 184, 128);	
-	
-	
-	
-		std::cout << "Bomb" << std::endl;
-		m_entities.push_back(bomb);
 
 
 
+	
 	m_active = false;
 }
 
@@ -176,21 +171,17 @@ GameState::~GameState()
 
 bool GameState::Update(float deltatime)
 {
-
+	
 	for (unsigned int i = 0; i < m_entities.size(); i++){
 		
-	
-
 		if (!m_entities[i]->IsVisible())
 			continue;
-
+	
 		// update
 		m_entities[i]->Update(deltatime);
-
-
+	
 	}
 
-	
 	// tommis update jag antar att de här här saker rör sig så jag sparar den så kan vi kolla om de behövs
 
 	/*

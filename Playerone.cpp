@@ -9,11 +9,13 @@
 
 
 
-Playerone::Playerone(Keyboard* keyboard, Sprite* sprite, float x, float y)
+Playerone::Playerone(Keyboard* keyboard, Sprite* sprite, Sprite* bombSprite, std::vector<Entity*>* entities, float x, float y)
 {
 
 	m_keyboard = keyboard;
 	m_sprite = sprite;
+	m_bombSprite = bombSprite;
+	m_entities = entities;
 
 	m_collider = new Collider(x, y);
 	m_collider->SetParent(this);
@@ -22,6 +24,8 @@ Playerone::Playerone(Keyboard* keyboard, Sprite* sprite, float x, float y)
 
 	m_x = x;
 	m_y = y;
+
+
 
 
 	Reset();
@@ -36,6 +40,9 @@ Playerone::~Playerone()
 
 void Playerone::Update(float deltatime)
 {
+	std::string filename = "../assets/main.png";
+	Sprite* sprite;
+
 
 	// axls movement
 	m_timer += deltatime;
@@ -98,7 +105,11 @@ void Playerone::Update(float deltatime)
 
 	if (m_keyboard->IsKeyDown(SDLK_SPACE) == true)
 	{
-		m_dir = 5;
+
+		Bomb* bomb = new Bomb(m_keyboard, m_bombSprite, m_x, m_y);
+		m_entities->push_back(bomb);
+		std::cout << "Bomb" << std::endl;
+		
 		
 
 	}

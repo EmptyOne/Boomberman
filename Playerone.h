@@ -9,7 +9,7 @@ class Keyboard;
 class Playerone : public Entity
 {
 public:
-	Playerone(Keyboard* keyboard, Sprite* sprite, float x, float y);
+	Playerone(Keyboard* keyboard, Sprite* sprite, Sprite* bombSprite, std::vector<Entity*>* entities, float x, float y);
 	~Playerone();
 	
 	void Update(float deltatime);
@@ -33,6 +33,7 @@ private:
 	
 	Keyboard* m_keyboard;
 	Sprite* m_sprite;
+	Sprite* m_bombSprite;
 	Collider* m_collider;
 
 	float m_x;
@@ -44,6 +45,13 @@ private:
 
 	float m_timer;
 	float m_playerSpeed;
+
+
+
+
+
+	std::vector<Entity*>* m_entities;
+
 
 };
 

@@ -69,7 +69,7 @@ void Bomb::Reset()
 
 bool Bomb::IsVisible()
 {
-	return m_visible;
+	return true;
 }
 
 void Bomb::SetInvisible()
