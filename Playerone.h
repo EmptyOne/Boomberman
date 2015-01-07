@@ -24,6 +24,7 @@ public:
 
 	void Reset();
 
+	bool IsOnBomb();
 	bool IsVisible();
 	EEntityType GetType();
 	Collider* GetCollider();
@@ -42,12 +43,15 @@ private:
 
 	bool m_space;
 
+	bool m_onBomb;
+
 
 	float m_timer;
 	float m_playerSpeed;
+	float m_bombSpeed;
+
+	int m_bombAmmount;
 	float m_bombTimer;
-
-
 
 
 	std::vector<Entity*>* m_entities;

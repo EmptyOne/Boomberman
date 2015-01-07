@@ -82,19 +82,19 @@ GameState::GameState(System& system)
 					//den här raden skriver ut allt atm 
 					SDL_Rect& rect = blockCoords[count];
 
-					if (x % 2 == 1 && y % 2 == 1){
+					//if (x % 2 == 1 && y % 2 == 1){
 
-						// solidblock					
-						sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
-						Block* solidblock = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
-						solidblock->SetType(2);
+					//	// solidblock					
+					//	sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
+					//	Block* solidblock = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
+					//	solidblock->SetType(2);
 				
-						m_entities.push_back(solidblock);
-					
-						continue;
-					}
-					else
-					{
+					//	m_entities.push_back(solidblock);
+					//
+					//	continue;
+					//}
+					//else
+					//{
 		
 						if (count == 0)
 						{
@@ -106,7 +106,7 @@ GameState::GameState(System& system)
 					
 							m_entities.push_back(breakableBlock);
 						}
-					}
+					//}
 				}
 			}
 		}
@@ -297,7 +297,7 @@ void GameState::CollisionChecking()
 			EEntityType aType = a->GetType();
 			EEntityType bType = b->GetType();
 
-			if (aType == ENTITY_PLAYERONE || aType == ENTITY_PLAYERTWO)
+			if (aType == ENTITY_PLAYERONE) //|| aType == ENTITY_PLAYERTWO)
 			{
 				Keyboard* keyboard = new Keyboard;
 
@@ -314,7 +314,7 @@ void GameState::CollisionChecking()
 
 
 
-				if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK)
+			if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK)
 			{
 
 				Block* solidblock = static_cast<Block*>(b);
@@ -324,7 +324,7 @@ void GameState::CollisionChecking()
 					//W
 					if (pd == 0)
 					{
-						playerone->SetY(py + 64);
+						playerone->SetY(py + overlapY);
 					}
 					//S
 					else if (pd == 1)
@@ -335,92 +335,58 @@ void GameState::CollisionChecking()
 					else if (pd == 2)
 					{
 						playerone->SetX(px - 64);
-
 					}
 					//A
 					else if (pd == 3)
 					{
 						playerone->SetX(px + 64);
 					}
-				
 
 					std::cout << "px: " << px << std::endl << "py: " << py << std::endl;
 				}
 			
 			}
-				else if (bType == ENTITY_BOMB)
+			else if (bType == ENTITY_BOMB)
+			{
+				Bomb* bomb = static_cast<Bomb*>(b);
+				if (playerone->IsOnBomb())
 				{
-					Bomb* bomb = static_cast<Bomb*>(b);
-					if (CollisionManager::Check(playerone->GetCollider(), bomb->GetCollider(), overlapX, overlapY))
+					continue;
+				}
+				if (CollisionManager::Check(playerone->GetCollider(), bomb->GetCollider(), overlapX, overlapY))
+				{
+					//std::cout << "px: " << px << std::endl << "py: " << py << std::endl << "bombX: " << bomb->GetX() << std::endl << "bombY: " << bomb->GetY() << std::endl;
+					if (bomb->GetX() != px && bomb->GetY() != py)
 					{
-						if (bomb->GetX() == px || bomb->GetY() == py)
-						{
-							playerone->SetY(0);
-							playerone->SetX(0);
-						}
-						else if (bomb->GetX() != px || bomb->GetY() != py)
-						{
-						//W
-						if (pd == 0)
-						{
-							playerone->SetY(py + 64);
-						}
-						//S
-						else if (pd == 1)
-						{
-							playerone->SetY(py - 64);
-						}
-						//D
-						else if (pd == 2)
-						{
-							playerone->SetX(px - 64);
-
-						}
-						//A
-						else if (pd == 3)
-						{
-							playerone->SetX(px + 64);
-						}
-						}
-						//W
-						//if (pd == 0 && bomb->GetY() == py)
-						//{
-						//	playerone->SetY(py);
-						//}
-						//else if (pd == 0)
-						//{
-						//	playerone->SetY(py + 64);
-						//}
-						////S
-						//if (pd == 1 && bomb->GetY() == py)
-						//{
-						//	playerone->SetY(py);
-						//}
-						//else if (pd == 1)
-						//{
-						//	playerone->SetY(py - 64);
-						//}
-						////D
-						//if (pd == 2 && bomb->GetX() == px)
-						//{
-						//	playerone->SetX(px);
-						//}
-						//else if (pd == 2)
-						//{
-						//	playerone->SetX(px + 64);
-						//}
-						////A
-						//if (pd == 3 && bomb->GetX() == px)
-						//{
-						//	playerone->SetX(px);
-						//}
-						//else if (pd == 3)
-						//{
-						//	playerone->SetX(px - 64);
-						//}
+					//W
+					if (pd == 0)
+					{
+							
+						playerone->SetY(py + 64);
+							
+					}
+					//S
+					else  if (pd == 1)
+					{
+						playerone->SetY(py - 64);
+							
+					}
+					//d
+					else  if (pd == 2)
+					{
+						playerone->SetX(px - 64);
+						
+					}
+					//A
+					else if (pd == 3)
+					{
+						playerone->SetX(px + 64);
+						
+					}
 					}
 				}
 			}
+		}
 		
 		}
 	}

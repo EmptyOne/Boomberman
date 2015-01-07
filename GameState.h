@@ -2,6 +2,7 @@
 
 #pragma once
 #include "State.h"
+#include <vector>
 
 class Entity;
 
