@@ -45,7 +45,7 @@ private:
 
 	float m_timer;
 	float m_playerSpeed;
-
+	float m_bombTimer;
 
 
 

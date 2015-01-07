@@ -314,26 +314,30 @@ void GameState::CollisionChecking()
 
 
 
-				if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK || bType == ENTITY_BOMB)
+				if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK)
 			{
 
 				Block* solidblock = static_cast<Block*>(b);
 
 				if (CollisionManager::Check(playerone->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
 				{
+					//W
 					if (pd == 0)
 					{
 						playerone->SetY(py + 64);
 					}
+					//S
 					else if (pd == 1)
 					{
 						playerone->SetY(py - 64);
 					}
+					//D
 					else if (pd == 2)
 					{
 						playerone->SetX(px - 64);
 
 					}
+					//A
 					else if (pd == 3)
 					{
 						playerone->SetX(px + 64);
@@ -344,6 +348,78 @@ void GameState::CollisionChecking()
 				}
 			
 			}
+				else if (bType == ENTITY_BOMB)
+				{
+					Bomb* bomb = static_cast<Bomb*>(b);
+					if (CollisionManager::Check(playerone->GetCollider(), bomb->GetCollider(), overlapX, overlapY))
+					{
+						if (bomb->GetX() == px || bomb->GetY() == py)
+						{
+							playerone->SetY(0);
+							playerone->SetX(0);
+						}
+						else if (bomb->GetX() != px || bomb->GetY() != py)
+						{
+						//W
+						if (pd == 0)
+						{
+							playerone->SetY(py + 64);
+						}
+						//S
+						else if (pd == 1)
+						{
+							playerone->SetY(py - 64);
+						}
+						//D
+						else if (pd == 2)
+						{
+							playerone->SetX(px - 64);
+
+						}
+						//A
+						else if (pd == 3)
+						{
+							playerone->SetX(px + 64);
+						}
+						}
+						//W
+						//if (pd == 0 && bomb->GetY() == py)
+						//{
+						//	playerone->SetY(py);
+						//}
+						//else if (pd == 0)
+						//{
+						//	playerone->SetY(py + 64);
+						//}
+						////S
+						//if (pd == 1 && bomb->GetY() == py)
+						//{
+						//	playerone->SetY(py);
+						//}
+						//else if (pd == 1)
+						//{
+						//	playerone->SetY(py - 64);
+						//}
+						////D
+						//if (pd == 2 && bomb->GetX() == px)
+						//{
+						//	playerone->SetX(px);
+						//}
+						//else if (pd == 2)
+						//{
+						//	playerone->SetX(px + 64);
+						//}
+						////A
+						//if (pd == 3 && bomb->GetX() == px)
+						//{
+						//	playerone->SetX(px);
+						//}
+						//else if (pd == 3)
+						//{
+						//	playerone->SetX(px - 64);
+						//}
+					}
+				}
 			}
 		
 		}

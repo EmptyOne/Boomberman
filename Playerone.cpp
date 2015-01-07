@@ -47,6 +47,7 @@ void Playerone::Update(float deltatime)
 	// axls movement
 	m_timer += deltatime;
 	m_playerSpeed = 0.25; //Borde vara samma som animations tiden
+	m_bombTimer += deltatime;
 
 	if (m_keyboard->IsKeyDown(SDLK_w) == true)
 	{
@@ -105,11 +106,13 @@ void Playerone::Update(float deltatime)
 
 	if (m_keyboard->IsKeyDown(SDLK_SPACE) == true)
 	{
-
+		if (m_bombTimer > m_playerSpeed)
+		{
 		Bomb* bomb = new Bomb(m_keyboard, m_bombSprite, m_x, m_y);
 		m_entities->push_back(bomb);
 		std::cout << "Bomb" << std::endl;
-		
+		m_bombTimer = 0;
+		}
 		
 
 	}
