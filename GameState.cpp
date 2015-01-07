@@ -146,14 +146,12 @@ GameState::GameState(System& system)
 
 	//bomb
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
-	Bomb* bomb = new Bomb(m_systems.input_manager->GetKeyboard(), sprite, 248, 0);
-
-	if (playerone->GetDir() == 5)
-	{
+	Bomb* bomb = new Bomb(m_systems.input_manager->GetKeyboard(), sprite, 184, 128);	
+	
+	
+	
 		std::cout << "Bomb" << std::endl;
 		m_entities.push_back(bomb);
-
-	}
 
 
 
@@ -308,7 +306,7 @@ void GameState::CollisionChecking()
 			EEntityType aType = a->GetType();
 			EEntityType bType = b->GetType();
 
-			if (aType == ENTITY_PLAYERONE)
+			if (aType == ENTITY_PLAYERONE || aType == ENTITY_PLAYERTWO)
 			{
 				Keyboard* keyboard = new Keyboard;
 
@@ -325,7 +323,7 @@ void GameState::CollisionChecking()
 
 
 
-			if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK || bType == ENTITY_BOMB )
+				if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK || bType == ENTITY_BOMB)
 			{
 
 				Block* solidblock = static_cast<Block*>(b);
@@ -349,54 +347,14 @@ void GameState::CollisionChecking()
 					{
 						playerone->SetX(px + 64);
 					}
+				
 
 					std::cout << "px: " << px << std::endl << "py: " << py << std::endl;
-
-
 				}
+			
 			}
 			}
-			else if (aType == ENTITY_PLAYERTWO){
-				Playertwo* playertwo = static_cast<Playertwo*>(a);
-
-				float ptwox;
-				float ptwoy;
-				float ptwod;
-				ptwox = playertwo->GetX();
-				ptwoy = playertwo->GetY();
-				ptwod = playertwo->GetDir();
-
-				if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK || bType == ENTITY_BOMB)
-				{
-
-					Block* solidblock = static_cast<Block*>(b);
-
-					if (CollisionManager::Check(playertwo->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
-					{
-						if (ptwod == 0)
-						{
-							playertwo->SetY(ptwoy + 64);
-						}
-						else if (ptwod == 1)
-						{
-							playertwo->SetY(ptwoy - 64);
-						}
-						else if (ptwod == 2)
-						{
-							playertwo->SetX(ptwox - 64);
-
-						}
-						else if (ptwod == 3)
-						{
-							playertwo->SetX(ptwox + 64);
-						}
-
-						std::cout << "ptwox: " << ptwox << std::endl << "ptwoy: " << ptwoy << std::endl;
-
-
-					}
-				}
-			}
+		
 		}
 	}
 }

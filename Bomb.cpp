@@ -69,7 +69,7 @@ void Bomb::Reset()
 
 bool Bomb::IsVisible()
 {
-	return true;
+	return m_visible;
 }
 
 void Bomb::SetInvisible()
@@ -96,7 +96,7 @@ Collider* Bomb::GetCollider()
 void Bomb::Activate()
 {
 	// activate the Bomb
-	m_space = true;
+	m_active = true;
 }
 
 bool Bomb::IsActive()
@@ -104,9 +104,5 @@ bool Bomb::IsActive()
 	return m_active;
 }
 
-bool Bomb::IsSpace()
-{
-	return m_space;
-}
 
 

@@ -28,7 +28,6 @@ public:
 
 	void Activate();
 	bool IsActive();
-	bool IsSpace();
 	void SetPosition(float x, float y);
 
 
@@ -50,7 +49,6 @@ private:
 	bool m_visible;
 	bool m_active;
 
-	bool m_space;
 	
 };
 
