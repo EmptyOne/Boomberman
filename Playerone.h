@@ -50,7 +50,7 @@ private:
 	float m_playerSpeed;
 	float m_bombSpeed;
 
-	int m_bombAmmount;
+	int m_bombAmount;
 	float m_bombTimer;
 
 

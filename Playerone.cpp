@@ -25,7 +25,7 @@ Playerone::Playerone(Keyboard* keyboard, Sprite* sprite, Sprite* bombSprite, std
 	m_x = x;
 	m_y = y;
 
-	m_bombAmmount = 3;
+	m_bombAmount = 3;
 
 	Reset();
 
@@ -106,22 +106,23 @@ void Playerone::Update(float deltatime)
 
 	if (m_keyboard->IsKeyDown(SDLK_SPACE) == true)
 	{
-		if (m_bombSpeed > m_playerSpeed)
+		if (m_bombSpeed > m_playerSpeed && 0 < m_bombAmount)
 		{
 
 			Bomb* bomb = new Bomb(m_keyboard, m_bombSprite, m_x, m_y);
 			bomb->Activate();
 			m_entities->push_back(bomb);
-
+			m_bombAmount += 1;
 
 			std::cout << bomb->IsActive() << std::endl;
 
-			if (m_bombTimer > 1.3 && bomb->IsActive() == true){
+			if (m_bombTimer > 2.5 ){
 
 				std::cout << "Bomb" << std::endl;
-				delete bomb;
+			
+				bomb = nullptr;
 				m_bombTimer = 0;
-
+				m_bombAmount -= 1;
 			}
 
 				m_bombSpeed = 0;
