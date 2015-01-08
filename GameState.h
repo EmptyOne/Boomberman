@@ -5,6 +5,7 @@
 #include <vector>
 
 class Entity;
+class Playerone;
 
 class GameState : public State
 {
@@ -22,6 +23,7 @@ private:
 private:
 	System m_systems;
 	std::vector<Entity*> m_entities;
+	Playerone* m_player;
 
 	bool m_active;
 };

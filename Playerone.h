@@ -52,7 +52,7 @@ private:
 	float m_playerSpeed;
 	float m_bombSpeed;
 
-	int m_bombAmount;
+	unsigned int m_bombAmount;
 	float m_bombTimer;
 
 	bool m_active;

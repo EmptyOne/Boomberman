@@ -121,15 +121,15 @@ GameState::GameState(System& system)
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 66, 64, 64);
 	Sprite* bombSprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
 
-	Playerone* playerone = new Playerone(m_systems.input_manager->GetKeyboard(), sprite, bombSprite, &m_entities, playeronex, playeroney);
-	playeronex = playerone->GetX();
-	playeroney = playerone->GetY();
+	m_player = new Playerone(m_systems.input_manager->GetKeyboard(), sprite, bombSprite, &m_entities, playeronex, playeroney);
+	playeronex = m_player->GetX();
+	playeroney = m_player->GetY();
 
-	m_entities.push_back(playerone);
+	m_entities.push_back(m_player);
 
 
 	//playertwo
-	// 3 pixlar fel i bilden x led.
+	
 	int playertwox = 1016;
 	int playertwoy = 768;
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 66, 64, 64);
@@ -172,24 +172,36 @@ GameState::~GameState()
 bool GameState::Update(float deltatime)
 {
 	
+
 	for (unsigned int i = 0; i < m_entities.size(); i++){
 		
 		if (!m_entities[i]->IsVisible())
 			continue;
 
+		/*Entity* a = m_entities[i];
+		EEntityType aType = a->GetType();
+		if (aType == ENTITY_PLAYERONE){
+			Playerone* playerone = static_cast<Playerone*>(a);
+			playerone->BombIncrease();
+		}*/
+
 		if (!m_entities[i]->IsActive())
 		{
+
+
+			m_player->BombIncrease();
+
 			delete m_entities[i];
 				m_entities.erase(m_entities.begin() + i);
+
+				////if (m_entities[38])
+				//if (aType == ENTITY_BOMB)
+				//{
+				//	//	Playerone* playerone = static_cast<Playerone*>(m_entities[i]);
+				//}
+		
+				continue;
 			
-				//if (m_entities[38])
-				if (m_entities[i]->GetType() == ENTITY_PLAYERONE)
-				{
-				Playerone* playerone = static_cast<Playerone*>(m_entities[i]);
-				playerone->BombIncrease();
-				}
-			
-			continue;
 		}
 	
 		// update
