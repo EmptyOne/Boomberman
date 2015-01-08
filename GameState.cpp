@@ -180,9 +180,15 @@ bool GameState::Update(float deltatime)
 		if (!m_entities[i]->IsActive())
 		{
 			delete m_entities[i];
-			m_entities.erase(m_entities.begin() + i); 
-
-			playerone->BombIncrease();
+				m_entities.erase(m_entities.begin() + i);
+			
+				//if (m_entities[38])
+				if (m_entities[i]->GetType() == ENTITY_PLAYERONE)
+				{
+				Playerone* playerone = static_cast<Playerone*>(m_entities[i]);
+				playerone->BombIncrease();
+				}
+			
 			continue;
 		}
 	

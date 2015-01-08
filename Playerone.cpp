@@ -8,7 +8,6 @@
 #include "Bomb.h"
 
 
-
 Playerone::Playerone(Keyboard* keyboard, Sprite* sprite, Sprite* bombSprite, std::vector<Entity*>* entities, float x, float y)
 {
 
