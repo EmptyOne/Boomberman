@@ -15,6 +15,7 @@
 #include "Block.h"
 #include "Bomb.h"
 #include "Playertwo.h"
+#include "Explosion.h"
 
 #include "Collider.h"
 #include "CollisionManager.h"
@@ -121,6 +122,7 @@ GameState::GameState(System& system)
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 66, 64, 64);
 	Sprite* bombSprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
 
+
 	m_player = new Playerone(m_systems.input_manager->GetKeyboard(), sprite, bombSprite, &m_entities, playeronex, playeroney);
 	playeronex = m_player->GetX();
 	playeroney = m_player->GetY();
@@ -146,6 +148,11 @@ GameState::GameState(System& system)
 	music->Play();
 
 	//bomb
+
+	//explosion
+	sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 130, 64, 64);
+	Sprite* explosionSprite = m_systems.sprite_manager->CreateSprite(filename, 130, 66, 64, 64);
+
 
 
 

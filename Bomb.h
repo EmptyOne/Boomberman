@@ -5,6 +5,8 @@
 #include "Entity.h"
 
 class Keyboard;
+class Explosion;
+
 class Bomb : public Entity
 {
 
@@ -50,9 +52,10 @@ private:
 	bool m_visible;
 	bool m_active;
 
+	std::vector<Entity*>* m_entities;
 	
 	float m_bombTimer;
 
-
+	Explosion* m_explosion;
 };
 

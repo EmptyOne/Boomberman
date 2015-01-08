@@ -6,6 +6,7 @@
 #include "Collider.h"
 #include "Bomb.h"
 #include "Playerone.h"
+#include "Explosion.h"
 
 
 Bomb::Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY)
@@ -13,7 +14,7 @@ Bomb::Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY)
 	
 	m_keyboard = keyboard;
 	m_sprite = sprite;
-
+	//m_entities = entities;
 	
 	m_speed = 300.0f;
 	m_offset = 1.0f;
@@ -32,6 +33,7 @@ Bomb::Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY)
 	m_active = true;
 	m_active = false;
 
+
 }
 
 Bomb::~Bomb()
@@ -42,14 +44,20 @@ Bomb::~Bomb()
 
 void Bomb::Update(float deltatime)
 {
+	std::string filename = "../assets/main.png";
+	Sprite* sprite;
+
+
 	if (!m_active)
 		return;
 
 	m_bombTimer += deltatime;
 
-	std::cout << m_bombTimer << std::endl;
+	
 	if (m_bombTimer > 2.5){
-
+		
+		//m_explosion = new Explosion(m_sprite, m_entities, m_position_x, m_position_y);
+		//m_entities->push_back(bomb);
 		m_active = false;
 		
 

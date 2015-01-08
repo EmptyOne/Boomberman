@@ -120,6 +120,9 @@
     <ClInclude Include="Playertwo.h">
       <Filter>Header Files\Objekt</Filter>
     </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>Header Files\Objekt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -183,6 +186,9 @@
       <Filter>Source Files\Objekt</Filter>
     </ClCompile>
     <ClCompile Include="Playertwo.cpp">
+      <Filter>Source Files\Objekt</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosion.cpp">
       <Filter>Source Files\Objekt</Filter>
     </ClCompile>
   </ItemGroup>

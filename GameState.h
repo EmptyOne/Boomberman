@@ -6,6 +6,7 @@
 
 class Entity;
 class Playerone;
+class Bomb;
 
 class GameState : public State
 {
@@ -24,7 +25,8 @@ private:
 	System m_systems;
 	std::vector<Entity*> m_entities;
 	Playerone* m_player;
-
+	Bomb* m_bomb;
+	
 	bool m_active;
 };
 
