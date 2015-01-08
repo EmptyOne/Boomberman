@@ -176,6 +176,15 @@ bool GameState::Update(float deltatime)
 		
 		if (!m_entities[i]->IsVisible())
 			continue;
+
+		if (!m_entities[i]->IsActive())
+		{
+			delete m_entities[i];
+			m_entities.erase(m_entities.begin() + i); 
+
+			playerone->BombIncrease();
+			continue;
+		}
 	
 		// update
 		m_entities[i]->Update(deltatime);

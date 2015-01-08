@@ -19,6 +19,7 @@ public:
 
 	void SetInvisible();
 	bool IsVisible();
+	bool IsActive();
 
 	void SetType(int i);
 	EEntityType GetType();
@@ -30,5 +31,6 @@ private:
 	float m_x;
 	float m_y;
 	bool m_visible;
-	EEntityType e;
+	EEntityType e; 
+	bool m_active;
 };

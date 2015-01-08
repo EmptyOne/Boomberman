@@ -28,6 +28,7 @@ public:
 
 	void Activate();
 	bool IsActive();
+	
 	void SetPosition(float x, float y);
 
 
@@ -50,5 +51,8 @@ private:
 	bool m_active;
 
 	
+	float m_bombTimer;
+
+
 };
 

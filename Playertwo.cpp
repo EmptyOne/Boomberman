@@ -24,6 +24,7 @@ Playertwo::Playertwo(Keyboard* keyboard, Sprite* sprite, float x, float y)
 	m_y = y;
 
 
+	m_active = true;
 	Reset();
 
 }
@@ -170,6 +171,8 @@ EEntityType Playertwo::GetType()
 {
 	return ENTITY_PLAYERTWO;
 }
-
+bool Playertwo::IsActive(){
+	return m_active;
+}
 
 

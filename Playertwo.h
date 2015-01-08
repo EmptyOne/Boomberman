@@ -25,6 +25,7 @@ public:
 	void Reset();
 
 	bool IsVisible();
+	bool IsActive();
 	EEntityType GetType();
 	Collider* GetCollider();
 
@@ -41,6 +42,7 @@ private:
 
 	bool m_space;
 
+	bool m_active;
 
 	float m_timer;
 	float m_playerSpeed;

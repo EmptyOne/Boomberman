@@ -27,5 +27,6 @@ public:
 	virtual float GetY() = 0;
 	virtual bool IsVisible() = 0;
 	virtual EEntityType GetType() = 0;
+	virtual bool IsActive() = 0;
 };
 

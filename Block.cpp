@@ -19,6 +19,7 @@ Block::Block(Sprite* sprite, float x, float y)
 
 	e = ENTITY_BLOCK;
 
+	m_active = true;
 	m_visible = true;
 }
 
@@ -88,4 +89,8 @@ void Block::SetType(int i)
 Collider* Block::GetCollider()
 {
 	return m_collider;
+}
+bool Block::IsActive(){
+
+	return m_active;
 }

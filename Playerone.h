@@ -21,11 +21,13 @@ public:
 
 	float GetDir();
 
+	void BombIncrease();
 
 	void Reset();
 
 	bool IsOnBomb();
 	bool IsVisible();
+	bool IsActive();
 	EEntityType GetType();
 	Collider* GetCollider();
 
@@ -53,6 +55,7 @@ private:
 	int m_bombAmount;
 	float m_bombTimer;
 
+	bool m_active;
 
 	std::vector<Entity*>* m_entities;
 
