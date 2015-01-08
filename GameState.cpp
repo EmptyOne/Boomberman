@@ -83,19 +83,19 @@ GameState::GameState(System& system)
 					//den här raden skriver ut allt atm 
 					SDL_Rect& rect = blockCoords[count];
 
-					//if (x % 2 == 1 && y % 2 == 1){
+					if (x % 2 == 1 && y % 2 == 1){
 
-					//	// solidblock					
-					//	sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
-					//	Block* solidblock = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
-					//	solidblock->SetType(2);
+						// solidblock					
+						sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
+						Block* solidblock = new Block(sprite, xOffset + x * 64, yOffset + y * 64);
+						solidblock->SetType(2);
 				
-					//	m_entities.push_back(solidblock);
-					//
-					//	continue;
-					//}
-					//else
-					//{
+						m_entities.push_back(solidblock);
+					
+						continue;
+					}
+					else
+					{
 		
 						if (count == 0)
 						{
@@ -107,7 +107,7 @@ GameState::GameState(System& system)
 					
 							m_entities.push_back(breakableBlock);
 						}
-					//}
+					}
 				}
 			}
 		}
@@ -376,7 +376,7 @@ void GameState::CollisionChecking()
 						playerone->SetX(px + 64);
 					}
 
-					std::cout << "px: " << px << std::endl << "py: " << py << std::endl;
+					//std::cout << "px: " << px << std::endl << "py: " << py << std::endl;
 				}
 			
 			}

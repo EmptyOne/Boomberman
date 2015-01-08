@@ -184,6 +184,7 @@ bool Playerone::IsActive(){
 }
 void Playerone::BombIncrease(){
 	
+	std::cout << m_bombAmount << std::endl;
 	m_bombAmount += 1;
 	std::cout << m_bombAmount << std::endl;
 }
