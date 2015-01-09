@@ -30,7 +30,7 @@ Bomb::Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY)
 	m_collider->SetWidthHeight(m_sprite->GetRegion()->w - m_offset,
 	m_sprite->GetRegion()->h - m_offset);
 
-	m_active = true;
+	//m_active = true;
 	m_active = false;
 
 

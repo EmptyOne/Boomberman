@@ -18,6 +18,7 @@ public:
 	float GetY();
 	void SetY(float y);
 	void SetX(float x);
+	void SetActive(bool state);
 
 	float GetDir();
 
@@ -30,7 +31,7 @@ public:
 	bool IsActive();
 	EEntityType GetType();
 	Collider* GetCollider();
-
+	void SetInvisible();
 
 private:
 	
@@ -56,6 +57,7 @@ private:
 	float m_bombTimer;
 
 	bool m_active;
+	bool m_visible;
 
 	std::vector<Entity*>* m_entities;
 

@@ -18,6 +18,7 @@ public:
 	void Reset();
 
 	void SetInvisible();
+	void Block::SetActive();
 	bool IsVisible();
 	bool IsActive();
 

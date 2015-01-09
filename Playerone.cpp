@@ -25,6 +25,7 @@ Playerone::Playerone(Keyboard* keyboard, Sprite* sprite, Sprite* bombSprite, std
 	m_y = y;
 
 	m_active = true;
+	m_visible = true;
 	m_bombAmount = 3;
 
 	Reset();
@@ -163,7 +164,11 @@ void Playerone::SetY(float y)
 	m_y = y;
 }
 
-
+void Playerone::SetActive(bool state)
+{
+	m_active = state;
+	
+}
 void Playerone::Reset()
 {
 
@@ -171,9 +176,12 @@ void Playerone::Reset()
 
 bool Playerone::IsVisible()
 {
-	return true;
+	return m_visible;
 }
-
+void Playerone::SetInvisible()
+{
+	m_visible = false;
+}
 EEntityType Playerone::GetType()
 {
 	return ENTITY_PLAYERONE;

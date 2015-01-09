@@ -58,6 +58,10 @@ void Block::SetInvisible()
 {
 	m_visible = false;
 }
+void Block::SetActive()
+{
+	m_active = false;
+}
 
 bool Block::IsVisible()
 {
