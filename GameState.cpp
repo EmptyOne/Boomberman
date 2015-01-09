@@ -83,7 +83,7 @@ GameState::GameState(System& system)
 					//den här raden skriver ut allt atm 
 					SDL_Rect& rect = blockCoords[count];
 
-					if (x % 2 == 1 && y % 2 == 1){
+					if (count == 1){
 
 						// solidblock					
 						sprite = m_systems.sprite_manager->CreateSprite(filename, rect.x, rect.y, rect.w, rect.h);
@@ -119,6 +119,7 @@ GameState::GameState(System& system)
 	int playeronex = 120;
 	int playeroney = 0;
 
+	//bomb
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 66, 64, 64);
 	Sprite* bombSprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
 
@@ -147,7 +148,7 @@ GameState::GameState(System& system)
 	SoundClip* music = m_systems.sound_manager->CreateSoundClip(soundname);
 	music->Play();
 
-	//bomb
+
 
 	//explosion
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 130, 64, 64);
@@ -155,6 +156,7 @@ GameState::GameState(System& system)
 
 
 
+	
 
 	
 	m_active = false;
@@ -194,14 +196,21 @@ bool GameState::Update(float deltatime)
 
 		if (!m_entities[i]->IsActive())
 		{
+			
+		//	m_player->BombIncrease();
 
+			
 
-			m_player->BombIncrease();
+			Sprite* spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
+			Explosion* exp = new Explosion(spr, m_entities[i]->GetX, m_entities[i]->GetY());
+			m_entities.push_back(exp);
+			//m_player->BombIncrease();
 
-			delete m_entities[i];
+				delete m_entities[i];
 				m_entities.erase(m_entities.begin() + i);
 
-				////if (m_entities[38])
+				
+					////if (m_entities[38])
 				//if (aType == ENTITY_BOMB)
 				//{
 				//	//	Playerone* playerone = static_cast<Playerone*>(m_entities[i]);

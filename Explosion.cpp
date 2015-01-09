@@ -8,8 +8,8 @@
 Explosion::Explosion(Sprite* sprite, float x, float y)
 {
 	m_sprite = sprite;
-
-
+	
+	
 
 	m_collider = new Collider(x, y);
 	m_collider->SetParent(this);
@@ -80,4 +80,9 @@ EEntityType Explosion::GetType()
 Collider* Explosion::GetCollider()
 {
 	return m_collider;
+}
+void Explosion::Setpos(float x, float y){
+	m_x = x;
+	m_y = y;
+
 }
