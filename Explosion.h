@@ -19,6 +19,7 @@ public:
 	float GetDir();
 	void SetY(float y);
 	void SetX(float x);
+	float GetTimer();
 
 	void Setpos(float x, float y);
 

@@ -130,5 +130,8 @@ bool Bomb::IsActive()
 	return m_active;
 }
 
-
+float Bomb::GetTimer()
+{
+	return m_bombTimer;
+}
 

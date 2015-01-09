@@ -200,14 +200,62 @@ bool GameState::Update(float deltatime)
 		//	m_player->BombIncrease();
 
 			
-
+			if (m_entities[i]->GetType() == ENTITY_BOMB)
+			{
+				
+				std::cout << "ent bomb: " << std::endl;
+				
 			Sprite* spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
-			Explosion* exp = new Explosion(spr, m_entities[i]->GetX, m_entities[i]->GetY());
-			m_entities.push_back(exp);
-			//m_player->BombIncrease();
+			m_bombX = m_entities[i]->GetX();
+			m_bombY = m_entities[i]->GetY();
+			std::cout << "x: " << m_bombX << std::endl << "y: " << m_bombY << std::endl;
+			Explosion* explosion = new Explosion(spr, m_bombX, m_bombY);
+			m_entities.push_back(explosion);
 
+			//X
+			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 66, 130, 64, 64);
+			explosion = new Explosion(spr, m_bombX, m_bombY + 64);
+			m_entities.push_back(explosion);
+
+			explosion = new Explosion(spr, m_bombX, m_bombY - 64);
+			m_entities.push_back(explosion);
+
+			explosion = new Explosion(spr, m_bombX, m_bombY + 128);
+			m_entities.push_back(explosion);
+
+			explosion = new Explosion(spr, m_bombX, m_bombY - 128);
+			m_entities.push_back(explosion);
+
+			//Y
+			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
+			explosion = new Explosion(spr, m_bombX+64, m_bombY);
+			m_entities.push_back(explosion);
+
+			explosion = new Explosion(spr, m_bombX - 64, m_bombY);
+			m_entities.push_back(explosion);
+
+			explosion = new Explosion(spr, m_bombX + 128, m_bombY);
+			m_entities.push_back(explosion);
+
+			explosion = new Explosion(spr, m_bombX - 128, m_bombY);
+			m_entities.push_back(explosion);
+
+			m_player->BombIncrease();
+			m_bombTimer = explosion->GetTimer();
+			std::cout << m_bombTimer << std::endl;
+
+			delete m_entities[i];
+			m_entities.erase(m_entities.begin() + i);
+			}
+			
+			if (m_entities[i]->GetType() == ENTITY_EXPLOSION && m_entities[i]->IsActive() == false)
+			{
 				delete m_entities[i];
 				m_entities.erase(m_entities.begin() + i);
+			}
+			
+
+			
 
 				
 					////if (m_entities[38])
@@ -401,33 +449,34 @@ void GameState::CollisionChecking()
 					//std::cout << "px: " << px << std::endl << "py: " << py << std::endl << "bombX: " << bomb->GetX() << std::endl << "bombY: " << bomb->GetY() << std::endl;
 					if (bomb->GetX() != px && bomb->GetY() != py)
 					{
-					//W
-					if (pd == 0)
-					{
+						//W
+						if (pd == 0)
+						{
 							
-						playerone->SetY(py + 64);
+							playerone->SetY(py + 64);
 							
-					}
-					//S
-					else  if (pd == 1)
-					{
-						playerone->SetY(py - 64);
+						}
+						//S
+						else  if (pd == 1)
+						{
+							playerone->SetY(py - 64);
 							
-					}
-					//d
-					else  if (pd == 2)
-					{
-						playerone->SetX(px - 64);
+						}
+						//d
+						else  if (pd == 2)
+						{
+							playerone->SetX(px - 64);
 						
-					}
-					//A
-					else if (pd == 3)
-					{
-						playerone->SetX(px + 64);
+						}
+						//A
+						else if (pd == 3)
+						{
+							playerone->SetX(px + 64);
 						
-					}
+						}
 					}
 				}
+				
 			}
 		}
 		

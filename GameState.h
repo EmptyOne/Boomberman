@@ -28,5 +28,8 @@ private:
 	Bomb* m_bomb;
 	
 	bool m_active;
+	float m_bombX;
+	float m_bombY;
+	float m_bombTimer;
 };
 

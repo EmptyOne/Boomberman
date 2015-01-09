@@ -8,7 +8,8 @@
 Explosion::Explosion(Sprite* sprite, float x, float y)
 {
 	m_sprite = sprite;
-	
+	m_x = x;
+	m_y = y;
 	
 
 	m_collider = new Collider(x, y);
@@ -16,7 +17,7 @@ Explosion::Explosion(Sprite* sprite, float x, float y)
 	m_collider->SetWidthHeight(m_sprite->GetRegion()->w,
 		m_sprite->GetRegion()->h);
 
-
+	m_active = true;
 }
 Explosion::~Explosion()
 {
@@ -27,11 +28,16 @@ Explosion::~Explosion()
 void Explosion::Update(float deltatime)
 {
 	m_explosionTimer += deltatime;
-
-	
-
+	if (m_explosionTimer > 1)
+	{
+		m_active = false;
+		m_explosionTimer = 0;
+	}
 }
-
+float Explosion::GetTimer()
+{
+	return m_explosionTimer;
+}
 Sprite* Explosion::GetSprite()
 {
 	return m_sprite;

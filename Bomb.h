@@ -19,6 +19,7 @@ public:
 	Sprite* GetSprite();
 	float GetX();
 	float GetY();
+	float GetTimer();
 
 	void Reset();
 
@@ -44,10 +45,11 @@ private:
 	float m_offset;
 	float m_position_x;
 	float m_position_y;
+	float m_timer;
 
 	float m_start_x;
 	float m_start_y;
-
+	
 
 	bool m_visible;
 	bool m_active;
