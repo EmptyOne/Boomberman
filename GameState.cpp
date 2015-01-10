@@ -24,6 +24,7 @@
 #include "SoundClip.h"
 
 #include <fstream>
+#include <iostream>
 
 
 GameState::GameState(System& system)
@@ -212,8 +213,13 @@ bool GameState::Update(float deltatime)
 			Explosion* explosion = new Explosion(spr, m_bombX, m_bombY);
 			m_entities.push_back(explosion);
 
+
+			// här är bombens x och y när vi tagit emot den och här är den fel
+			std::cout << "bombx" << m_bombX << "bomby" << m_bombY << std::endl;
+			
+			
 			//Y
-			/*spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 66, 130, 64, 64);
+			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 66, 130, 64, 64);
 			explosion = new Explosion(spr, m_bombX-1, m_bombY + 64);
 			m_entities.push_back(explosion);
 
@@ -225,13 +231,13 @@ bool GameState::Update(float deltatime)
 
 			explosion = new Explosion(spr, m_bombX-1, m_bombY - 128);
 			m_entities.push_back(explosion);
-			*/
+			
 			//X
 			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
 			explosion = new Explosion(spr, m_bombX + 64, m_bombY-1);
 			m_entities.push_back(explosion);
 
-			explosion = new Explosion(spr, m_bombX - 64, m_bombY);
+			explosion = new Explosion(spr, m_bombX - 64, m_bombY-1);
 			m_entities.push_back(explosion);
 
 			explosion = new Explosion(spr, m_bombX + 128, m_bombY-1);
@@ -240,6 +246,7 @@ bool GameState::Update(float deltatime)
 			explosion = new Explosion(spr, m_bombX - 128, m_bombY);
 			m_entities.push_back(explosion);
 			
+
 			m_player->BombIncrease();
 			m_bombTimer = explosion->GetTimer();
 			//std::cout << m_bombTimer << std::endl;
