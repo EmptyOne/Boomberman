@@ -23,6 +23,8 @@
 #include "SoundManager.h"
 #include "SoundClip.h"
 
+#include "UI.h"
+
 #include <fstream>
 #include <iostream>
 
@@ -35,6 +37,8 @@ GameState::GameState(System& system)
 	std::string kartan = "../assets/MAP.png";
 	std::string txtname = "../assets/Map.txt";
 	std::string soundname = "../assets/BOOM_MUSIC.wav";
+	std::string UIimg = "../assets/UI.png";
+	std::string liv = "../assets/Hearth.png";
 
 	Sprite* sprite;
 
@@ -65,6 +69,18 @@ GameState::GameState(System& system)
 	backgroundBlock->SetType(1);
 
 	m_entities.push_back(backgroundBlock);
+	
+	//UI
+	sprite = m_systems.sprite_manager->CreateSprite(UIimg, 0, 0, 120, 832);
+	UI* ui = new UI(sprite, 0,0);
+	ui->SetType(1);
+	m_entities.push_back(ui);
+
+	//liv i UI
+	sprite = m_systems.sprite_manager->CreateSprite(liv, 0, 0, 32, 32);
+	UI* uiliv = new UI(sprite, 40, 200);
+	uiliv->SetType(2);
+	m_entities.push_back(uiliv);
 
 
 	std::ifstream stream;
@@ -83,7 +99,7 @@ GameState::GameState(System& system)
 					stream >> count;
 					//den här raden skriver ut allt atm 
 					SDL_Rect& rect = blockCoords[count];
-
+					
 					if (count == 1){
 
 						// solidblock					
@@ -209,48 +225,44 @@ bool GameState::Update(float deltatime)
 			Sprite* spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
 			m_bombX = m_entities[i]->GetX();
 			m_bombY = m_entities[i]->GetY();
-			//std::cout << "x: " << m_bombX << std::endl << "y: " << m_bombY << std::endl;
-			Explosion* explosion = new Explosion(spr, m_bombX, m_bombY);
+			
+			Explosion* explosion = new Explosion(spr, m_bombX-1, m_bombY-1);
 			m_entities.push_back(explosion);
-
-
-			// här är bombens x och y när vi tagit emot den och här är den fel
-			std::cout << "bombx" << m_bombX << "bomby" << m_bombY << std::endl;
 			
 			
 			//Y
 			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 66, 130, 64, 64);
-			explosion = new Explosion(spr, m_bombX-1, m_bombY + 64);
+			explosion = new Explosion(spr, m_bombX-1, m_bombY + 64 -1);
+			m_entities.push_back(explosion);
+			
+			explosion = new Explosion(spr, m_bombX-1, m_bombY - 64-1);
+			m_entities.push_back(explosion);
+			
+			explosion = new Explosion(spr, m_bombX-1, m_bombY + 128-1);
 			m_entities.push_back(explosion);
 
-			explosion = new Explosion(spr, m_bombX-1, m_bombY - 64);
-			m_entities.push_back(explosion);
-
-			explosion = new Explosion(spr, m_bombX-1, m_bombY + 128);
-			m_entities.push_back(explosion);
-
-			explosion = new Explosion(spr, m_bombX-1, m_bombY - 128);
+			explosion = new Explosion(spr, m_bombX-1, m_bombY - 128-1);
 			m_entities.push_back(explosion);
 			
 			//X
 			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
-			explosion = new Explosion(spr, m_bombX + 64, m_bombY-1);
+			explosion = new Explosion(spr, m_bombX + 64-1, m_bombY-1);
 			m_entities.push_back(explosion);
 
-			explosion = new Explosion(spr, m_bombX - 64, m_bombY-1);
+			explosion = new Explosion(spr, m_bombX - 64-1, m_bombY-1);
+			m_entities.push_back(explosion);
+			
+			explosion = new Explosion(spr, m_bombX + 128-1, m_bombY-1);
 			m_entities.push_back(explosion);
 
-			explosion = new Explosion(spr, m_bombX + 128, m_bombY-1);
-			m_entities.push_back(explosion);
-
-			explosion = new Explosion(spr, m_bombX - 128, m_bombY);
+			explosion = new Explosion(spr, m_bombX - 128-1, m_bombY-1);
 			m_entities.push_back(explosion);
 			
 
 			m_player->BombIncrease();
 			m_bombTimer = explosion->GetTimer();
 			//std::cout << m_bombTimer << std::endl;
-
+			
 			delete m_entities[i];
 			m_entities.erase(m_entities.begin() + i);
 			}
