@@ -6,6 +6,7 @@
 #include "SpriteManager.h"
 #include "StateManager.h"
 #include "GameState.h"
+#include "EndState.h"
 #include "Engine.h"
 #include "SoundManager.h"
 
@@ -37,7 +38,7 @@ bool Engine::Initialize()
 	m_input_manager = new InputManager;
 	m_sprite_manager = new SpriteManager(m_draw_manager->GetRenderer());
 	m_state_manager = new StateManager;
-
+	
 
 	m_sound_manager = new SoundManager;
 	if (!m_sound_manager->initialize())
@@ -52,6 +53,9 @@ bool Engine::Initialize()
 	system.sprite_manager = m_sprite_manager;
 	system.sound_manager = m_sound_manager;
 	m_state_manager->SetState(new GameState(system));
+	
+	//Här behövs en if som kollar om GameState->NextState körs.
+	//m_state_manager->SetState(new EndState(system));
 
 	return true;
 }

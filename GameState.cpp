@@ -170,7 +170,7 @@ GameState::GameState(System& system)
 	//explosion
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 130, 64, 64);
 	Sprite* explosionSprite = m_systems.sprite_manager->CreateSprite(filename, 130, 66, 64, 64);
-
+	
 
 
 	
@@ -389,6 +389,7 @@ void GameState::Draw()
 
 State* GameState::NextState()
 {
+	
 	return nullptr;
 }
 
@@ -516,12 +517,14 @@ void GameState::CollisionChecking()
 					{
 					playerone->SetActive(false);
 					playerone->SetInvisible();
+
+					NextState();
 					}
 					else
 					{
 						playerone->SetLife();
 					}
-					std::cout << playerone->GetLife() << std::endl;
+					
 				}
 			}
 		}
@@ -542,7 +545,7 @@ void GameState::CollisionChecking()
 					Bomb* bomb = static_cast<Bomb*>(b);
 					if (CollisionManager::Check(bomb->GetCollider(), explosion->GetCollider(), overlapX, overlapY))
 					{
-						std::cout << "exp bomb" << std::endl;
+					
 						bomb->SetInvisible();
 						bomb->DeActivate();
 					}
