@@ -232,6 +232,7 @@ bool GameState::Update(float deltatime)
 			
 			//Y
 			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 66, 130, 64, 64);
+			
 			explosion = new Explosion(spr, m_bombX-1, m_bombY + 64 -1);
 			m_entities.push_back(explosion);
 			
@@ -244,20 +245,25 @@ bool GameState::Update(float deltatime)
 			explosion = new Explosion(spr, m_bombX-1, m_bombY - 128-1);
 			m_entities.push_back(explosion);
 			
+
 			//X
 			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
-			explosion = new Explosion(spr, m_bombX + 64-1, m_bombY-1);
+			if (m_bombX - 1 > 120)
+			{
+				explosion = new Explosion(spr, m_bombX - 128 - 1, m_bombY - 1);
+				m_entities.push_back(explosion);
+
+				explosion = new Explosion(spr, m_bombX - 64 - 1, m_bombY - 1);
+				m_entities.push_back(explosion);
+			}
+			explosion = new Explosion(spr, m_bombX + 64 - 1, m_bombY - 1);
 			m_entities.push_back(explosion);
 
-			explosion = new Explosion(spr, m_bombX - 64-1, m_bombY-1);
-			m_entities.push_back(explosion);
-			
-			explosion = new Explosion(spr, m_bombX + 128-1, m_bombY-1);
+
+
+			explosion = new Explosion(spr, m_bombX + 128 - 1, m_bombY - 1);
 			m_entities.push_back(explosion);
 
-			explosion = new Explosion(spr, m_bombX - 128-1, m_bombY-1);
-			m_entities.push_back(explosion);
-			
 
 			m_player->BombIncrease();
 			m_bombTimer = explosion->GetTimer();
@@ -506,10 +512,16 @@ void GameState::CollisionChecking()
 				Explosion* explosion = static_cast<Explosion*>(b);
 				if (CollisionManager::Check(playerone->GetCollider(), explosion->GetCollider(), overlapX, overlapY))
 				{
-
+					if (playerone->GetLife() < 0)
+					{
 					playerone->SetActive(false);
 					playerone->SetInvisible();
-				
+					}
+					else
+					{
+						playerone->SetLife();
+					}
+					std::cout << playerone->GetLife() << std::endl;
 				}
 			}
 		}
@@ -524,7 +536,16 @@ void GameState::CollisionChecking()
 						block->SetInvisible();
 						block->SetActive();
 					}
-					
+				}
+				if (bType == ENTITY_BOMB)
+				{
+					Bomb* bomb = static_cast<Bomb*>(b);
+					if (CollisionManager::Check(bomb->GetCollider(), explosion->GetCollider(), overlapX, overlapY))
+					{
+						std::cout << "exp bomb" << std::endl;
+						bomb->SetInvisible();
+						bomb->DeActivate();
+					}
 				}
 			}
 		

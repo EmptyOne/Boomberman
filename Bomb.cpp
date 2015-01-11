@@ -135,3 +135,7 @@ float Bomb::GetTimer()
 	return m_bombTimer;
 }
 
+void Bomb::DeActivate()
+{
+	m_active = false;
+}

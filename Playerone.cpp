@@ -14,7 +14,8 @@ Playerone::Playerone(Keyboard* keyboard, Sprite* sprite, Sprite* bombSprite, std
 	m_keyboard = keyboard;
 	m_sprite = sprite;
 	m_bombSprite = bombSprite;
-	m_entities = entities;
+	m_entities = entities; 
+	
 
 	m_collider = new Collider(x, y);
 	m_collider->SetParent(this);
@@ -27,6 +28,7 @@ Playerone::Playerone(Keyboard* keyboard, Sprite* sprite, Sprite* bombSprite, std
 	m_active = true;
 	m_visible = true;
 	m_bombAmount = 3;
+	m_life = 2;
 
 	Reset();
 
@@ -49,6 +51,7 @@ void Playerone::Update(float deltatime)
 	m_playerSpeed = 0.25; //Borde vara samma som animations tiden
 	m_bombSpeed += deltatime;
 	m_bombTimer += deltatime;
+	m_lifeTimer += deltatime;
 	
 
 	if (m_timer > m_playerSpeed)
@@ -198,4 +201,18 @@ void Playerone::BombIncrease(){
 	std::cout << m_bombAmount << std::endl;
 	m_bombAmount += 1;
 	std::cout << m_bombAmount << std::endl;
+}
+
+void Playerone::SetLife()
+{
+	if (m_lifeTimer > 2)
+	{
+		m_life -= 1; 
+		m_lifeTimer = 0;
+	}
+}
+
+int Playerone::GetLife()
+{
+	return m_life;
 }

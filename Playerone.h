@@ -33,6 +33,9 @@ public:
 	Collider* GetCollider();
 	void SetInvisible();
 
+	void SetLife();
+	int GetLife();
+
 private:
 	
 	Keyboard* m_keyboard;
@@ -53,6 +56,8 @@ private:
 	float m_playerSpeed;
 	float m_bombSpeed;
 
+	int m_life;
+	float m_lifeTimer;
 	unsigned int m_bombAmount;
 	float m_bombTimer;
 

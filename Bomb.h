@@ -30,6 +30,7 @@ public:
 	Collider* GetCollider();
 
 	void Activate();
+	void DeActivate();
 	bool IsActive();
 	
 	void SetPosition(float x, float y);
