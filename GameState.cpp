@@ -221,8 +221,8 @@ bool GameState::Update(float deltatime)
 			{
 				
 				//std::cout << "ent bomb: " << std::endl;
-				
-			Sprite* spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
+				Sprite* spr;
+			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
 			m_bombX = m_entities[i]->GetX();
 			m_bombY = m_entities[i]->GetY();
 			
@@ -231,6 +231,7 @@ bool GameState::Update(float deltatime)
 			
 			
 			//Y
+
 			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 66, 130, 64, 64);
 			
 			explosion = new Explosion(spr, m_bombX-1, m_bombY + 64 -1);
@@ -364,7 +365,7 @@ bool GameState::Update(float deltatime)
 
 
 
-
+	
 	CollisionChecking();
 
 	return true;
@@ -436,6 +437,8 @@ void GameState::CollisionChecking()
 
 				Block* solidblock = static_cast<Block*>(b);
 
+				if (!solidblock->IsVisible())
+					continue;
 				if (CollisionManager::Check(playerone->GetCollider(), solidblock->GetCollider(), overlapX, overlapY))
 				{
 					//W
@@ -532,12 +535,15 @@ void GameState::CollisionChecking()
 			{
 				Block* block = static_cast<Block*>(b);
 				Explosion* explosion = static_cast<Explosion*>(a);
+				
 				if (bType == ENTITY_BLOCK)
 				{
 					if (CollisionManager::Check(block->GetCollider(), explosion->GetCollider(), overlapX, overlapY))
 					{
 						block->SetInvisible();
 						block->SetActive();
+
+					
 					}
 				}
 				if (bType == ENTITY_BOMB)
@@ -550,6 +556,16 @@ void GameState::CollisionChecking()
 						bomb->DeActivate();
 					}
 				}
+					if (bType == ENTITY_SOLIDBLOCK)
+						{
+						if (CollisionManager::Check(explosion->GetCollider(), block->GetCollider(), overlapX, overlapY))
+						{
+						explosion->DeActive();
+						explosion->SetInvisible();
+						}
+						
+					}
+
 			}
 		
 		}

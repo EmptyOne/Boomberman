@@ -92,3 +92,12 @@ void Explosion::Setpos(float x, float y){
 	m_y = y;
 
 }
+void Explosion::SetInvisible()
+{
+	m_visible = false;
+}
+
+void Explosion::DeActive()
+{
+	m_active = false;
+}

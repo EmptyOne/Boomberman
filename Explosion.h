@@ -19,6 +19,8 @@ public:
 	float GetDir();
 	void SetY(float y);
 	void SetX(float x);
+	void SetInvisible();
+	void DeActive();
 	float GetTimer();
 
 	void Setpos(float x, float y);
@@ -49,7 +51,7 @@ private:
 	float m_explosionTimer;
 
 	bool m_active;
-
+	bool m_visible;
 
 };
 
