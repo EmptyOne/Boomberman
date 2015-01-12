@@ -71,5 +71,13 @@ void UI::SetType(int i)
 	{
 		e = ENTITY_OPTION;
 	}
+	else if (1 == 5)
+	{
+		e = ENTITY_PLAYERONEWIN;
+	}
+	else if (i == 6)
+	{
+		e = ENTITY_PLAYERTWOWIN;
+	}
 
 }
