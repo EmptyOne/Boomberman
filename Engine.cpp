@@ -42,7 +42,7 @@ bool Engine::Initialize()
 	
 
 	m_sound_manager = new SoundManager;
-	if (!m_sound_manager->initialize())
+	if (!m_sound_manager->Initialize())
 		return false;
 	
 

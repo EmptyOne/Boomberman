@@ -24,6 +24,7 @@
 
 #include "SoundManager.h"
 #include "SoundClip.h"
+#include "MusicClip.h"
 
 #include "UI.h"
 
@@ -161,9 +162,12 @@ GameState::GameState(System& system)
 	m_entities.push_back(playertwo);
 
 	//musik
-	SoundClip* music = m_systems.sound_manager->CreateSoundClip(soundname);
+	MusicClip* music = m_systems.sound_manager->CreateMusicClip(soundname);
 	music->Play();
 
+
+	// det är typ de här vi vill köra fast där vi går till EndState
+	// music->Stop();
 
 
 	//explosion
@@ -302,6 +306,8 @@ bool GameState::Update(float deltatime)
 			if (playerone->GetLife() < 0)
 			{
 			std::cout << "playerone" << std::endl;
+			
+		
 			return false;
 			}
 		}

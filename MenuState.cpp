@@ -1,9 +1,10 @@
 // MenuState.cpp
 
-//Inte riktigt säker på vad vi behöver ta med atm
 #include "stdafx.h"
 #include "MenuState.h"
 #include "GameState.h"
+#include "EndState.h"
+#include "OptionState.h"
 
 #include "Mouse.h"
 #include "Keyboard.h"
@@ -50,8 +51,16 @@ MenuState::~MenuState()
 bool MenuState::Update(float deltatime)
 {
 	Keyboard* m_keyboard;
+
 	if (m_systems.input_manager->GetKeyboard()->IsKeyDown(SDLK_q) == true)
 	{
+		m_state = true;
+		NextState();
+		return false;
+	}
+	else if (m_systems.input_manager->GetKeyboard()->IsKeyDown(SDLK_w) == true){
+		m_state = false;
+		NextState();
 		return false;
 	}
 	return true;
@@ -75,8 +84,15 @@ void MenuState::Draw()
 }
 State* MenuState::NextState()
 {
+	if (m_state == true){
 
-	return new GameState(m_systems);
+		return new GameState(m_systems);
+	}
+	else if (m_state == false){
+
+		return new OptionState(m_systems);
+	}
+
 }
 
 void MenuState::CollisionChecking()

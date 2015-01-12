@@ -1,21 +1,20 @@
 #pragma once
 
+class MusicClip;
 class SoundClip;
 
-class SoundManager{
-
+class SoundManager
+{
 public:
 	SoundManager();
 	~SoundManager();
-
-	bool initialize();
+	bool Initialize();
 	void Shutdown();
-
-	SoundClip* CreateSoundClip(std::string p_sFilename);
-
-
+	MusicClip *CreateMusicClip(std::string p_sFilename);
+	SoundClip *CreateSoundClip(std::string p_sFilename);
 private:
+	std::map<std::string, Mix_Music*> m_axMusic;
 	std::map<std::string, Mix_Chunk*> m_axSounds;
+	std::vector<MusicClip*> m_axMusicClips;
 	std::vector<SoundClip*> m_axSoundClips;
-
 };

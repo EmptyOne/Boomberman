@@ -132,6 +132,12 @@
     <ClInclude Include="MenuState.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
+    <ClInclude Include="OptionState.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicClip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -208,6 +214,12 @@
     </ClCompile>
     <ClCompile Include="MenuState.cpp">
       <Filter>Source Files\State</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicClip.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

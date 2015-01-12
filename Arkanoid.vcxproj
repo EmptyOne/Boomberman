@@ -105,6 +105,8 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="MusicClip.h" />
+    <ClInclude Include="OptionState.h" />
     <ClInclude Include="Playerone.h" />
     <ClInclude Include="Playertwo.h" />
     <ClInclude Include="SoundClip.h" />
@@ -133,6 +135,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="MusicClip.cpp" />
+    <ClCompile Include="OptionState.cpp" />
     <ClCompile Include="Playerone.cpp" />
     <ClCompile Include="Playertwo.cpp" />
     <ClCompile Include="SoundClip.cpp" />

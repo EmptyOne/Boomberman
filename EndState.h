@@ -5,8 +5,6 @@
 #include <vector>
 
 class Entity;
-class Playerone;
-class Bomb;
 class Keyboard;
 
 class EndState : public State
@@ -26,15 +24,12 @@ private:
 private:
 	System m_systems;
 	std::vector<Entity*> m_entities;
-	Playerone* m_player;
-	Bomb* m_bomb;
+
 	Keyboard* m_keyboard;
 
 
 	bool m_active;
-	float m_bombX;
-	float m_bombY;
-	float m_bombTimer;
+
 	bool m_state;
 };
 
