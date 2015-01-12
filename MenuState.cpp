@@ -13,16 +13,7 @@
 #include "SpriteManager.h"
 #include "Sprite.h"
 
-#include "Playerone.h"
-#include "Block.h"
-#include "Bomb.h"
-#include "Playertwo.h"
-#include "Explosion.h"
-
-#include "Collider.h"
-#include "CollisionManager.h"
-
-#include "SoundManager.h"
+#include "SoundManager.h">
 #include "SoundClip.h"
 
 #include "UI.h"
@@ -33,15 +24,22 @@
 
 MenuState::MenuState(System& system)
 {
+
+
 	m_systems = system;
-	std::string liv = "../assets/Hearth.png";
+	std::string menuimg = "../assets/menu.png";
 
 	Sprite* sprite;
 
+	sprite = m_systems.sprite_manager->CreateSprite(menuimg, 0, 0, 1080, 832);
+	UI* menu = new UI(sprite, 0, 0);
+	menu->SetType(3);
+	m_entities.push_back(menu);
+
 
 	std::cout << "MenuState" << std::endl;
-	NextState();
-	
+
+	m_active = false;
 }
 
 MenuState::~MenuState()
@@ -51,16 +49,33 @@ MenuState::~MenuState()
 
 bool MenuState::Update(float deltatime)
 {
+	Keyboard* m_keyboard;
+	if (m_systems.input_manager->GetKeyboard()->IsKeyDown(SDLK_q) == true)
+	{
+		return false;
+	}
 	return true;
 }
 
 void MenuState::Draw()
 {
+	for (unsigned int i = 0; i < m_entities.size(); i++)
+	{
+		if (!m_entities[i]->IsVisible())
+			continue;
 
+		Sprite* sprite = m_entities[i]->GetSprite();
+		if (sprite)
+		{
+			m_systems.draw_manager->Draw(sprite,
+				m_entities[i]->GetX(),
+				m_entities[i]->GetY());
+		}
+	}
 }
-
 State* MenuState::NextState()
 {
+
 	return new GameState(m_systems);
 }
 

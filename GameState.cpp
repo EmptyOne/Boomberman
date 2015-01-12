@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "GameState.h"
 #include "EndState.h"
+#include "MenuState.h"
 
 #include "Mouse.h"
 #include "Keyboard.h"
@@ -39,7 +40,7 @@ GameState::GameState(System& system)
 	std::string txtname = "../assets/Map.txt";
 	std::string soundname = "../assets/BOOM_MUSIC.wav";
 	std::string UIimg = "../assets/UI.png";
-	std::string liv = "../assets/Hearth.png";
+	std::string liv = "../assets/playeronedeath.png";
 
 	Sprite* sprite;
 
@@ -79,17 +80,17 @@ GameState::GameState(System& system)
 
 	//liv i UI
 	sprite = m_systems.sprite_manager->CreateSprite(liv, 0, 0, 32, 32);
-	UI* uiliv = new UI(sprite, 15, 200);
+	UI* uiliv = new UI(sprite, 9, 169);
 	uiliv->SetType(2);
 	m_entities.push_back(uiliv);
 
 	sprite = m_systems.sprite_manager->CreateSprite(liv, 0, 0, 32, 32);
-	UI* uiliv2 = new UI(sprite, 47, 200);
+	UI* uiliv2 = new UI(sprite, 44, 169);
 	uiliv->SetType(2);
 	m_entities.push_back(uiliv2);
 
 	sprite = m_systems.sprite_manager->CreateSprite(liv, 0, 0, 32, 32);
-	UI* m_liv3 = new UI(sprite, 79, 200);
+	UI* m_liv3 = new UI(sprite, 79, 169);
 	uiliv->SetType(2);
 	m_entities.push_back(m_liv3);
 
@@ -211,172 +212,110 @@ bool GameState::Update(float deltatime)
 	
 
 	for (unsigned int i = 0; i < m_entities.size(); i++){
-		
+
 		if (!m_entities[i]->IsVisible())
 			continue;
 
 		/*Entity* a = m_entities[i];
 		EEntityType aType = a->GetType();
 		if (aType == ENTITY_PLAYERONE){
-			Playerone* playerone = static_cast<Playerone*>(a);
-			playerone->BombIncrease();
+		Playerone* playerone = static_cast<Playerone*>(a);
+		playerone->BombIncrease();
 		}*/
 
 		if (!m_entities[i]->IsActive())
 		{
-			
-		//	m_player->BombIncrease();
 
-			
+			//	m_player->BombIncrease();
+
+
 			if (m_entities[i]->GetType() == ENTITY_BOMB)
 			{
-				
+
 				//std::cout << "ent bomb: " << std::endl;
 				Sprite* spr;
-			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
-			m_bombX = m_entities[i]->GetX();
-			m_bombY = m_entities[i]->GetY();
-			
-			Explosion* explosion = new Explosion(spr, m_bombX-1, m_bombY-1);
-			m_entities.push_back(explosion);
-			
-			
-			//Y
+				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
+				m_bombX = m_entities[i]->GetX();
+				m_bombY = m_entities[i]->GetY();
 
-			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 66, 130, 64, 64);
-			
-			explosion = new Explosion(spr, m_bombX-1, m_bombY + 64 -1);
-			m_entities.push_back(explosion);
-			
-			explosion = new Explosion(spr, m_bombX-1, m_bombY - 64-1);
-			m_entities.push_back(explosion);
-			
-			explosion = new Explosion(spr, m_bombX-1, m_bombY + 128-1);
-			m_entities.push_back(explosion);
-
-			explosion = new Explosion(spr, m_bombX-1, m_bombY - 128-1);
-			m_entities.push_back(explosion);
-			
-
-			//X
-			spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
-			if (m_bombX - 1 > 120)
-			{
-				explosion = new Explosion(spr, m_bombX - 128 - 1, m_bombY - 1);
+				Explosion* explosion = new Explosion(spr, m_bombX - 1, m_bombY - 1);
 				m_entities.push_back(explosion);
 
-				explosion = new Explosion(spr, m_bombX - 64 - 1, m_bombY - 1);
+
+				//Y
+
+				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 66, 130, 64, 64);
+
+				explosion = new Explosion(spr, m_bombX - 1, m_bombY + 64 - 1);
 				m_entities.push_back(explosion);
+
+				explosion = new Explosion(spr, m_bombX - 1, m_bombY - 64 - 1);
+				m_entities.push_back(explosion);
+
+				explosion = new Explosion(spr, m_bombX - 1, m_bombY + 128 - 1);
+				m_entities.push_back(explosion);
+
+				explosion = new Explosion(spr, m_bombX - 1, m_bombY - 128 - 1);
+				m_entities.push_back(explosion);
+
+
+				//X
+				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
+				if (m_bombX - 1 > 120)
+				{
+					explosion = new Explosion(spr, m_bombX - 128 - 1, m_bombY - 1);
+					m_entities.push_back(explosion);
+
+					explosion = new Explosion(spr, m_bombX - 64 - 1, m_bombY - 1);
+					m_entities.push_back(explosion);
+				}
+				explosion = new Explosion(spr, m_bombX + 64 - 1, m_bombY - 1);
+				m_entities.push_back(explosion);
+
+
+
+				explosion = new Explosion(spr, m_bombX + 128 - 1, m_bombY - 1);
+				m_entities.push_back(explosion);
+
+
+				m_player->BombIncrease();
+				m_bombTimer = explosion->GetTimer();
+				//std::cout << m_bombTimer << std::endl;
+
+				delete m_entities[i];
+				m_entities.erase(m_entities.begin() + i);
 			}
-			explosion = new Explosion(spr, m_bombX + 64 - 1, m_bombY - 1);
-			m_entities.push_back(explosion);
 
-
-
-			explosion = new Explosion(spr, m_bombX + 128 - 1, m_bombY - 1);
-			m_entities.push_back(explosion);
-
-
-			m_player->BombIncrease();
-			m_bombTimer = explosion->GetTimer();
-			//std::cout << m_bombTimer << std::endl;
-			
-			delete m_entities[i];
-			m_entities.erase(m_entities.begin() + i);
-			}
-			
 			if (m_entities[i]->GetType() == ENTITY_EXPLOSION && m_entities[i]->IsActive() == false)
 			{
 				delete m_entities[i];
 				m_entities.erase(m_entities.begin() + i);
 			}
-			
 
-			
 
-				
-					////if (m_entities[38])
-				//if (aType == ENTITY_BOMB)
-				//{
-				//	//	Playerone* playerone = static_cast<Playerone*>(m_entities[i]);
-				//}
-		
-				continue;
-			
+
+
+
+			////if (m_entities[38])
+			//if (aType == ENTITY_BOMB)
+			//{
+			//	//	Playerone* playerone = static_cast<Playerone*>(m_entities[i]);
+			//}
+
+			continue;
+
 		}
-	
+
 		// update
 		m_entities[i]->Update(deltatime);
-	
-	}
-
-	// tommis update jag antar att de här här saker rör sig så jag sparar den så kan vi kolla om de behövs
-
-	/*
-	// update all entities
-	for (unsigned int i = 0; i < m_entities.size(); i++)
-	{
-	if (!m_entities[i]->IsVisible())
-	continue;
-
-	// update
-	m_entities[i]->Update(deltatime);
-
-	// note(tommi): special treatment for the Bomb
-	if (m_entities[i]->GetType() == ENTITY_BOMB)
-	{
-	// note(tommi): we static_cast the Bomb from entity
-	//   to Bomb we know that it is a Bomb since
-	//   we check for entity type
-	Bomb* bomb = static_cast<Bomb*>(m_entities[i]);
-
-	if (!bomb->IsActive() && m_active)
-	{
-	// reset the game
-	m_active = false;
-	}
-	else if (!bomb->IsActive())
-	{
-	// here the Bomb follows the Playerone
-	// note(tommi): we can do this because we always
-	//   add the Playerone first in the vector of entities
 
 
-	Playerone* playerone = static_cast<Playerone*>(m_entities[0]);
 
-	float PlayeroneHalfWidth = playerone->GetSprite()->GetRegion()->w * 0.5f;
-	float PlayeroneHalfHeight = playerone->GetSprite()->GetRegion()->h * 0.5f;
 
-	float PlayeronePosX = playerone->GetX();
-	float PlayeronePosY = playerone->GetY();
-
-	float BombHalfWidth = bomb->GetSprite()->GetRegion()->w	* 0.5f;
-	float BombHalfHeight = bomb->GetSprite()->GetRegion()->h	* 0.5f;
-
-	float BombNewX = PlayeronePosX + PlayeroneHalfWidth - BombHalfWidth;
-	float BombNewY = PlayeronePosY - PlayeroneHalfHeight - BombHalfHeight;
-
-	bomb->SetPosition(BombNewX, BombNewY);
-	
-	Mouse* mouse = m_systems.input_manager->GetMouse();
-	if (mouse->IsButtonDown(0) && !m_active)
-	{
-		std::cout << "hello" << std::endl;
-	bomb->Activate();
-	m_active = true;
-	}
+		// we always do collision checking after updating 
+		// positions et al in entities
 
 	}
-	}
-	}
-	*/
-
-	// we always do collision checking after updating 
-	// positions et al in entities
-
-
-
-	
 	CollisionChecking();
 
 	return true;
@@ -402,7 +341,7 @@ void GameState::Draw()
 State* GameState::NextState()
 {
 	
-	return new EndState(m_systems);
+	return new MenuState(m_systems);
 }
 
 
@@ -415,7 +354,7 @@ void GameState::CollisionChecking()
 	for (unsigned int i = 0; i < m_entities.size(); i++)
 	{
 		Entity* a = m_entities[i];
-
+	
 		for (unsigned int j = 0; j < m_entities.size(); j++)
 		{
 			if (i == j)

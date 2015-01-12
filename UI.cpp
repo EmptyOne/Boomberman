@@ -63,5 +63,13 @@ void UI::SetType(int i)
 	{
 		e = ENTITY_LIV;
 	}
+	else if (i == 3)
+	{
+		e = ENTITY_MENU;
+	}
+	else if (i == 4)
+	{
+		e = ENTITY_OPTION;
+	}
 
 }
