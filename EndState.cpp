@@ -34,7 +34,8 @@ EndState::EndState(System& system)
 {
 	m_systems = system;
 
-	std::cout << "EndState" << std::endl;
+	std::cout << "endstate" << std::endl;
+	Sprite* sprite;
 }
 
 EndState::~EndState()

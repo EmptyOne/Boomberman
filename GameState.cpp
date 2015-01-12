@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "GameState.h"
+#include "EndState.h"
 
 #include "Mouse.h"
 #include "Keyboard.h"
@@ -78,9 +79,19 @@ GameState::GameState(System& system)
 
 	//liv i UI
 	sprite = m_systems.sprite_manager->CreateSprite(liv, 0, 0, 32, 32);
-	UI* uiliv = new UI(sprite, 40, 200);
+	UI* uiliv = new UI(sprite, 15, 200);
 	uiliv->SetType(2);
 	m_entities.push_back(uiliv);
+
+	sprite = m_systems.sprite_manager->CreateSprite(liv, 0, 0, 32, 32);
+	UI* uiliv2 = new UI(sprite, 47, 200);
+	uiliv->SetType(2);
+	m_entities.push_back(uiliv2);
+
+	sprite = m_systems.sprite_manager->CreateSprite(liv, 0, 0, 32, 32);
+	UI* m_liv3 = new UI(sprite, 79, 200);
+	uiliv->SetType(2);
+	m_entities.push_back(m_liv3);
 
 
 	std::ifstream stream;
@@ -391,7 +402,7 @@ void GameState::Draw()
 State* GameState::NextState()
 {
 	
-	return nullptr;
+	return new EndState(m_systems);
 }
 
 
@@ -525,7 +536,25 @@ void GameState::CollisionChecking()
 					}
 					else
 					{
+						std::string dead = "../assets/dead.png";
+						Sprite* sprite;
+						sprite = m_systems.sprite_manager->CreateSprite(dead, 0, 0, 32, 32);
+						UI* uiliv = new UI(sprite, 15, 200);
+						uiliv->SetType(2);
+						m_entities.push_back(uiliv);
+
+						sprite = m_systems.sprite_manager->CreateSprite(dead, 0, 0, 32, 32);
+						UI* uiliv2 = new UI(sprite, 47, 200);
+						uiliv->SetType(2);
+						m_entities.push_back(uiliv2);
+
+						sprite = m_systems.sprite_manager->CreateSprite(dead, 0, 0, 32, 32);
+						UI* m_liv3 = new UI(sprite, 79, 200);
+						uiliv->SetType(2);
+						m_entities.push_back(m_liv3);
+
 						playerone->SetLife();
+						std::cout << playerone->GetLife() << std::endl;
 					}
 					
 				}

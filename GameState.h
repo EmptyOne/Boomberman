@@ -26,7 +26,8 @@ private:
 	std::vector<Entity*> m_entities;
 	Playerone* m_player;
 	Bomb* m_bomb;
-	
+
+
 	bool m_active;
 	float m_bombX;
 	float m_bombY;
