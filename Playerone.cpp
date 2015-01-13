@@ -6,16 +6,18 @@
 #include "Collider.h"
 #include "Playerone.h"
 #include "Bomb.h"
+#include "SoundClip.h"
+#include "SoundManager.h"
 
-
-Playerone::Playerone(Keyboard* keyboard, Sprite* sprite, Sprite* bombSprite, std::vector<Entity*>* entities, float x, float y)
+Playerone::Playerone(Keyboard* keyboard, Sprite* sprite, Sprite* bombSprite, std::vector<Entity*>* entities, float x, float y, SoundClip* Fuse, SoundClip* Hurt)
 {
 
 	m_keyboard = keyboard;
 	m_sprite = sprite;
 	m_bombSprite = bombSprite;
 	m_entities = entities; 
-	
+	m_soundclip = Fuse;
+	m_soundcliptwo = Hurt;
 
 	m_collider = new Collider(x, y);
 	m_collider->SetParent(this);
@@ -106,11 +108,14 @@ void Playerone::Update(float deltatime)
 		}
 	}
 
-	if (m_keyboard->IsKeyDown(SDLK_SPACE) == true)
+	if (m_keyboard->IsKeyDown(SDLK_f) == true)
 	{
 		if (m_bombSpeed > m_playerSpeed && 0 < m_bombAmount)
 		{
-		
+
+			SoundClip* fuse = new SoundClip(*m_soundcliptwo);
+			fuse->Play();
+
 			Bomb* bomb = new Bomb(m_keyboard, m_bombSprite, m_x, m_y);
 			bomb->Activate();
 			m_entities->push_back(bomb);
@@ -207,6 +212,9 @@ void Playerone::SetLife()
 {
 	if (m_lifeTimer > 2)
 	{
+		SoundClip* hurt = new SoundClip(*m_soundclip);
+		hurt->Play();
+
 		m_life -= 1; 
 		m_lifeTimer = 0;
 	}

@@ -27,7 +27,11 @@
 EndState::EndState(System& system)
 {
 	m_systems = system;
-	
+
+	std::string win = "../assets/win.wav";
+
+	SoundClip* victory = m_systems.sound_manager->CreateSoundClip(win);
+	victory->Play();
 
 	std::string twowinimg = "../assets/endstatetwo.png";
 	Sprite* sprite;
@@ -55,6 +59,11 @@ bool EndState::Update(float deltatime)
 	Keyboard* m_keyboard;
 	if (m_systems.input_manager->GetKeyboard()->IsKeyDown(SDLK_y) == true){
 		std::cout << "y" << std::endl;
+
+		std::string woho = "../assets/woho.wav";
+
+		SoundClip* restart = m_systems.sound_manager->CreateSoundClip(woho);
+		restart->Play();
 
 		m_state = true;
 		NextState();

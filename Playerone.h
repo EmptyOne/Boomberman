@@ -5,11 +5,12 @@
 #include "Entity.h"
 
 class Keyboard;
+class SoundClip;
 
 class Playerone : public Entity
 {
 public:
-	Playerone(Keyboard* keyboard, Sprite* sprite, Sprite* bombSprite, std::vector<Entity*>* entities, float x, float y);
+	Playerone(Keyboard* keyboard, Sprite* sprite, Sprite* bombSprite, std::vector<Entity*>* entities, float x, float y, SoundClip* Fuse, SoundClip* Hurt);
 	~Playerone();
 	
 	void Update(float deltatime);
@@ -42,6 +43,8 @@ private:
 	Sprite* m_sprite;
 	Sprite* m_bombSprite;
 	Collider* m_collider;
+	SoundClip* m_soundclip;
+	SoundClip* m_soundcliptwo;
 
 	float m_x;
 	float m_y;

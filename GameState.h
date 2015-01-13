@@ -6,6 +6,7 @@
 
 class Entity;
 class Playerone;
+class Playertwo;
 class Bomb;
 
 class GameState : public State
@@ -25,6 +26,7 @@ private:
 	System m_systems;
 	std::vector<Entity*> m_entities;
 	Playerone* m_player;
+	Playertwo* m_playertwo;	
 	Bomb* m_bomb;
 
 

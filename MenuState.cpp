@@ -54,6 +54,12 @@ bool MenuState::Update(float deltatime)
 
 	if (m_systems.input_manager->GetKeyboard()->IsKeyDown(SDLK_q) == true)
 	{
+
+		std::string start = "../assets/start.wav";
+
+		SoundClip* startS = m_systems.sound_manager->CreateSoundClip(start);
+		startS->Play();
+
 		m_state = true;
 		NextState();
 		return false;

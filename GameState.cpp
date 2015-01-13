@@ -141,7 +141,20 @@ GameState::GameState(System& system)
 	Sprite* bombSprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
 
 
-	m_player = new Playerone(m_systems.input_manager->GetKeyboard(), sprite, bombSprite, &m_entities, playeronex, playeroney);
+
+	//soundclip
+	std::string hurtplayer = "../assets/hurt.wav";
+
+	SoundClip* Hurt = m_systems.sound_manager->CreateSoundClip(hurtplayer);
+	//Hurt->Play();
+
+	std::string bombfuse = "../assets/fuse.wav";
+
+	SoundClip* Fuse = m_systems.sound_manager->CreateSoundClip(bombfuse);
+	//Fuse->Play();
+
+	//Player
+	m_player = new Playerone(m_systems.input_manager->GetKeyboard(), sprite, bombSprite, &m_entities, playeronex, playeroney, Hurt, Fuse);
 	playeronex = m_player->GetX();
 	playeroney = m_player->GetY();
 
@@ -155,11 +168,11 @@ GameState::GameState(System& system)
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 66, 64, 64);
 
 
-	Playertwo* playertwo = new Playertwo(m_systems.input_manager->GetKeyboard(), sprite, playertwox, playertwoy);
-	playertwox = playertwo->GetX();
-	playertwoy = playertwo->GetY();
+	m_playertwo = new Playertwo(m_systems.input_manager->GetKeyboard(), sprite, bombSprite, &m_entities, playertwox, playertwoy, Hurt, Fuse);
+	playertwox = m_playertwo->GetX();
+	playertwoy = m_playertwo->GetY();
 
-	m_entities.push_back(playertwo);
+	m_entities.push_back(m_playertwo);
 
 	//musik
 	MusicClip* music = m_systems.sound_manager->CreateMusicClip(soundname);
@@ -168,6 +181,9 @@ GameState::GameState(System& system)
 
 	// det är typ de här vi vill köra fast där vi går till EndState
 	// music->Stop();
+
+
+	
 
 
 	//explosion
@@ -223,6 +239,12 @@ bool GameState::Update(float deltatime)
 			if (m_entities[i]->GetType() == ENTITY_BOMB)
 			{
 
+				std::string explosionsound = "../assets/explosion.wav";
+
+				SoundClip* explosionS = m_systems.sound_manager->CreateSoundClip(explosionsound);
+				explosionS->Play();
+
+
 				//std::cout << "ent bomb: " << std::endl;
 				Sprite* spr;
 				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
@@ -268,10 +290,18 @@ bool GameState::Update(float deltatime)
 				explosion = new Explosion(spr, m_bombX + 128 - 1, m_bombY - 1);
 				m_entities.push_back(explosion);
 
-
+				
 				m_player->BombIncrease();
 				m_bombTimer = explosion->GetTimer();
 				//std::cout << m_bombTimer << std::endl;
+				
+
+				
+					m_playertwo->BombIncrease();
+					m_bombTimer = explosion->GetTimer();
+					//std::cout << m_bombTimer << std::endl;
+				
+
 
 				delete m_entities[i];
 				m_entities.erase(m_entities.begin() + i);
@@ -365,7 +395,7 @@ void GameState::CollisionChecking()
 			EEntityType aType = a->GetType();
 			EEntityType bType = b->GetType();
 
-			if (aType == ENTITY_PLAYERONE) //|| aType == ENTITY_PLAYERTWO)
+			if (aType == ENTITY_PLAYERONE || aType == ENTITY_PLAYERTWO)
 			{
 				Keyboard* keyboard = new Keyboard;
 
@@ -477,6 +507,7 @@ void GameState::CollisionChecking()
 					{
 						std::string dead = "../assets/playeronedeath.png";
 						Sprite* sprite;
+
 						if (playerone->GetLife() == 1)
 						{
 							sprite = m_systems.sprite_manager->CreateSprite(dead, 0, 0, 32, 32);

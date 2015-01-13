@@ -7,7 +7,7 @@
 #include "Bomb.h"
 #include "Playerone.h"
 #include "Explosion.h"
-
+#include "SoundClip.h"
 
 Bomb::Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY)
 {
@@ -54,8 +54,9 @@ void Bomb::Update(float deltatime)
 	m_bombTimer += deltatime;
 
 	
-	if (m_bombTimer > 2.5){
+	if (m_bombTimer > 2){
 		
+
 		//m_explosion = new Explosion(m_sprite, m_entities, m_position_x, m_position_y);
 		//m_entities->push_back(bomb);
 		m_active = false;
