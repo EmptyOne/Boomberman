@@ -408,9 +408,6 @@ void GameState::CollisionChecking()
 				px = playerone->GetX();
 				py = playerone->GetY();
 				pd = playerone->GetDir();
-			
-
-
 
 			if (bType == ENTITY_SOLIDBLOCK || bType == ENTITY_BLOCK)
 			{
@@ -444,6 +441,7 @@ void GameState::CollisionChecking()
 
 					//std::cout << "px: " << px << std::endl << "py: " << py << std::endl;
 				}
+
 			
 			}
 			else if (bType == ENTITY_BOMB)
@@ -498,10 +496,10 @@ void GameState::CollisionChecking()
 				{
 					if (playerone->GetLife() < -1)
 					{
-					playerone->SetActive(false);
-					playerone->SetInvisible();
+						playerone->SetActive(false);
+						playerone->SetInvisible();
 
-					NextState();
+						NextState();
 					}
 					else
 					{
@@ -515,26 +513,74 @@ void GameState::CollisionChecking()
 							uiliv->SetType(2);
 							m_entities.push_back(uiliv);
 						}
-						
+
 						if (playerone->GetLife() == 0)
 						{
-						sprite = m_systems.sprite_manager->CreateSprite(dead, 0, 0, 32, 32);
-						UI* uiliv2 = new UI(sprite, 44, 169);
-						uiliv2->SetType(2);
-						m_entities.push_back(uiliv2);
+							sprite = m_systems.sprite_manager->CreateSprite(dead, 0, 0, 32, 32);
+							UI* uiliv2 = new UI(sprite, 44, 169);
+							uiliv2->SetType(2);
+							m_entities.push_back(uiliv2);
 						}
 						if (playerone->GetLife() == -1)
 						{
-						sprite = m_systems.sprite_manager->CreateSprite(dead, 0, 0, 32, 32);
-						UI* m_liv3 = new UI(sprite, 79, 169);
-						m_liv3->SetType(2);
-						m_entities.push_back(m_liv3);
+							sprite = m_systems.sprite_manager->CreateSprite(dead, 0, 0, 32, 32);
+							UI* m_liv3 = new UI(sprite, 79, 169);
+							m_liv3->SetType(2);
+							m_entities.push_back(m_liv3);
 						}
 						playerone->SetLife();
 						std::cout << playerone->GetLife() << std::endl;
 					}
-					
+
 				}
+				else
+				{
+					Playertwo* playertwo = static_cast<Playertwo*>(a);
+					if (CollisionManager::Check(playertwo->GetCollider(), explosion->GetCollider(), overlapX, overlapY))
+					{
+					if (playertwo->GetLife() < -1)
+					{
+						playertwo->SetActive(false);
+						playertwo->SetInvisible();
+
+						NextState();
+					}
+					else
+					{
+						std::string deadtwo = "../assets/playertwodeath.png";
+						Sprite* sprite;
+
+						if (playertwo->GetLife() == 1)
+						{
+							sprite = m_systems.sprite_manager->CreateSprite(deadtwo, 0, 0, 32, 32);
+							UI* uiliv = new UI(sprite, 9, 531);
+							uiliv->SetType(2);
+							m_entities.push_back(uiliv);
+						}
+
+						if (playertwo->GetLife() == 0)
+						{
+							sprite = m_systems.sprite_manager->CreateSprite(deadtwo, 0, 0, 32, 32);
+							UI* uiliv2 = new UI(sprite, 44, 531);
+							uiliv2->SetType(2);
+							m_entities.push_back(uiliv2);
+						}
+						if (playertwo->GetLife() == -1)
+						{
+							sprite = m_systems.sprite_manager->CreateSprite(deadtwo, 0, 0, 32, 32);
+							UI* m_liv3 = new UI(sprite, 79, 531);
+							m_liv3->SetType(2);
+							m_entities.push_back(m_liv3);
+						}
+						playertwo->SetLife();
+						std::cout << playertwo->GetLife() << std::endl;
+					}
+
+					}
+			}
+
+
+			
 			}
 		}
 			if (aType == ENTITY_EXPLOSION)

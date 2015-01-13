@@ -28,6 +28,7 @@ private:
 	Playerone* m_player;
 	Playertwo* m_playertwo;	
 	Bomb* m_bomb;
+	
 
 
 	bool m_active;

@@ -136,7 +136,7 @@
       <Filter>Header Files\State</Filter>
     </ClInclude>
     <ClInclude Include="MusicClip.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -219,7 +219,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MusicClip.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Sound</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
