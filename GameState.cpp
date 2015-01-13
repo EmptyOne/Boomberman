@@ -335,10 +335,18 @@ bool GameState::Update(float deltatime)
 			Playerone* playerone = static_cast<Playerone*>(m_entities[i]);
 			if (playerone->GetLife() < 0)
 			{
-			std::cout << "playerone" << std::endl;
 			
 		
 			return false;
+			}
+		}
+		if (m_entities[i]->GetType() == ENTITY_PLAYERTWO)
+		{
+			Playertwo* playertwo = static_cast<Playertwo*>(m_entities[i]);
+			if (playertwo->GetLife() < 0)
+			{
+
+				return false;
 			}
 		}
 
@@ -371,7 +379,7 @@ void GameState::Draw()
 State* GameState::NextState()
 {
 	
-	return new EndState(m_systems);
+	return new EndState(m_systems, m_player, m_playertwo);
 }
 
 
@@ -496,88 +504,95 @@ void GameState::CollisionChecking()
 				{
 					if (playerone->GetLife() < -1)
 					{
+						if (aType == ENTITY_PLAYERONE)
+						{
 						playerone->SetActive(false);
 						playerone->SetInvisible();
 
 						NextState();
+						}
 					}
+					
+
 					else
 					{
 						std::string dead = "../assets/playeronedeath.png";
+						std::string deadtwo = "../assets/playertwodeath.png";
 						Sprite* sprite;
 
 						if (playerone->GetLife() == 1)
 						{
+							if (aType == ENTITY_PLAYERONE)
+							{
 							sprite = m_systems.sprite_manager->CreateSprite(dead, 0, 0, 32, 32);
 							UI* uiliv = new UI(sprite, 9, 169);
 							uiliv->SetType(2);
 							m_entities.push_back(uiliv);
+							}
+							else if (aType == ENTITY_PLAYERTWO)
+							{
+								sprite = m_systems.sprite_manager->CreateSprite(deadtwo, 0, 0, 32, 32);
+								UI* uiliv = new UI(sprite, 9, 531);
+								uiliv->SetType(2);
+								m_entities.push_back(uiliv);
+							}
 						}
 
 						if (playerone->GetLife() == 0)
 						{
+							if (aType == ENTITY_PLAYERONE)
+							{
 							sprite = m_systems.sprite_manager->CreateSprite(dead, 0, 0, 32, 32);
 							UI* uiliv2 = new UI(sprite, 44, 169);
 							uiliv2->SetType(2);
 							m_entities.push_back(uiliv2);
+							}
+							else if (aType == ENTITY_PLAYERTWO)
+							{
+								sprite = m_systems.sprite_manager->CreateSprite(deadtwo, 0, 0, 32, 32);
+								UI* uiliv = new UI(sprite, 44, 531);
+								uiliv->SetType(2);
+								m_entities.push_back(uiliv);
+							}
 						}
 						if (playerone->GetLife() == -1)
 						{
-							sprite = m_systems.sprite_manager->CreateSprite(dead, 0, 0, 32, 32);
-							UI* m_liv3 = new UI(sprite, 79, 169);
-							m_liv3->SetType(2);
-							m_entities.push_back(m_liv3);
+							if (aType == ENTITY_PLAYERONE)
+							{
+								sprite = m_systems.sprite_manager->CreateSprite(dead, 0, 0, 32, 32);
+								UI* m_liv3 = new UI(sprite, 79, 169);
+								m_liv3->SetType(2);
+								m_entities.push_back(m_liv3);
+							}
+							else if (aType == ENTITY_PLAYERTWO)
+							{
+								sprite = m_systems.sprite_manager->CreateSprite(deadtwo, 0, 0, 32, 32);
+								UI* uiliv = new UI(sprite, 79, 531);
+								uiliv->SetType(2);
+								m_entities.push_back(uiliv);
+							if (playerone->GetLife() == -1)
+							{
+								if (aType == ENTITY_PLAYERTWO)
+								{
+									if (playerone->GetLife() == -1)
+									{
+										playerone->SetActive(false);
+										playerone->SetInvisible();
+
+										NextState();
+									}
+								}
+							}
+							}
+							
 						}
+						
 						playerone->SetLife();
 						std::cout << playerone->GetLife() << std::endl;
 					}
 
 				}
-				else
-				{
-					Playertwo* playertwo = static_cast<Playertwo*>(a);
-					if (CollisionManager::Check(playertwo->GetCollider(), explosion->GetCollider(), overlapX, overlapY))
-					{
-					if (playertwo->GetLife() < -1)
-					{
-						playertwo->SetActive(false);
-						playertwo->SetInvisible();
-
-						NextState();
-					}
-					else
-					{
-						std::string deadtwo = "../assets/playertwodeath.png";
-						Sprite* sprite;
-
-						if (playertwo->GetLife() == 1)
-						{
-							sprite = m_systems.sprite_manager->CreateSprite(deadtwo, 0, 0, 32, 32);
-							UI* uiliv = new UI(sprite, 9, 531);
-							uiliv->SetType(2);
-							m_entities.push_back(uiliv);
-						}
-
-						if (playertwo->GetLife() == 0)
-						{
-							sprite = m_systems.sprite_manager->CreateSprite(deadtwo, 0, 0, 32, 32);
-							UI* uiliv2 = new UI(sprite, 44, 531);
-							uiliv2->SetType(2);
-							m_entities.push_back(uiliv2);
-						}
-						if (playertwo->GetLife() == -1)
-						{
-							sprite = m_systems.sprite_manager->CreateSprite(deadtwo, 0, 0, 32, 32);
-							UI* m_liv3 = new UI(sprite, 79, 531);
-							m_liv3->SetType(2);
-							m_entities.push_back(m_liv3);
-						}
-						playertwo->SetLife();
-						std::cout << playertwo->GetLife() << std::endl;
-					}
-
-					}
-			}
+		
 
 
 			

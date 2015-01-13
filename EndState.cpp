@@ -14,6 +14,9 @@
 #include "SpriteManager.h"
 #include "Sprite.h"
 
+#include "Playerone.h"
+#include "Playertwo.h"
+
 
 #include "SoundManager.h"
 #include "SoundClip.h"
@@ -23,26 +26,38 @@
 #include <fstream>
 #include <iostream>
 
-
-EndState::EndState(System& system)
+EndState::EndState(System& system, Playerone* playerone, Playertwo* playertwo)
 {
 	m_systems = system;
-
+	Sprite* sprite;
 	std::string win = "../assets/win.wav";
 
 	SoundClip* victory = m_systems.sound_manager->CreateSoundClip(win);
 	victory->Play();
+	m_playerone = playerone;
+	m_playertwo = playertwo;
+	if (m_playerone->GetLife() == -1)
+	{
+		std::string twowinimg = "../assets/endstatetwo.png";
 
-	std::string twowinimg = "../assets/endstatetwo.png";
-	Sprite* sprite;
+		sprite = m_systems.sprite_manager->CreateSprite(twowinimg, 0, 0, 1080, 832);
+		UI* twowin = new UI(sprite, 0, 0);
+		twowin->SetType(5);
 
+		m_entities.push_back(twowin);
+	}
+	
+	if (m_playertwo->GetLife() == -1)
+	{
+		std::string onewinimg = "../assets/endstateone.png";
 
-	sprite = m_systems.sprite_manager->CreateSprite(twowinimg, 0, 0, 1080, 832);
-	UI* twowin = new UI(sprite, 0, 0);
-	twowin->SetType(5);
-	m_entities.push_back(twowin);
+		sprite = m_systems.sprite_manager->CreateSprite(onewinimg, 0, 0, 1080, 832);
+		UI* onewin = new UI(sprite, 0, 0);
+		onewin->SetType(6);
 
-	std::cout << "endstate" << std::endl;
+		m_entities.push_back(onewin);
+	}
+	
 
 	m_active = false;
 

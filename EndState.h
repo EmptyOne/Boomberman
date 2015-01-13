@@ -6,11 +6,13 @@
 
 class Entity;
 class Keyboard;
+class Playerone;
+class Playertwo;
 
 class EndState : public State
 {
 public:
-	EndState(System& system);
+	EndState(System& system, Playerone* playerone, Playertwo* playertwo);
 	~EndState();
 
 	bool Update(float deltatime);
@@ -26,7 +28,8 @@ private:
 	std::vector<Entity*> m_entities;
 
 	Keyboard* m_keyboard;
-
+	Playerone* m_playerone;
+	Playertwo* m_playertwo;
 
 	bool m_active;
 
