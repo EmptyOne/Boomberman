@@ -109,17 +109,16 @@ void Playerone::Update(float deltatime)
 
 	if (m_keyboard->IsKeyDown(SDLK_f) == true)
 	{
-		
 		if (m_bombSpeed > m_playerSpeed && 0 < m_bombAmount)
 		{
 
 			SoundClip* fuse = new SoundClip(*m_soundcliptwo);
 			fuse->Play();
 
-			Bomb* bomb = new Bomb(m_keyboard, m_bombSprite, m_x, m_y);
+			Bomb* bomb = new Bomb(m_keyboard, m_bombSprite, m_x, m_y, "PlayerOne");
 			bomb->Activate();
 			m_entities->push_back(bomb);
-
+			
 			// när bomben skrivs ut är de rätt men när vi skickar den blire fel typ :S
 			//std::cout << "bombx" << m_x << "bomby" << m_y << std::endl;
 			m_bombAmount -= 1;

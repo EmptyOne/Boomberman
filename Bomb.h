@@ -11,7 +11,7 @@ class Bomb : public Entity
 
 public:
 	//Bomb();
-	Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY);
+	Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY, std::string parentName);
 	~Bomb();
 
 	void Update(float deltatime);
@@ -27,6 +27,7 @@ public:
 
 	EEntityType GetType();
 	Collider* GetCollider();
+	std::string GetParent();
 
 	void Activate();
 	void DeActivate();
@@ -57,6 +58,7 @@ private:
 	std::vector<Entity*>* m_entities;
 	
 	float m_bombTimer;
+	std::string m_parentName;
 
 	Explosion* m_explosion;
 };

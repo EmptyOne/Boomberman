@@ -9,14 +9,13 @@
 #include "Explosion.h"
 #include "SoundClip.h"
 
-Bomb::Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY)
+Bomb::Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY, std::string parentName)
 {
 	
+	m_parentName = parentName;
 	m_keyboard = keyboard;
 	m_sprite = sprite;
 	//m_entities = entities;
-	
-	
 	
 	m_speed = 300.0f;
 	m_offset = 1.0f;
@@ -67,11 +66,16 @@ void Bomb::Update(float deltatime)
 		std::cout << "Bomb" << std::endl;
 		m_bombTimer = 0;
 
+
 	}
 
 	m_collider->SetPosition(m_position_x, m_position_y);
 }
 
+std::string Bomb::GetParent()
+{
+	return m_parentName;
+}
 Sprite* Bomb::GetSprite()
 {
 	return m_sprite;

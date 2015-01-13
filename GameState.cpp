@@ -223,12 +223,7 @@ bool GameState::Update(float deltatime)
 		if (!m_entities[i]->IsVisible())
 			continue;
 
-		/*Entity* a = m_entities[i];
-		EEntityType aType = a->GetType();
-		if (aType == ENTITY_PLAYERONE){
-		Playerone* playerone = static_cast<Playerone*>(a);
-		playerone->BombIncrease();
-		}*/
+
 
 		if (!m_entities[i]->IsActive())
 		{
@@ -239,13 +234,12 @@ bool GameState::Update(float deltatime)
 			if (m_entities[i]->GetType() == ENTITY_BOMB)
 			{
 
+				Bomb* bomb = static_cast<Bomb*>(m_entities[i]);
 				std::string explosionsound = "../assets/explosion.wav";
 
 				SoundClip* explosionS = m_systems.sound_manager->CreateSoundClip(explosionsound);
 				explosionS->Play();
 
-
-				//std::cout << "ent bomb: " << std::endl;
 				Sprite* spr;
 				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
 				m_bombX = m_entities[i]->GetX();
@@ -290,27 +284,28 @@ bool GameState::Update(float deltatime)
 				explosion = new Explosion(spr, m_bombX + 128 - 1, m_bombY - 1);
 				m_entities.push_back(explosion);
 
-				if (m_player->GetType() == ENTITY_PLAYERONE)
-				{
-					
-					std::cout << "bomb+player" << std::endl;
-				m_player->BombIncrease();
 			
-				}
-				else if (m_playertwo->GetType() == ENTITY_PLAYERTWO)
+				
+				std::string parent = bomb->GetParent();
+
+				if (parent == "PlayerOne")
 				{
-					
-					 std::cout << " bomb + test" << std::endl;
+					m_player->BombIncrease();
+				}
+				else
+				{
 					m_playertwo->BombIncrease();
 				}
-
 
 				delete m_entities[i];
 				m_entities.erase(m_entities.begin() + i);
 			}
 
+		
+
 			if (m_entities[i]->GetType() == ENTITY_EXPLOSION && m_entities[i]->IsActive() == false)
 			{
+				
 				delete m_entities[i];
 				m_entities.erase(m_entities.begin() + i);
 			}
@@ -405,7 +400,7 @@ void GameState::CollisionChecking()
 			EEntityType aType = a->GetType();
 			EEntityType bType = b->GetType();
 
-			if (aType == ENTITY_PLAYERONE|| aType == ENTITY_PLAYERTWO)
+			if (aType == ENTITY_PLAYERONE || aType == ENTITY_PLAYERTWO)
 			{
 				Keyboard* keyboard = new Keyboard;
 
@@ -594,14 +589,12 @@ void GameState::CollisionChecking()
 					}
 
 				}
-				
+		
+
 
 			
 			}
 		}
-
-
-
 			if (aType == ENTITY_EXPLOSION)
 			{
 				Block* block = static_cast<Block*>(b);
