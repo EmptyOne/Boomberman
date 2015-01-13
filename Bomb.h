@@ -4,7 +4,6 @@
 
 #include "Entity.h"
 
-class Keyboard;
 class Explosion;
 
 class Bomb : public Entity

@@ -291,15 +291,7 @@ bool GameState::Update(float deltatime)
 				m_entities.push_back(explosion);
 
 				
-				m_player->BombIncrease();
-				m_bombTimer = explosion->GetTimer();
-				//std::cout << m_bombTimer << std::endl;
-				
-
-				
-					m_playertwo->BombIncrease();
-					m_bombTimer = explosion->GetTimer();
-					//std::cout << m_bombTimer << std::endl;
+			
 				
 
 

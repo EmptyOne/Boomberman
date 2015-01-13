@@ -127,6 +127,11 @@ void Playertwo::Update(float deltatime)
 			m_bombSpeed = 0;
 
 			m_onBomb = true;
+			if (m_bombTimer < 1)
+			{
+			BombIncrease();
+			m_bombTimer = 0;
+			}
 		}
 
 
@@ -203,9 +208,12 @@ bool Playertwo::IsActive(){
 }
 void Playertwo::BombIncrease(){
 
-	std::cout << m_bombAmount << std::endl;
-	m_bombAmount += 1;
-	std::cout << m_bombAmount << std::endl;
+	
+		std::cout << m_bombAmount << std::endl;
+		m_bombAmount += 1;
+		std::cout << m_bombAmount << std::endl;
+		
+	
 }
 
 void Playertwo::SetLife()

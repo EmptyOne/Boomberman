@@ -52,7 +52,6 @@ void Playerone::Update(float deltatime)
 	m_timer += deltatime;
 	m_playerSpeed = 0.25; //Borde vara samma som animations tiden
 	m_bombSpeed += deltatime;
-	m_bombTimer += deltatime;
 	m_lifeTimer += deltatime;
 	
 

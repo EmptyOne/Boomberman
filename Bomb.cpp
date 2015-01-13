@@ -64,7 +64,6 @@ void Bomb::Update(float deltatime)
 
 		std::cout << "Bomb" << std::endl;
 		m_bombTimer = 0;
-		
 
 
 	}

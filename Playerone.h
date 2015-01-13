@@ -62,7 +62,6 @@ private:
 	int m_life;
 	float m_lifeTimer;
 	unsigned int m_bombAmount;
-	float m_bombTimer;
 
 	bool m_active;
 	bool m_visible;
