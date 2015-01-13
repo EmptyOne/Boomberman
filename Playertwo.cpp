@@ -110,6 +110,7 @@ void Playertwo::Update(float deltatime)
 
 	if (m_keyboard->IsKeyDown(SDLK_h) == true)
 	{
+		
 		if (m_bombSpeed > m_playerSpeed && 0 < m_bombAmount)
 		{
 
@@ -127,11 +128,7 @@ void Playertwo::Update(float deltatime)
 			m_bombSpeed = 0;
 
 			m_onBomb = true;
-			if (m_bombTimer < 1)
-			{
-			BombIncrease();
-			m_bombTimer = 0;
-			}
+			
 		}
 
 

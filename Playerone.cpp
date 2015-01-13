@@ -109,6 +109,7 @@ void Playerone::Update(float deltatime)
 
 	if (m_keyboard->IsKeyDown(SDLK_f) == true)
 	{
+		
 		if (m_bombSpeed > m_playerSpeed && 0 < m_bombAmount)
 		{
 

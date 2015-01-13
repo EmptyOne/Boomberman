@@ -16,6 +16,8 @@ Bomb::Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY)
 	m_sprite = sprite;
 	//m_entities = entities;
 	
+	
+	
 	m_speed = 300.0f;
 	m_offset = 1.0f;
 
@@ -64,7 +66,6 @@ void Bomb::Update(float deltatime)
 
 		std::cout << "Bomb" << std::endl;
 		m_bombTimer = 0;
-
 
 	}
 

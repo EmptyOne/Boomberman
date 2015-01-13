@@ -290,9 +290,19 @@ bool GameState::Update(float deltatime)
 				explosion = new Explosion(spr, m_bombX + 128 - 1, m_bombY - 1);
 				m_entities.push_back(explosion);
 
-				
+				if (m_player->GetType() == ENTITY_PLAYERONE)
+				{
+					
+					std::cout << "bomb+player" << std::endl;
+				m_player->BombIncrease();
 			
-				
+				}
+				else if (m_playertwo->GetType() == ENTITY_PLAYERTWO)
+				{
+					
+					 std::cout << " bomb + test" << std::endl;
+					m_playertwo->BombIncrease();
+				}
 
 
 				delete m_entities[i];
@@ -395,7 +405,7 @@ void GameState::CollisionChecking()
 			EEntityType aType = a->GetType();
 			EEntityType bType = b->GetType();
 
-			if (aType == ENTITY_PLAYERONE || aType == ENTITY_PLAYERTWO)
+			if (aType == ENTITY_PLAYERONE|| aType == ENTITY_PLAYERTWO)
 			{
 				Keyboard* keyboard = new Keyboard;
 
@@ -584,12 +594,14 @@ void GameState::CollisionChecking()
 					}
 
 				}
-		
-
+				
 
 			
 			}
 		}
+
+
+
 			if (aType == ENTITY_EXPLOSION)
 			{
 				Block* block = static_cast<Block*>(b);
