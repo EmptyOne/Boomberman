@@ -259,31 +259,35 @@ bool GameState::Update(float deltatime)
 				explosion = new Explosion(spr, m_bombX - 1, m_bombY - 64 - 1);
 				m_entities.push_back(explosion);
 
-				explosion = new Explosion(spr, m_bombX - 1, m_bombY + 128 - 1);
+			/*	explosion = new Explosion(spr, m_bombX - 1, m_bombY + 128 - 1);
 				m_entities.push_back(explosion);
 
 				explosion = new Explosion(spr, m_bombX - 1, m_bombY - 128 - 1);
-				m_entities.push_back(explosion);
-
+				m_entities.push_back(explosion);*/
 
 				//X
 				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
 				if (m_bombX - 1 > 120)
 				{
-					explosion = new Explosion(spr, m_bombX - 128 - 1, m_bombY - 1);
-					m_entities.push_back(explosion);
-
+					
 					explosion = new Explosion(spr, m_bombX - 64 - 1, m_bombY - 1);
 					m_entities.push_back(explosion);
+
+				/*	explosion = new Explosion(spr, m_bombX - 128 - 1, m_bombY - 1);
+					m_entities.push_back(explosion);
+			*/
 				}
+			
+				
+				
 				explosion = new Explosion(spr, m_bombX + 64 - 1, m_bombY - 1);
 				m_entities.push_back(explosion);
+		
 
 
-
-				explosion = new Explosion(spr, m_bombX + 128 - 1, m_bombY - 1);
+			/*	explosion = new Explosion(spr, m_bombX + 128 - 1, m_bombY - 1);
 				m_entities.push_back(explosion);
-
+*/
 			
 				
 				std::string parent = bomb->GetParent();
@@ -426,6 +430,7 @@ void GameState::CollisionChecking()
 					//W
 					if (pd == 0)
 					{
+						
 						playerone->SetY(py + overlapY);
 					}
 					//S
@@ -606,7 +611,7 @@ void GameState::CollisionChecking()
 					{
 						block->SetInvisible();
 						block->SetActive();
-
+						
 					
 					}
 				}
@@ -626,6 +631,7 @@ void GameState::CollisionChecking()
 						{
 						explosion->DeActive();
 						explosion->SetInvisible();
+						
 						}
 						
 					}
