@@ -57,13 +57,8 @@ void Bomb::Update(float deltatime)
 	
 	if (m_bombTimer > 2){
 		
-
-		//m_explosion = new Explosion(m_sprite, m_entities, m_position_x, m_position_y);
-		//m_entities->push_back(bomb);
 		m_active = false;
 		
-
-		std::cout << "Bomb" << std::endl;
 		m_bombTimer = 0;
 
 

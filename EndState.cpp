@@ -73,7 +73,7 @@ bool EndState::Update(float deltatime)
 {
 	Keyboard* m_keyboard;
 	if (m_systems.input_manager->GetKeyboard()->IsKeyDown(SDLK_y) == true){
-		std::cout << "y" << std::endl;
+		
 
 		std::string woho = "../assets/woho.wav";
 
@@ -86,7 +86,7 @@ bool EndState::Update(float deltatime)
 		
 	}
 	else if (m_systems.input_manager->GetKeyboard()->IsKeyDown(SDLK_n) == true){
-		std::cout << "n" << std::endl;
+	
 		m_state = false;
 		NextState();
 		return false;

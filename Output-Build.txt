@@ -1,0 +1,7 @@
+﻿1>------ Build started: Project: Arkanoid, Configuration: Debug Win32 ------
+1>  EndState.cpp
+1>c:\users\love\desktop\boom\boomberman\endstate.cpp(74): warning C4101: 'm_keyboard' : unreferenced local variable
+1>c:\users\love\desktop\boom\boomberman\endstate.cpp(127): warning C4715: 'EndState::NextState' : not all control paths return a value
+1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+1>  Arkanoid.vcxproj -> C:\Users\love\Desktop\BOOM\Boomberman\../bin/Arkanoid.Debug.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========

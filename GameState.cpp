@@ -452,55 +452,12 @@ void GameState::CollisionChecking()
 						playerone->SetX(px + overlapX);
 					}
 
-					//std::cout << "px: " << px << std::endl << "py: " << py << std::endl;
+					
 				}
 
 			
 			}
-			else if (bType == ENTITY_BOMB)
-			{
-				Bomb* bomb = static_cast<Bomb*>(b);
-				if (playerone->IsOnBomb())
-				{
-					continue;
-				}
-				if (CollisionManager::Check(playerone->GetCollider(), bomb->GetCollider(), overlapX, overlapY))
-				{
-					//std::cout << "px: " << px << std::endl << "py: " << py << std::endl << "bombX: " << bomb->GetX() << std::endl << "bombY: " << bomb->GetY() << std::endl;
-					if (bomb->GetX() != px && bomb->GetY() != py)
-					{
-						//std::cout << "bombx: " << bomb->GetX() << std::endl << "bomby: " << bomb->GetY() << std::endl << "px: " << px << std::endl << "py: " << py << std::endl;
-						
-							//W
-							if (pd == 0)
-							{
-							
-								//playerone->SetY(py + 64);
-							
-							}
-							//S
-							else  if (pd == 1)
-							{
-								playerone->SetY(py - 64);
-							
-							}
-							//d
-							else  if (pd == 2)
-							{
-								playerone->SetX(px - 64);
-						
-							}
-							//A
-							else if (pd == 3)
-							{
-								playerone->SetX(px + 64);
-						
-							}
-						
-					}
-				}
-				
-			}
+
 			
 			else if (bType == ENTITY_EXPLOSION)
 			{
@@ -593,7 +550,7 @@ void GameState::CollisionChecking()
 						}
 						
 						playerone->SetLife();
-						std::cout << playerone->GetLife() << std::endl;
+						
 					}
 
 				}

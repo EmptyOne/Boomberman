@@ -65,7 +65,7 @@ void Playertwo::Update(float deltatime)
 				m_y -= 64;
 				m_timer = 0;
 				m_dir = 0;
-				m_onBomb = false;
+			
 			}
 		}
 		else if (m_keyboard->IsKeyDown(SDLK_k) == true)
@@ -76,7 +76,7 @@ void Playertwo::Update(float deltatime)
 				m_y += 64;
 				m_timer = 0;
 				m_dir = 1;
-				m_onBomb = false;
+			
 
 			}
 		}
@@ -88,7 +88,7 @@ void Playertwo::Update(float deltatime)
 				m_x += 64;
 				m_timer = 0;
 				m_dir = 2;
-				m_onBomb = false;
+				
 			}
 
 
@@ -102,7 +102,7 @@ void Playertwo::Update(float deltatime)
 				m_x -= 64;
 				m_timer = 0;
 				m_dir = 3;
-				m_onBomb = false;
+			
 
 			}
 		}
@@ -121,13 +121,12 @@ void Playertwo::Update(float deltatime)
 			m_entities->push_back(bomb);
 
 			
-			// när bomben skrivs ut är de rätt men när vi skickar den blire fel typ :S
-			//std::cout << "bombx" << m_x << "bomby" << m_y << std::endl;
+	
 			m_bombAmount -= 1;
 
 			m_bombSpeed = 0;
 
-			m_onBomb = true;
+			
 			
 		}
 
@@ -139,10 +138,7 @@ void Playertwo::Update(float deltatime)
 	m_collider->SetPosition(m_x, m_y);
 
 }
-bool Playertwo::IsOnBomb()
-{
-	return m_onBomb;
-}
+
 float Playertwo::GetDir()
 {
 	return m_dir;
@@ -205,12 +201,8 @@ bool Playertwo::IsActive(){
 }
 void Playertwo::BombIncrease(){
 
-	
-		std::cout << m_bombAmount << std::endl;
 		m_bombAmount += 1;
-		std::cout << m_bombAmount << std::endl;
-		
-	
+			
 }
 
 void Playertwo::SetLife()
