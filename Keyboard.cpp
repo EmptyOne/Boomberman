@@ -17,7 +17,8 @@ bool Keyboard::IsKeyDown(int index)
 }
 
 void Keyboard::SetKeyboard(int index, bool state)
-{
+{ 
+	if (index >= 0 && index < 255)
 	m_keys[index] = state;
 	
 }

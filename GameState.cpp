@@ -235,6 +235,7 @@ bool GameState::Update(float deltatime)
 			{
 
 				Bomb* bomb = static_cast<Bomb*>(m_entities[i]);
+
 				std::string explosionsound = "../assets/explosion.wav";
 
 				SoundClip* explosionS = m_systems.sound_manager->CreateSoundClip(explosionsound);
@@ -333,7 +334,9 @@ bool GameState::Update(float deltatime)
 
 		if (m_entities[i]->GetType() == ENTITY_PLAYERONE)
 		{
+			
 			Playerone* playerone = static_cast<Playerone*>(m_entities[i]);
+		
 			if (playerone->GetLife() < 0)
 			{
 			
@@ -472,7 +475,7 @@ void GameState::CollisionChecking()
 							if (pd == 0)
 							{
 							
-								playerone->SetY(py + 64);
+								//playerone->SetY(py + 64);
 							
 							}
 							//S

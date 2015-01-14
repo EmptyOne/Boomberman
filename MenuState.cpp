@@ -69,6 +69,12 @@ bool MenuState::Update(float deltatime)
 		NextState();
 		return false;
 	}
+	else if (m_systems.input_manager->GetKeyboard()->IsKeyDown(SDLK_r) == true)
+	{
+		
+		//Kalla på engine shutdown?
+		SDL_Quit();
+	}
 	return true;
 }
 
