@@ -36,6 +36,9 @@ EndState::EndState(System& system, Playerone* playerone, Playertwo* playertwo)
 	victory->Play();
 	m_playerone = playerone;
 	m_playertwo = playertwo;
+	if (m_playerone->GetLife() == m_playertwo->GetLife())
+	{
+	}
 	if (m_playerone->GetLife() == -1)
 	{
 		std::string twowinimg = "../assets/endstatetwo.png";
