@@ -16,7 +16,7 @@ Explosion::Explosion(Sprite* sprite, float x, float y)
 	m_collider->SetParent(this);
 	m_collider->SetWidthHeight(m_sprite->GetRegion()->w,
 		m_sprite->GetRegion()->h);
-
+	e = ENTITY_EXPLOSION;
 	m_active = true;
 }
 Explosion::~Explosion()
@@ -79,9 +79,18 @@ bool Explosion::IsActive()
 {
 	return m_active;
 }
+
+void Explosion::SetType(int i)
+{
+	if (i == 1)
+		e = ENTITY_EXPLOSION;
+	else if (i == 2)
+		e = ENTITY_EXPLOSIONL2;
+}
 EEntityType Explosion::GetType()
 {
-	return ENTITY_EXPLOSION;
+	return e;
+
 }
 Collider* Explosion::GetCollider()
 {
