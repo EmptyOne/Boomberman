@@ -269,7 +269,7 @@ bool GameState::Update(float deltatime)
 				//Y
 				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 66, 130, 64, 64);
 
-				for (int i = 1; i < 5; i++)
+				for (int i = 1; i < 3; i++)
 				{
 					createExplosion(spr, m_bombX, m_bombY + i * 64);
 					std::cout << (int)m_bombX / 64 - 1 << " " << (int)m_bombY / 64 + i << " " << m_map[(int)m_bombX / 64 - 1][(int)m_bombY / 64 + i] << std::endl;
@@ -281,13 +281,47 @@ bool GameState::Update(float deltatime)
 						break;
 					}
 				}
-					
+				for (int i = 1; i < 3; i++){
+					createExplosion(spr, m_bombX, m_bombY - i * 64);
+					if (m_map[(int)m_bombX / 64 - 1][(int)m_bombY / 64 - i] == 0){
+						m_map[(int)m_bombX / 64 - 1][(int)m_bombY / 64 - i] = 3;
+						break;
+					}
+					else if (m_map[(int)m_bombX / 64 - 1][(int)m_bombY / 64 - i] == 1)
+						break;
+
+				}
 				createExplosion(spr, m_bombX, m_bombY - i * 64);
+					spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
+
+				for (int i = 1; i < 3; i++)
+				{
+					createExplosion(spr, m_bombX + i * 64, m_bombY);
+					if (m_map[(int)m_bombX / 64 - 1 + i][(int)m_bombY / 64] == 0)
+					{
+						m_map[(int)m_bombX / 64 - 1 + i][(int)m_bombY / 64] = 3;
+						break;
+					}
+					else if (m_map[(int)m_bombX / 64 - 1 + i][(int)m_bombY / 64] == 1)
+						break;
+				}
+				
+				for (int i = 1; i < 3; i++)
+				{
+					createExplosion(spr, m_bombX - i * 64, m_bombY);
+					if (m_map[(int)m_bombX / 64 - 1 - i][(int)m_bombY / 64] == 0)
+					{
+						m_map[(int)m_bombX / 64 - 1 - i][(int)m_bombY / 64] = 3;
+						break;
+					}
+					else if (m_map[(int)m_bombX / 64 - 1 - i][(int)m_bombY / 64] == 1)
+						break;
+				}
 
 			
 
 				//X
-				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
+				
 				
 				if (m_bombX > 120)
 				{
