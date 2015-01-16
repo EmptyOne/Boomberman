@@ -142,7 +142,7 @@ GameState::GameState(System& system)
 
 	//bomb
 	sprite = m_systems.sprite_manager->CreateSprite(filename, 0, 66, 64, 64);
-	Sprite* bombSprite = m_systems.sprite_manager->CreateSprite(filename, 0, 130, 64, 64);
+	Sprite* bombSprite = m_systems.sprite_manager->CreateSprite(filename, 0, 132, 64, 64);
 
 
 
@@ -191,8 +191,8 @@ GameState::GameState(System& system)
 
 
 	//explosion
-	sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 130, 64, 64);
-	Sprite* explosionSprite = m_systems.sprite_manager->CreateSprite(filename, 130, 66, 64, 64);
+	sprite = m_systems.sprite_manager->CreateSprite(filename, 66, 132, 64, 64);
+	Sprite* explosionSprite = m_systems.sprite_manager->CreateSprite(filename, 132, 66, 64, 64);
 	
 
 
@@ -221,6 +221,7 @@ void GameState::createExplosion(Sprite *spr, float x, float y)
 {
 
 	Explosion *exp = new Explosion(spr, x, y);
+	std::cout << m_bombX << " " << m_bombY << std::endl;
 	exp->SetType(1);
 	m_entities.push_back(exp);
 }
@@ -260,19 +261,20 @@ bool GameState::Update(float deltatime)
 				//Main
 				Sprite* spr;
 				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
+				
 				m_bombX = m_entities[i]->GetX();
 				m_bombY = m_entities[i]->GetY();
-
+				std::cout << m_bombX << " " << m_bombY << std::endl;
 				createExplosion(spr, m_bombX, m_bombY);
 
 
 				//Y
-				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 66, 130, 64, 64);
+				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 66, 132, 64, 64);
 
 				for (int i = 1; i < 3; i++)
 				{
 					createExplosion(spr, m_bombX, m_bombY + i * 64);
-					std::cout << (int)m_bombX / 64 - 1 << " " << (int)m_bombY / 64 + i << " " << m_map[(int)m_bombX / 64 - 1][(int)m_bombY / 64 + i] << std::endl;
+					//std::cout << (int)m_bombX / 64 - 1 << " " << (int)m_bombY / 64 + i << " " << m_map[(int)m_bombX / 64 - 1][(int)m_bombY / 64 + i] << std::endl;
 					if (m_map[(int)m_bombX / 64 - 1][(int)m_bombY / 64 + i] == 0){
 						m_map[(int)m_bombX / 64 - 1][(int)m_bombY / 64 + i] = 3;
 						break;
@@ -292,7 +294,7 @@ bool GameState::Update(float deltatime)
 
 				}
 				createExplosion(spr, m_bombX, m_bombY - i * 64);
-					spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
+					spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 132, 132, 64, 64);
 
 				for (int i = 1; i < 3; i++)
 				{
