@@ -22,10 +22,11 @@ public:
 	
 
 private:
-	bool wouldCollide(float xw, float yw);
 	void createExplosion(Sprite *spr, float x, float y);
+	void createExplosion2(Sprite *spr, float x, float y);
+
 	void CollisionChecking();
-	void ExpLength(float x, float y);
+
 
 private:
 	System m_systems;

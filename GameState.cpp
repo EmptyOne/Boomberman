@@ -213,44 +213,19 @@ GameState::~GameState()
 	m_entities.clear();
 }
 
-bool GameState::wouldCollide(float xw, float yw)
-{
-	Entity *prevEntity = NULL;
-	for (int i = 0; i < m_entities.size(); ++i) {
-		if (prevEntity) switch (prevEntity->GetType()) {
-		case ENTITY_SOLIDBLOCK:
-			if (prevEntity->GetX() >= xw || prevEntity->GetY() >= yw)
-				return true;
-			break;
-		default:
-			break;
-		}
-		Entity *entity = m_entities[i];
-		switch (entity->GetType()) {
-		case ENTITY_SOLIDBLOCK:
-		{
-			float x = entity->GetX();
-			float y = entity->GetY();
-
-			if (x >= xw || y >= yw)
-				return true;
-			break;
-		}
-		default:
-			return nullptr;
-		}
-	}
-
-	return false;
-}
 
 void GameState::createExplosion(Sprite *spr, float x, float y)
 {
-	if (wouldCollide(x, y))
-		return;
 
 	Explosion *exp = new Explosion(spr, x, y);
 	exp->SetType(1);
+	m_entities.push_back(exp);
+}
+void GameState::createExplosion2(Sprite *spr, float x, float y)
+{
+
+	Explosion *exp = new Explosion(spr, x, y);
+	exp->SetType(2);
 	m_entities.push_back(exp);
 }
 
@@ -280,6 +255,7 @@ bool GameState::Update(float deltatime)
 				SoundClip* explosionS = m_systems.sound_manager->CreateSoundClip(explosionsound);
 				explosionS->Play();
 
+				//Main
 				Sprite* spr;
 				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
 				m_bombX = m_entities[i]->GetX();
@@ -296,7 +272,7 @@ bool GameState::Update(float deltatime)
 
 			
 
-				////X
+				//X
 				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
 				if (m_bombX > 120)
 				{
@@ -305,44 +281,24 @@ bool GameState::Update(float deltatime)
 				}
 				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
 				createExplosion(spr, m_bombX + 64, m_bombY);
-				
-				
-				
-				ExpLength(m_bombX, m_bombY);
+		
 
-				if (m_bx != m_bombX - 64 && m_by != m_bombY)
-				{
-					//std::cout << m_bx << std::endl << explosion->GetX() + 64 << std::endl,
-				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
-				createExplosion(spr, m_bombX + 128, m_bombY);
-				}
 			
-				if (m_bx != m_bombX + 64&& m_by != m_bombY)
-				{
-					createExplosion(spr, m_bombX - 128, m_bombY);
-				}
-	//			std::cout << "bombx: " << m_bx << std::endl << "expX: " << explosion->GetX() << std::endl << "bombY: " << m_by << std::endl << "expY: " << explosion->GetY() << std::endl << std::endl;
-		//		std::cout << "Reset" << std::endl;
-				/*if (m_bx != m_bombX) {
-					if (m_by != m_bombY - 64 )
-						createExplosion(spr, m_bombX, m_bombY + 128);
-					if (m_by != m_bombY + 64)
-						createExplosion(spr, m_bombX, m_bombY - 128);
-				}*/
-					
-					
-					
-				/*
-				explosion = new Explosion(spr, m_bombX - 1, m_bombY - 128 - 1);
-				m_entities.push_back(explosion);
 				
 				
-					
+				//höger
+				//createExplosion(spr, m_bombX + 128, m_bombY);
+				//vänster
+				//createExplosion(spr, m_bombX - 128, m_bombY);
+				//ner
+				//createExplosion(spr, m_bombX, m_bombY + 128);
+				//upp
+				//createExplosion(spr, m_bombX, m_bombY - 128);
 
 				
-				
-					explosion = new Explosion(spr, m_bombX - 1, m_bombY - 128 - 1);
-					m_entities.push_back(explosion);*/
+
+					
+			
 					
 				
 		
@@ -371,6 +327,7 @@ bool GameState::Update(float deltatime)
 			if (m_entities[i]->GetType() == ENTITY_EXPLOSION && m_entities[i]->IsActive() == false)
 			{
 				
+
 				delete m_entities[i];
 				m_entities.erase(m_entities.begin() + i);
 			}
@@ -379,15 +336,10 @@ bool GameState::Update(float deltatime)
 				delete m_entities[i];
 				m_entities.erase(m_entities.begin() + i);
 			}
+		
 
 
 
-
-			////if (m_entities[38])
-			//if (aType == ENTITY_BOMB)
-			//{
-			//	//	Playerone* playerone = static_cast<Playerone*>(m_entities[i]);
-			//}
 
 			continue;
 
@@ -428,24 +380,7 @@ bool GameState::Update(float deltatime)
 
 	return true;
 }
-void GameState::ExpLength(float x, float y)
-{
-	for (unsigned int i = 0; i < m_entities.size(); i++){
 
-		
-			if (m_entities[i]->GetType() == ENTITY_SOLIDBLOCK || m_entities[i]->GetType() == ENTITY_BLOCK)
-			{
-				if (m_entities[i]->GetX() == x && m_entities[i]->GetY() == y)
-				{
-			std::cout <<"X: " << m_entities[i]->GetX() << std::endl <<"Y: " << m_entities[i]->GetY() << std::endl << std::endl;
-			m_bx = m_entities[i]->GetX();
-			m_by = m_entities[i]->GetY();
-			}
-		
-		}
-
-	}
-}
 void GameState::Draw()
 {
 	for (unsigned int i = 0; i < m_entities.size(); i++)
@@ -475,7 +410,8 @@ void GameState::CollisionChecking()
 {
 
 	int overlapX = 0, overlapY = 0;
-
+	Sprite* spr;
+	spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
 
 	for (unsigned int i = 0; i < m_entities.size(); i++)
 	{
@@ -543,7 +479,7 @@ void GameState::CollisionChecking()
 			}
 
 			
-			else if (bType == ENTITY_EXPLOSION || bType == ENTITY_EXPLOSIONL2)
+			else if (bType == ENTITY_EXPLOSION)
 			{
 				Explosion* explosion = static_cast<Explosion*>(b);
 				if (CollisionManager::Check(playerone->GetCollider(), explosion->GetCollider(), overlapX, overlapY))
@@ -678,13 +614,31 @@ void GameState::CollisionChecking()
 							block->GetX();
 							block->GetY();
 				
+							
 							explosion->DeActive();
-						explosion->SetInvisible();
+							explosion->SetInvisible();
 						}
 					
 						
 					}
-					
+					if (bType == ENTITY_BACKGROUNDBLOCK)
+					{
+						if (CollisionManager::Check(explosion->GetCollider(), block->GetCollider(), overlapX, overlapY))
+						{
+							Sprite* spr;
+							spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
+							//höger
+							createExplosion2(spr, m_bombX + 128, m_bombY);
+							//vänster
+							createExplosion2(spr, m_bombX - 128, m_bombY);
+							//ner
+							createExplosion2(spr, m_bombX, m_bombY + 128);
+							//upp
+							createExplosion2(spr, m_bombX, m_bombY - 128);
+							//vi är fucked. japp :) :> :( :< =) :C SDL_Quit; c++ quit; ska vi ge upp nu? Ja. Bra. Hejdå. :) (wave) /bye
+
+						}
+					}
 
 			}
 	
