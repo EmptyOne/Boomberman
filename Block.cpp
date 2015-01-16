@@ -8,14 +8,15 @@
 Block::Block(Sprite* sprite, float x, float y)
 {
 	m_sprite = sprite;
+	m_x = x;
+	m_y = y;
 
-	m_collider = new Collider(x, y);
+	m_collider = new Collider(m_x, m_y);
 	m_collider->SetParent(this);
 	m_collider->SetWidthHeight(m_sprite->GetRegion()->w, 
 		m_sprite->GetRegion()->h);
 
-	m_x = x;
-	m_y = y;
+	
 
 	e = ENTITY_BLOCK;
 

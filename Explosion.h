@@ -30,6 +30,7 @@ public:
 	bool IsVisible();
 	bool IsActive();
 	EEntityType GetType();
+	void SetType(int i);
 	Collider* GetCollider();
 
 
@@ -42,7 +43,7 @@ private:
 	//float m_bombX;
 	//float m_bombY;
 	float m_dir;
-
+	EEntityType e;
 
 	
 	float m_playerSpeed;
