@@ -97,6 +97,9 @@ GameState::GameState(System& system)
 				for (int x = 0; x < xNumBlocks; x++){
 
 					stream >> count;
+
+					m_map[x][y] = count;
+
 					//den här raden skriver ut allt atm 
 					SDL_Rect& rect = blockCoords[count];
 					
@@ -231,7 +234,6 @@ void GameState::createExplosion2(Sprite *spr, float x, float y)
 
 bool GameState::Update(float deltatime)
 {
-	
 
 	for (unsigned int i = 0; i < m_entities.size(); i++){
 
@@ -265,22 +267,37 @@ bool GameState::Update(float deltatime)
 
 
 				//Y
-
 				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 66, 130, 64, 64);
-				createExplosion(spr, m_bombX, m_bombY + 64);
-				createExplosion(spr, m_bombX, m_bombY - 64);
+
+				for (int i = 1; i < 5; i++)
+				{
+					createExplosion(spr, m_bombX, m_bombY + i * 64);
+					std::cout << (int)m_bombX / 64 - 1 << " " << (int)m_bombY / 64 + i << " " << m_map[(int)m_bombX / 64 - 1][(int)m_bombY / 64 + i] << std::endl;
+					if (m_map[(int)m_bombX / 64 - 1][(int)m_bombY / 64 + i] == 0){
+						m_map[(int)m_bombX / 64 - 1][(int)m_bombY / 64 + i] = 3;
+						break;
+					}
+					else if (m_map[(int)m_bombX / 64 - 1][(int)m_bombY / 64 + i] == 1){
+						break;
+					}
+				}
+					
+				createExplosion(spr, m_bombX, m_bombY - i * 64);
 
 			
 
 				//X
 				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
+				
 				if (m_bombX > 120)
 				{
 					createExplosion(spr, m_bombX - 64, m_bombY);
 				
 				}
-				spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 130, 130, 64, 64);
+					
 				createExplosion(spr, m_bombX + 64, m_bombY);
+					
+
 		
 
 			
@@ -625,18 +642,7 @@ void GameState::CollisionChecking()
 					{
 						if (CollisionManager::Check(explosion->GetCollider(), block->GetCollider(), overlapX, overlapY))
 						{
-							Sprite* spr;
-							spr = m_systems.sprite_manager->CreateSprite("../assets/main.png", 0, 198, 64, 64);
-							//höger
-							createExplosion2(spr, m_bombX + 128, m_bombY);
-							//vänster
-							createExplosion2(spr, m_bombX - 128, m_bombY);
-							//ner
-							createExplosion2(spr, m_bombX, m_bombY + 128);
-							//upp
-							createExplosion2(spr, m_bombX, m_bombY - 128);
-							//vi är fucked. japp :) :> :( :< =) :C SDL_Quit; c++ quit; ska vi ge upp nu? Ja. Bra. Hejdå. :) (wave) /bye
-
+						
 						}
 					}
 

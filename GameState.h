@@ -34,7 +34,7 @@ private:
 	Playerone* m_player;
 	Playertwo* m_playertwo;	
 	Bomb* m_bomb;
-	
+	int m_map[15][13];
 	bool m_length;
 	bool m_active;
 	float m_bombX;
