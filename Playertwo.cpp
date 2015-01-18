@@ -21,14 +21,14 @@ Playertwo::Playertwo(Keyboard* keyboard, Sprite* sprite, Sprite* bombSprite, std
 
 	m_collider = new Collider(x, y);
 	m_collider->SetParent(this);
-	m_collider->SetWidthHeight(m_sprite->GetRegion()->w,
-		m_sprite->GetRegion()->h);
+	m_collider->SetWidthHeight(m_sprite->GetRegion()->w, m_sprite->GetRegion()->h);
 
 	m_x = x;
 	m_y = y;
 
 	m_active = true;
 	m_visible = true;
+
 	m_bombAmount = 3;
 	m_life = 2;
 
@@ -47,14 +47,11 @@ void Playertwo::Update(float deltatime)
 	std::string filename = "../assets/main.png";
 	Sprite* sprite;
 
-
-	// axls movement
 	m_timer += deltatime;
-	m_playerSpeed = 0.25; //Borde vara samma som animations tiden
+	m_playerSpeed = 0.25; 
 	m_bombSpeed += deltatime;
 	m_bombTimer += deltatime;
 	m_lifeTimer += deltatime;
-
 
 	if (m_timer > m_playerSpeed)
 	{
@@ -65,19 +62,15 @@ void Playertwo::Update(float deltatime)
 				m_y -= 64;
 				m_timer = 0;
 				m_dir = 0;
-			
 			}
 		}
 		else if (m_keyboard->IsKeyDown(SDLK_k) == true)
 		{
 			if (m_y != 832.0f - 64.0f)
 			{
-
 				m_y += 64;
 				m_timer = 0;
 				m_dir = 1;
-			
-
 			}
 		}
 
@@ -88,22 +81,16 @@ void Playertwo::Update(float deltatime)
 				m_x += 64;
 				m_timer = 0;
 				m_dir = 2;
-				
 			}
-
-
 		}
 		else if (m_keyboard->IsKeyDown(SDLK_j) == true)
 		{
 			//För att man inte ska kunna glitcha utanför spelplanen
 			if (m_x != 120)
 			{
-
 				m_x -= 64;
 				m_timer = 0;
 				m_dir = 3;
-			
-
 			}
 		}
 	}
@@ -112,7 +99,6 @@ void Playertwo::Update(float deltatime)
 	{
 		if (m_bombSpeed > m_playerSpeed && 0 < m_bombAmount)
 		{
-
 			SoundClip* fuse = new SoundClip(*m_soundcliptwo);
 			fuse->Play();
 
@@ -120,23 +106,13 @@ void Playertwo::Update(float deltatime)
 			bomb->Activate();
 			m_entities->push_back(bomb);
 
-			
-	
 			m_bombAmount -= 1;
 
 			m_bombSpeed = 0;
-
-			
-			
 		}
-
-
 	}
 
-
-
 	m_collider->SetPosition(m_x, m_y);
-
 }
 
 float Playertwo::GetDir()
@@ -176,7 +152,6 @@ void Playertwo::SetY(float y)
 void Playertwo::SetActive(bool state)
 {
 	m_active = state;
-
 }
 void Playertwo::Reset()
 {
@@ -201,8 +176,7 @@ bool Playertwo::IsActive(){
 }
 void Playertwo::BombIncrease(){
 
-		m_bombAmount += 1;
-			
+	m_bombAmount += 1;
 }
 
 void Playertwo::SetLife()

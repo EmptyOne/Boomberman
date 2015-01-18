@@ -1,12 +1,10 @@
 // EndState.cpp
 
-//Inte riktigt säker på vad vi behöver ta med atm
 #include "stdafx.h"
 #include "EndState.h"
 #include "GameState.h"
 #include "MenuState.h"
 
-#include "Mouse.h"
 #include "Keyboard.h"
 #include "InputManager.h"
 
@@ -16,7 +14,6 @@
 
 #include "Playerone.h"
 #include "Playertwo.h"
-
 
 #include "SoundManager.h"
 #include "SoundClip.h"
@@ -49,7 +46,7 @@ EndState::EndState(System& system, Playerone* playerone, Playertwo* playertwo)
 
 		m_entities.push_back(twowin);
 	}
-	
+
 	if (m_playertwo->GetLife() == -1)
 	{
 		std::string onewinimg = "../assets/endstateone.png";
@@ -60,7 +57,7 @@ EndState::EndState(System& system, Playerone* playerone, Playertwo* playertwo)
 
 		m_entities.push_back(onewin);
 	}
-	
+
 
 	m_active = false;
 
@@ -76,7 +73,7 @@ bool EndState::Update(float deltatime)
 {
 	Keyboard* m_keyboard;
 	if (m_systems.input_manager->GetKeyboard()->IsKeyDown(SDLK_y) == true){
-		
+
 
 		std::string woho = "../assets/woho.wav";
 
@@ -86,14 +83,14 @@ bool EndState::Update(float deltatime)
 		m_state = true;
 		NextState();
 		return false;
-		
+
 	}
 	else if (m_systems.input_manager->GetKeyboard()->IsKeyDown(SDLK_n) == true){
-	
+
 		m_state = false;
 		NextState();
 		return false;
-		
+
 	}
 	else
 		return true;

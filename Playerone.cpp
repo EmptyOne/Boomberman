@@ -47,13 +47,10 @@ void Playerone::Update(float deltatime)
 	std::string filename = "../assets/main.png";
 	Sprite* sprite;
 
-
-	// axls movement
 	m_timer += deltatime;
-	m_playerSpeed = 0.25; //Borde vara samma som animations tiden
+	m_playerSpeed = 0.25; 
 	m_bombSpeed += deltatime;
 	m_lifeTimer += deltatime;
-	
 
 	if (m_timer > m_playerSpeed)
 	{
@@ -64,19 +61,15 @@ void Playerone::Update(float deltatime)
 				m_y -= 64;
 				m_timer = 0;
 				m_dir = 0;
-				
 			}
 		}
 		else if (m_keyboard->IsKeyDown(SDLK_s) == true)
 		{
 			if (m_y != 832.0f - 64.0f)
 			{
-
 				m_y += 64;
 				m_timer = 0;
 				m_dir = 1;
-			
-
 			}
 		}
 
@@ -87,17 +80,13 @@ void Playerone::Update(float deltatime)
 				m_x += 64;
 				m_timer = 0;
 				m_dir = 2;
-			
 			}
-
-
 		}
 		else if (m_keyboard->IsKeyDown(SDLK_a) == true)
 		{
 			//För att man inte ska kunna glitcha utanför spelplanen
 			if (m_x != 120)
 			{
-
 				m_x -= 64;
 				m_timer = 0;
 				m_dir = 3;
@@ -110,25 +99,18 @@ void Playerone::Update(float deltatime)
 	{
 		if (m_bombSpeed > m_playerSpeed && 0 < m_bombAmount)
 		{
-
 			SoundClip* fuse = new SoundClip(*m_soundcliptwo);
 			fuse->Play();
 
 			Bomb* bomb = new Bomb(m_keyboard, m_bombSprite, m_x, m_y, "PlayerOne");
 			bomb->Activate();
 			m_entities->push_back(bomb);
-			
 		
 			m_bombAmount -= 1;
 
 			m_bombSpeed = 0;
-		
 		}
-
-
 	}
-
-
 
 	m_collider->SetPosition(m_x, m_y);
 
@@ -171,7 +153,6 @@ void Playerone::SetY(float y)
 void Playerone::SetActive(bool state)
 {
 	m_active = state;
-	
 }
 void Playerone::Reset()
 {
@@ -197,7 +178,6 @@ bool Playerone::IsActive(){
 void Playerone::BombIncrease(){
 
 	m_bombAmount += 1;
-
 }
 
 void Playerone::SetLife()

@@ -38,8 +38,6 @@ OptionState::OptionState(System& system)
 	option->SetType(4);
 	m_entities.push_back(option);
 
-	std::cout << "OptionState" << std::endl;
-
 	m_active = false;
 
 
@@ -82,10 +80,7 @@ void OptionState::Draw()
 State* OptionState::NextState()
 {
 	
-
 		return new MenuState(m_systems);
-	
-
 }
 
 void OptionState::CollisionChecking()

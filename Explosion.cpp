@@ -10,13 +10,13 @@ Explosion::Explosion(Sprite* sprite, float x, float y)
 	m_sprite = sprite;
 	m_x = x;
 	m_y = y;
-	
 
 	m_collider = new Collider(x, y);
 	m_collider->SetParent(this);
-	m_collider->SetWidthHeight(m_sprite->GetRegion()->w,
-		m_sprite->GetRegion()->h);
+	m_collider->SetWidthHeight(m_sprite->GetRegion()->w, m_sprite->GetRegion()->h);
+
 	e = ENTITY_EXPLOSION;
+
 	m_active = true;
 }
 Explosion::~Explosion()
@@ -90,16 +90,15 @@ void Explosion::SetType(int i)
 EEntityType Explosion::GetType()
 {
 	return e;
-
 }
 Collider* Explosion::GetCollider()
 {
 	return m_collider;
 }
 void Explosion::Setpos(float x, float y){
+
 	m_x = x;
 	m_y = y;
-
 }
 void Explosion::SetInvisible()
 {

@@ -69,7 +69,6 @@ private:
 
 	std::vector<Entity*>* m_entities;
 
-
 };
 
 

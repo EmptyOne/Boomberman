@@ -11,30 +11,19 @@
 
 Bomb::Bomb(Keyboard* keyboard, Sprite* sprite, float startX, float startY, std::string parentName)
 {
-	
+
 	m_parentName = parentName;
 	m_keyboard = keyboard;
 	m_sprite = sprite;
-	//m_entities = entities;
-	
-	m_speed = 300.0f;
-	//m_offset = 1.0f;
-
-	
 
 	m_position_x = m_start_x = startX;
 	m_position_y = m_start_y = startY;
 
-
 	m_collider = new Collider(startX, startY);
 	m_collider->SetParent(this);
-	m_collider->SetWidthHeight(m_sprite->GetRegion()->w,
-	m_sprite->GetRegion()->h);
+	m_collider->SetWidthHeight(m_sprite->GetRegion()->w, m_sprite->GetRegion()->h);
 
-	//m_active = true;
 	m_active = false;
-
-
 }
 
 Bomb::~Bomb()
@@ -54,14 +43,11 @@ void Bomb::Update(float deltatime)
 
 	m_bombTimer += deltatime;
 
-	
+
 	if (m_bombTimer > 2){
-		
+
 		m_active = false;
-		
 		m_bombTimer = 0;
-
-
 	}
 
 	m_collider->SetPosition(m_position_x, m_position_y);
@@ -87,10 +73,7 @@ float Bomb::GetY()
 
 void Bomb::Reset()
 {
-	
 	m_active = false;
-
-
 }
 
 bool Bomb::IsVisible()

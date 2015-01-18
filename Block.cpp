@@ -13,10 +13,7 @@ Block::Block(Sprite* sprite, float x, float y)
 
 	m_collider = new Collider(m_x, m_y);
 	m_collider->SetParent(this);
-	m_collider->SetWidthHeight(m_sprite->GetRegion()->w, 
-		m_sprite->GetRegion()->h);
-
-	
+	m_collider->SetWidthHeight(m_sprite->GetRegion()->w, m_sprite->GetRegion()->h);
 
 	e = ENTITY_BLOCK;
 
@@ -32,7 +29,7 @@ Block::~Block()
 
 void Block::Update(float deltatime)
 {
-	// here be dragons
+
 }
 
 Sprite* Block::GetSprite()

@@ -25,8 +25,6 @@
 
 MenuState::MenuState(System& system)
 {
-
-
 	m_systems = system;
 	std::string menuimg = "../assets/menu.png";
 
@@ -36,9 +34,6 @@ MenuState::MenuState(System& system)
 	UI* menu = new UI(sprite, 0, 0);
 	menu->SetType(3);
 	m_entities.push_back(menu);
-
-
-	std::cout << "MenuState" << std::endl;
 
 	m_active = false;
 }

@@ -2,7 +2,8 @@
 
 #include "stdafx.h"
 #include "UI.h"
-
+#include "Collider.h"
+#include "Sprite.h"
 
 UI::UI(Sprite* sprite, float x, float y){
 
@@ -10,8 +11,12 @@ UI::UI(Sprite* sprite, float x, float y){
 	m_y = y;
 	m_sprite = sprite;
 
-	e = ENTITY_UI;
 
+	m_collider = new Collider(m_x, m_y);
+	m_collider->SetParent(this);
+	m_collider->SetWidthHeight(m_sprite->GetRegion()->w, m_sprite->GetRegion()->h);
+
+	e = ENTITY_UI;
 
 	m_active = true;
 	m_visible = true;

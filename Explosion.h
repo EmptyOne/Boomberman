@@ -40,8 +40,6 @@ private:
 
 	float m_x;
 	float m_y;
-	//float m_bombX;
-	//float m_bombY;
 	float m_dir;
 	EEntityType e;
 
