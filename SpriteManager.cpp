@@ -107,8 +107,8 @@ SpriteText* SpriteManager::CreateSprite(const std::string& fontfilename, char si
 	SpriteText* spritetext = new SpriteText(m_renderer, it->second, text, colorR, colorG, colorB); // Second = andra parametern
 	m_sprites.push_back(spritetext);
 	return spritetext;
-
 }
+
 void SpriteManager::DestroySprite(Sprite* sprite)
 {
 	// we look through all sprites
